@@ -1,0 +1,20 @@
+@import '../../init';
+
+.component {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    // @include b;
+    &:active {
+        background-color: map-get($colors, "light-yellow" )
+    }
+}
+.img {
+
+}
+.text {
+    @include font-mont;
+    font-size: 12px;
+    margin-left: 7px;
+}

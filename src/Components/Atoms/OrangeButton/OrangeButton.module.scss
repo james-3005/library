@@ -1,0 +1,34 @@
+@import '../../init';
+
+.component {
+    background-color: #E16A00;
+    color: white;
+    display: flex;
+    @include center;
+    @include font-mont;
+    border-radius: 3px;
+    font-weight: 700;
+    cursor: pointer;
+    &:active {
+        background-color: #d36404;
+    }
+}
+
+.smallComponent {
+    @extend .component;
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+}
+.mediumComponent {
+    @extend .component;
+    width: 210px;
+    height: 50px;
+    font-size: 15px;
+}
+.bigComponent {
+    @extend .component;
+    width: 305px;
+    height: 40px;
+    font-size: 16px;
+}

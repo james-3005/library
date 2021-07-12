@@ -1,0 +1,27 @@
+@import '../../init';
+
+.component {
+    width: 100%;
+    height: 100vh;
+    background-color: map-get($colors, "green" );
+    overflow: hidden;
+    position: relative;
+}
+.footer {
+    width: 100%;
+    position: absolute;
+    bottom: -4%;
+    z-index: 2;
+}
+.footer_animal {
+    position: absolute;
+    // left: 5%;
+    bottom: 0;
+    z-index: 3;
+}
+.footer_flower {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
