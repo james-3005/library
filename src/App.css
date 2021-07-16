@@ -3,3 +3,23 @@
   margin: 0;
   border: 0;
 }
+input {
+  outline: none;
+}
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Unkempt:wght@400;700&display=swap');
+.e-custom-style {
+  color: white !important;
+  border-bottom-color: #fff !important;
+}
+.e-custom-style input {
+  font-family: "Barlow" !important;
+}
+
+.e-calendar .e-content td.e-disabled span { /* csslint allow: adjoining-classes */
+  color: #fff !important  ;
+}
+.e-date-wrapper.e-custom-style .e-input-group-icon.e-date-icon.e-icons, /* csslint allow: adjoining-classes */
+.e-date-wrapper.e-custom-style .e-input-group-icon.e-date-icon.e-icons.e-active{ /* csslint allow: adjoining-classes */
+    color: white !important;
+}

@@ -1,0 +1,9 @@
+@import '../../init';
+
+.component {
+    position: absolute;
+    top: 25%;
+    right: 9%;
+    @include font-bar;
+    background-color: map-get($colors, "black");
+}

@@ -1,11 +1,13 @@
 @import '../../init';
 
 .component {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: #FAEBFF;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .footer_animal {
