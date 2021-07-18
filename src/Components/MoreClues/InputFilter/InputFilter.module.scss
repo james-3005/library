@@ -1,0 +1,41 @@
+@import '../../init';
+
+.component {
+    width: 150px;
+    // @include b;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input {
+    width: 80%;
+    height: 100%;
+    // @include b;
+    border-radius: 23px;
+    padding: 0 30px 0 10px;
+    @include font-bar;
+
+}
+.icon {
+    // @include b;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    right: 4px;
+    transition: 0.6s;
+    &:hover {
+        transition: 0.6s;
+        background-color: rgb(182, 175, 175);
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

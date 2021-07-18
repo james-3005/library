@@ -1,0 +1,73 @@
+@import '../../init';
+
+.icon {
+    width: 23px;
+    height: 23px;
+
+
+}
+.btn {
+    width: 40px;
+    height: 40px;
+    background-color: map-get($colors, "purple" );
+    // border-radius: 50%;
+    border: 2.5px solid map-get($colors, "white" );
+    outline: none;
+    cursor: pointer;
+    @include center;
+    z-index: 3;
+  
+
+}
+
+.searchComponent {
+    // width: 200px;
+    // height: 50px;
+    // border-radius: 23px;
+    // padding-left: 3px;
+    // @include b;
+    position: relative;
+    // overflow: hidden;
+}
+.input {
+    width: 700px;
+    height: 35px;
+    padding: 5px 10px 5px 10px;
+    z-index: 2;
+    // @include b;
+    // background-color: map-get($colors, "white" );
+    position: absolute;
+    transition: 0.6s;
+    @include font-rob;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    right: 0;
+}
+.input_active {
+    @extend .input;
+    width: 0px;
+    padding: 5px 0px;
+
+}
+// .wraper {
+//     width: 45px;
+//     height: 45px;
+//     border-radius: 2px;
+//     background-color: map-get($colors, "white"); 
+//     @include center;
+//     position: absolute;
+//     right: 0;
+// }
+.selection {
+    width: 150px;
+    outline: none;
+    border-radius: 23px;
+    @include font-bar;
+    padding-left: 10px;
+    color: #757575;
+    &option {
+        height: 20px;
+        @include font-bar;
+    }
+}
