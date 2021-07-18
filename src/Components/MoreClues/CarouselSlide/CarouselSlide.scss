@@ -1,0 +1,43 @@
+@import "../../init";
+
+.slidebox {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 0 auto;
+  /* border-radius: 20px; */
+  // border-color: #61dafb;
+}
+
+.imagecard {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 70%;
+  height: 60%;
+}
+
+h3 {
+  text-align: left;
+  margin-left: 15%;
+}
+
+.form form {
+  align-items: center;
+  margin: 0 auto;
+}
+
+.button {
+  align-items: center;
+  background-color: #e16a00;
+  color: white;
+  display: flex;
+  @include center;
+  @include font-mont;
+  border-radius: 3px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  font-size: 12px;
+}
