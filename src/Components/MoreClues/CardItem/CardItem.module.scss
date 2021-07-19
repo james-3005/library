@@ -23,11 +23,11 @@
   // object-fit: scale-down;
 }
 
-p {
+.slidebox p {
   text-align: left;
   margin-left: 15%;
-    @include font-mont;
-      font-style: normal;
+  @include font-mont;
+  font-style: normal;
 }
 .price {
 

@@ -21,7 +21,7 @@ function Carousel({data}) {
             <div>
                 {
                     data?
-                    data.map((item, index) => (<CarouselSilde data={item}/>)):
+                    data.map((item, index) => (<CarouselSilde key={index} data={item}/>)):
                     <div/>
                 }
             </div>

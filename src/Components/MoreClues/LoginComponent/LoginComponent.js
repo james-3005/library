@@ -3,8 +3,11 @@ import OrangeButton from '../../Atoms/OrangeButton/OrangeButton';
 import styles from './LoginComponent.module.scss'
 import {  motion } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
+import {useAuth} from '../../../Context/AuthProvider'
+import {useLoader} from '../../../Context/LoaderProvider'
 function LoginScreen() {
     const [signUpScreen, setSignUpScreen]= useState(false);
+    const [forgotPassword, setForgotPassword]= useState(false);
     const [username, setUsername]= useState("");
     const [email, setEmail]= useState("");
     const [password, setPassword]= useState("");
@@ -13,21 +16,57 @@ function LoginScreen() {
     const [spanUsername, setSpanUsername]= useState("");
     const [spanPassword, setSpanPassword]= useState("");
     const [spanConfirmPassword, setSpanConfirmPassword]= useState("");
+    const { signup, login, currentUser, logout, setCurrentUser, resetPassword } = useAuth();
+    const { turnOnLoader, turnOffLoader }= useLoader();
     const handleSwitch = () =>{
         setSpanConfirmPassword("");
         setSpanUsername("");
         setSignUpScreen(!signUpScreen);
         
     }
-    async function handleSignUp() {
+    const handleSignUp = () => {
         checkvalid("email");
         checkvalid("password");
         checkvalid("username");
         checkvalid("confirmpassword");
         if(spanEmail !== "" || spanPassword !== "" || spanConfirmPassword !== "" || spanUsername !== "") 
             return ;
+        turnOnLoader();
+        signup(email, password)
+            .then(() => {
+                turnOffLoader();
+                console.log("signUp");
+                setSignUpScreen(false);
+                })
+            .catch(err => {
+            setSpanEmail("Email already in use");
+            turnOffLoader();
+        })
+  
+        
     }
     const handleLogin = async() => {
+        turnOnLoader();
+        login(email, password)
+            .then(async (res) => {
+                setCurrentUser(res);
+                console.log("login");
+                console.log(currentUser.user.uid);
+                window.localStorage.setItem("user", JSON.stringify(currentUser));
+                turnOffLoader();
+            })
+            .catch(err => {
+                turnOffLoader();
+                if(err.code === "auth/user-not-found"){
+                    setSpanEmail("Email not found");
+                    setSpanPassword("");
+                    return;
+                }
+                setSpanPassword("Wrong password");
+                setSpanEmail("");
+                // console.log(errc)
+            });
+
     
     }
 
@@ -37,6 +76,7 @@ function LoginScreen() {
                 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 if(!re.test(String(email).toLowerCase()))
                     setSpanEmail("Email not valid");
+                else setSpanEmail("");
                 break;
             case "password":
                 if(password.length < 6){
@@ -63,8 +103,24 @@ function LoginScreen() {
         }
     }
     const history= useHistory();
-    return (
-        <motion.div 
+    const setForgotPasswordScreen = () => {
+        if(!forgotPassword)
+            setSpanEmail("Enter email to reset Password");
+        else
+            setSpanEmail("");
+        setForgotPassword(!forgotPassword);
+        
+    }
+    const handleForgotPassword = () => {
+        checkvalid("email");
+        if(spanEmail !== "") return;
+        alert("Sended, please check your email");
+        resetPassword(email);
+    }
+    return (<>
+        {
+            !forgotPassword?
+<motion.div 
             initial= {{ opacity: 0.4, y: -100}}
             animate= {{ opacity: 1, y: 0}}
             className={styles.mainComponent}>
@@ -108,8 +164,11 @@ function LoginScreen() {
                 <span className={styles.span} style={{marginTop: -20}}>{spanConfirmPassword}</span>
                 
                 <div className={styles.footer}>
-                    {signUpScreen?<div></div>:<p className={styles.forgotpassword}>forgot password?</p>}
-                    
+                    {
+                        forgotPassword||!signUpScreen?
+                        <p className={styles.forgotpassword} onClick={setForgotPasswordScreen}>Forgot password?</p>:
+                        <div/>
+                    }
                     <OrangeButton size="medium" text={signUpScreen?"Sign Up":"Log In"} action={signUpScreen? handleSignUp: handleLogin}/>
                     <p className={styles.descript}>
                         <span>
@@ -120,9 +179,36 @@ function LoginScreen() {
                         </span> now.
                     </p>
                 </div>
-        </motion.div>
+        </motion.div>:
+        <motion.div 
+        initial= {{ opacity: 0.4, y: -100}}
+        animate= {{ opacity: 1, y: 0}}
+        className={styles.mainComponent}>
+            <input  type="text" 
+                    placeholder="email" 
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
+                    className={spanEmail !== "" ?styles.input_warn : styles.input} 
+                    onBlur={() =>checkvalid("email")} 
+                    onFocus={()=>setSpanEmail("")}/>
+            <span className={styles.span}>{spanEmail}</span>
+            <div className={styles.footer}>
+                    <p className={styles.forgotpassword} onClick={setForgotPasswordScreen}>Turn back</p>:
+                <OrangeButton size="medium" text={"Send Email"} action={handleForgotPassword}/>
+                <p className={styles.descript}>
+                    <span>
+                        {"Already have an account, "}
+                    </span>
+                    <span className={styles.signUp} onClick={setForgotPasswordScreen}>
+                        Sign In
+                    </span> now.
+                </p>
+            </div>
+    </motion.div>
+        }
         
-    )
+        
+        </>)
 }
 
 export default LoginScreen
