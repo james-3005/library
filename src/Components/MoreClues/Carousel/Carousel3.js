@@ -1,7 +1,6 @@
 import React, {useRef} from 'react'
-import styles from './Carousel.module.scss'
+import styles from './Carousel3.module.scss'
 import CarouselSilde from '../CardItem/CardItem'
-import { motion } from 'framer-motion';
 function Carousel({data}) {
     const carouselRef = useRef();
     const handleScroll = (key) => {
@@ -12,9 +11,7 @@ function Carousel({data}) {
             });
     }
     return (
-        <motion.div className={styles.component}
-            initial= {{ opacity: 0.4, y: -30}}
-            animate= {{ opacity: 1, y: 0}}>
+        <div className={styles.component}>
             <img src="/image/svg/nextCarousel.svg" alt="" 
             className={styles.next} onClick={() => handleScroll(300)}/>
             <img src="/image/svg/backCarousel.svg" alt="" 
@@ -31,7 +28,7 @@ function Carousel({data}) {
 
                 
             </div>
-        </motion.div>
+        </div>
     )
 }
 

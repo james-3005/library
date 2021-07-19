@@ -1,2 +1,45 @@
 @import '../../../init';
 
+.component {
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+}
+.main {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: center;
+    position: relative;
+    
+}
+.header {
+    position: absolute;
+    left: -4%;
+    top: 10%;
+    font-size: 25px;
+    font-weight: bold;
+}
+.list {
+    // @include b;
+    width: 76vw;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: -2.1%;
+    right: 0;
+    top: 230px;
+}
+.searchBar {
+    position: absolute;
+    top: 20%;
+    left: 11%;
+}
+
+.filterBar {
+    top: 20%;
+    position: absolute;
+    right: 13%;
+}

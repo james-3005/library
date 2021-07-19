@@ -6,6 +6,7 @@
     background-color: map-get($colors, "yellow" );
     overflow: hidden;
     position: relative;
+    scroll-snap-align: center;
 }
 .footer {
     width: 100%;

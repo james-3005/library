@@ -1,10 +1,28 @@
-<svg width="856" height="368" viewBox="0 0 856 368" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="123" height="102" transform="matrix(-1 0 0 1 123 0)" fill="url(#pattern0)"/>
-<rect width="203" height="171" transform="matrix(-1 0 0 1 666 185)" fill="url(#pattern1)"/>
-<rect x="636" y="110" width="222" height="187" fill="url(#pattern2)"/>
-<rect width="159" height="133" transform="matrix(-1 0 0 1 845 235)" fill="url(#pattern3)"/>
-<rect x="113" y="131" width="131" height="109" fill="url(#pattern4)"/>
-<rect x="99" y="33" width="159" height="135" fill="url(#pattern5)"/>
+<svg width="858" height="373" viewBox="0 0 858 373" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Cloud">
+<g id="Group 27">
+<g id="Group 25">
+<rect id="Fuzzy Friends Cloud" width="123" height="102" transform="matrix(-1 0 0 1 123 -1.52588e-05)" fill="url(#pattern0)"/>
+</g>
+</g>
+<g id="Group 30">
+<rect id="Fuzzy Friends Cloud_2" width="203" height="171" transform="matrix(-1 0 0 1 666 185)" fill="url(#pattern1)"/>
+</g>
+<g id="Group 31">
+<rect id="Fuzzy Friends Cloud_3" x="636" y="110" width="222" height="187" fill="url(#pattern2)"/>
+</g>
+<g id="Group 32">
+<rect id="Fuzzy Friends Cloud_4" width="159" height="133" transform="matrix(-1 0 0 1 845 240)" fill="url(#pattern3)"/>
+</g>
+<g id="clould2">
+<rect id="Fuzzy Friends Cloud_5" x="113" y="131" width="131" height="109" fill="url(#pattern4)"/>
+</g>
+<g id="clould1">
+<g id="Group 26">
+<rect id="Fuzzy Friends Cloud_6" x="99" y="33" width="159" height="135" fill="url(#pattern5)"/>
+</g>
+</g>
+</g>
 <defs>
 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0" transform="translate(0 0.288217) scale(0.00125 0.00150735)"/>

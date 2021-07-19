@@ -6,11 +6,14 @@
     background-color: map-get($colors, "purple" );
     overflow: hidden;
     position: relative;
+    z-index: 0;
+    scroll-snap-align: start;
 }
 .footer {
     width: 100%;
     position: absolute;
     bottom: -4%;
+    // animation: floating 2s infinite alternate;
 }
 .footer_animal {
     position: absolute;
@@ -22,10 +25,29 @@
     position: absolute;
     right: 0;
     top: 0;
+    animation: floating 10s infinite alternate;
+
 }
+    @keyframes floating {
+        from {
+            transform: translateX(-100px)
+        }
+        to {
+            transform: translateX(10px)
+        }
+    }
+    @keyframes floating2 {
+        from {
+            transform: translateY(100px)
+        }
+        to {
+            transform: translateY(0px)
+        }
+    }
 .footer_moon {
     position: absolute;
     right: 0;
     bottom: 0;
     z-index: 1;
+    animation: floating2 10s infinite alternate;
 }

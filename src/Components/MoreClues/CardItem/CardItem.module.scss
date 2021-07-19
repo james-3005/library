@@ -1,0 +1,79 @@
+@import "../../init";
+
+.slidebox {
+  width: 185px;
+  height: 352px;
+  // @include b;  
+  margin-right: 62px;
+  // float: left;
+  display: inline-block;
+  background-color: white;
+  &:last-child {
+      margin-right: 0;
+  }
+  text-align: center;
+}
+
+.imagecard {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 128px;
+  height: 190px;
+  // object-fit: scale-down;
+}
+
+p {
+  text-align: left;
+  margin-left: 15%;
+    @include font-mont;
+      font-style: normal;
+}
+.price {
+
+
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 11px;
+}
+.type {
+  font-weight: 500;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.author {
+  font-weight: bold;
+  font-size: 12px;
+  margin-top: 14px;
+}
+form {
+    margin-left: 15%;
+    margin-top: 5px;
+  display: flex;
+  // justify-content: space-between;
+}
+.heart {
+  margin-left: 5px;
+  transition: 0.6s;
+  &:hover {
+    transition: 0.6s; 
+    fill: #e16a00;
+  }
+
+}
+
+
+.button {
+  align-items: center;
+  background-color: #e16a00;
+  color: white;
+  display: flex;
+  @include center;
+  @include font-mont;
+  border-radius: 3px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  font-size: 12px;
+}

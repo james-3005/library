@@ -8,6 +8,7 @@ import ReviewPage from './Components/Page/ReviewPage/ReviewPage';
 function App() {
   return (
       <div>
+      
         <Switch>
           <Route path="/" exact component={MainPage}/>
           <Route path="/adminPage" component={AdminPage}/>

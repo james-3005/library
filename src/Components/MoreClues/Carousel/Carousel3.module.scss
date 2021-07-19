@@ -69,10 +69,10 @@
   
   &::-webkit-scrollbar-track-piece {
     background-color: #D7D7D7;
-          border: 4px solid map-get($colors, "purple" );
-      height:  200px !important;
-      margin-right: 350px; 
-      margin-left: 350px;
+    border: 4px solid map-get($colors, "green" );
+    height:  200px !important;
+    margin-right: 350px; 
+    margin-left: 350px;
   }
   
 }

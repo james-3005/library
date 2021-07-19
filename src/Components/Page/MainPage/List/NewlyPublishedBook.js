@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
-import Background4 from '../../../Template/Background4/Background4'
-import styles from './SearchScreen.module.scss'
-import { motion } from "framer-motion"
-import classnames from "classnames";
-import SearchBar from '../../../MoreClues/SeachBar/SeachBar'
-import FilterBar from '../../../MoreClues/FilterBar/FilterBar';
-import Carousel3 from '../../../MoreClues/Carousel/Carousel3';
-const array = [
+import React from "react";
+// import Swiper core and required modules
+
+// Import Swiper styles
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
+import "swiper/components/scrollbar/scrollbar.scss";
+import styles from "./Carousel.module.scss";
+import Background3 from "../../../Template/Background3/Background3";
+import Carousel2 from "../../../MoreClues/Carousel/Carousel2";
+// install Swiper modules
+
+export default () => {
+  const array = [
     {
       image:
         "https://taisachmoi.com/wp-content/uploads/2018/12/dac-nhan-tam.jpg",
@@ -98,34 +104,13 @@ const array = [
       id: 10,
     },
   ];
-function SearchScreen() {
-    const [activeSearch, setActiveSearch]= useState(true);
-    const [activeFilter, setActiveFilter]= useState(false);
-    return (
-        <Background4>
-          <p className={styles.header}>Tìm kiếm</p>
-          <div className={styles.searchBar}>
-              <SearchBar  activeSearch={activeSearch} 
-                          setActiveSearch={setActiveSearch}
-                          activeFilter={activeFilter}
-                          setActiveFilter={setActiveFilter}
-                          />
-          </div>
-          <div className={styles.filterBar}>
-              <FilterBar  activeSearch={activeSearch} 
-                          setActiveSearch={setActiveSearch}
-                          activeFilter={activeFilter}
-                          setActiveFilter={setActiveFilter}/>
-          </div>
-          <div className={styles.component}>
-              <div className={styles.list}>
-                  <Carousel3 data={array}/>
-              </div>
-          </div>
-            
-            
-        </Background4>
-    )
-}
 
-export default SearchScreen
+  return (
+    <Background3>
+      <div className={styles.Carousel}>
+        <h2 className={styles.Header}>Sách mới xuất bản</h2>
+        <Carousel2 data={array}/>
+      </div>
+    </Background3>
+  );
+};

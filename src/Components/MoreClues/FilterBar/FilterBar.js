@@ -2,11 +2,16 @@ import React from 'react'
 import InputFilter from '../InputFilter/InputFilter';
 import styles from './FilterBar.module.scss'
 
-function FilterBar() {
-    const [activeFilter, setActiveFilter]= React.useState(false);
+function FilterBar({activeSearch, setActiveSearch, activeFilter, setActiveFilter}) {
+    const handleToggle = () => {
+        if(!activeFilter){
+            setActiveSearch(false);
+        }
+        setActiveFilter(!activeFilter);
+    }
     return (
         <div className={styles.searchComponent}>
-                <button className={styles.btn} onClick={() => setActiveFilter(!activeFilter)}>
+                <button className={styles.btn} onClick={handleToggle}>
                     <img src={!activeFilter?"image/svg/filter.svg":"image/svg/filterclear.svg"}
                         alt="" 
                         className={styles.icon}/>

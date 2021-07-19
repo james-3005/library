@@ -1,0 +1,15 @@
+@import '../../init';
+
+.mainPage {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    // transition: 0.4s;
+    scroll-behavior: smooth;
+}
+.cc {
+    scroll-snap-align: center;
+}

@@ -1,0 +1,23 @@
+@import "../../../init";
+
+.Carousel {
+  @include font-mont;
+  margin: 97px auto 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  text-align: left;
+  @include font-mont;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 25px;
+  margin-bottom: 50px;
+}
+.main {
+  height: 100vh;
+  scroll-snap-align: center;
+
+}

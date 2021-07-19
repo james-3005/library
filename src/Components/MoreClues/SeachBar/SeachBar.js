@@ -2,13 +2,20 @@ import { motion } from 'framer-motion';
 import React from 'react'
 import styles from './SearchBar.module.scss'
 
-function SeachBar() {
-    const [activeSearch, setActiveSearch]= React.useState(false);
+function SeachBar({activeSearch, setActiveSearch, activeFilter, setActiveFilter}) {
     const [value, setValue]= React.useState("");
     const handleToggle = () => {
-        if(activeSearch) 
+        if(!activeSearch) {
+            setActiveSearch(!activeSearch);
+            setActiveFilter(false);
             setValue("");
-        setActiveSearch(!activeSearch);
+        }
+        else {
+            setActiveSearch(!activeSearch);
+            // setValue("");
+        }
+            
+        
 
     }
     return (

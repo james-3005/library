@@ -6,18 +6,20 @@
     background-color: map-get($colors, "white" );
     overflow: hidden;
     position: relative;
+    scroll-snap-align: center;
 }
 .footer {
     width: 100%;
     position: absolute;
     bottom: -4%;
-    z-index: 2;
+    z-index: 1;
 }
 .footer_animal {
     position: absolute;
-    left: 5%;
+    left: -10%;
     bottom: 0;
-    z-index: 3;
+    z-index: 2;
+
 }
 .footer_cloud {
     position: absolute;
@@ -26,7 +28,16 @@
 }
 .footer_moon {
     position: absolute;
-    left: 5%;
+    left: -10%;
     bottom: 0;
-    z-index: 1;
+    z-index: 0;
+    animation: floating2 10s infinite alternate;
+}
+@keyframes floating2 {
+    from {
+        transform: translateY(100px)
+    }
+    to {
+        transform: translateY(0px)
+    }
 }
