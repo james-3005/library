@@ -16,6 +16,7 @@ function MainPage() {
       <Link to="/loginPage">loginPage</Link>
       <Link to="/paymentPage">paymentPage</Link>
       <Link to="/reviewPage">reviewPage</Link>
+      <Link to="/BookDetail">BookDetail</Link>
       </div>
       
       <Carousel1 />

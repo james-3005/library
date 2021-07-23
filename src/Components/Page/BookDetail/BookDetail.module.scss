@@ -1,0 +1,217 @@
+@import '../../init';
+
+;
+.container {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    position: absolute;
+    z-index: 5;
+    @include font-bar;
+    
+}
+.boxImage {
+    width: 18%;
+    height: 50%;
+    background-color: map-get($colors, "purple");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    box-shadow: 2px 2px 15px black;
+}
+.img {
+    width: 90%;
+    height: 95%;
+}
+
+.details {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background-color: map-get($colors, "purple");
+    box-shadow: 2px 2px 15px black;
+    padding: 20px;
+    overflow: auto;
+}
+.boxDes {
+    //height: 65%;
+    display: flex;
+    flex-direction: row;
+}
+.infomation {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    //align-items: center;
+}
+.introduction {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+.textRow {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    padding-bottom: 10px;
+    //align-items: center;
+    margin-left: 15px;
+}
+
+.t1 {
+    display: block;
+    width: 75%;
+}
+.title {
+    margin-bottom: 15px;
+}
+
+.boxPrice {
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
+    background-color: orangered;
+    color: white;
+    font-size: 20;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 35px;
+}
+.textDes {
+    font-size: 20;
+    font-weight:600;
+    color:darkslategray;
+    line-height: 1.5em;
+    max-lines: 7;
+    text-overflow: ellipsis;
+    width: 90%;
+    //background-color: black;
+    margin-left: 30px;
+    
+}
+.quantity {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.sl {
+    height: 40px;
+    width: 40px;
+    border-radius: 8px;
+    background-color: #240423;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.boxBuy {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    //background-color: brown;
+    width: 90%;
+}
+.slt {
+    font-size: 14;
+    font-weight: 50w;
+    padding-right: 15px;
+}
+
+.divider {
+    margin-top: 10px;
+    height: 2px;
+    width: 100%;
+    background-color: gray;
+    padding: 1.5px;
+}
+.bt1 {
+    background-color: #E16A00;
+    color: white;
+    display: flex;
+    @include center;
+    @include font-mont;
+    border-radius: 3px;
+    font-weight: 700;
+    height: 28px;
+    width: 200px;
+}
+
+.bt2 {
+    @extend .bt1;
+    background-color: rgb(53, 53, 175);
+    margin-top: 10px;
+}
+
+.boxComment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+.item {
+    background-color: black;
+    height: 40px;
+    width: 80%;
+}
+.commentList {
+    
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    //margin: auto;
+}
+
+.radio {
+    display: flex;
+    flex-direction: row;
+    height: 22px;
+    width: 120px;
+    background-color: rgb(53, 53, 175);
+    margin-left: 15px;
+    align-items: center;
+    color: white;
+    
+}
+.optionBox {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.addCommentBox {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 95px;
+}
+.input {
+    height: 35px;
+    width: 80%;
+    font-size: 18px;
+    border-radius: 5px;
+    border-width: 0px 0px 2px 0px;
+	border-color: grey;
+}
+
+input::placeholder {
+    padding-left: 10px;
+}
+.commentItem {
+    width: 80%;
+}

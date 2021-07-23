@@ -1,0 +1,30 @@
+@import '../../../init';
+
+
+.containerItem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 50px;
+    width: 100%;
+    background-color: #240423;
+    @include font-bar;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.boxTitle {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+}
+.title {
+    color: rgb(100, 100, 6);
+    font-size: 20;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.content {
+    color: white;
+
+}
