@@ -9,7 +9,7 @@ function LoaderScreen() {
             right: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "##0000008c",
+            backgroundColor: "#0000008c",
             justifyContent: "center",
             alignItems: 'center',
             // opacity: 0.4,
