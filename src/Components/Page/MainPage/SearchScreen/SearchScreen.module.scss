@@ -17,10 +17,11 @@
 }
 .header {
     position: absolute;
-    left: -4%;
+    left: 11%;
     top: 10%;
     font-size: 25px;
-    font-weight: bold;
+    font-weight: 900;
+    @include font-mont;
 }
 .list {
     // @include b;

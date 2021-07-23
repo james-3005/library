@@ -30,10 +30,10 @@ export function AuthProvider({ children }) {
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password)
+    return auth.currentUser.updatePassword(password);
   }
   useEffect(() => {
-      const user= JSON.parse(window.localStorage.getItem("user"));
+      const user= window.localStorage.getItem("user");
       setCurrentUser(user);
   }, [])
 
@@ -43,9 +43,9 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
-    resetPassword
+    resetPassword,
     // updateEmail,
-    // updatePassword,
+    updatePassword,
   }
 
   return (

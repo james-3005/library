@@ -5,6 +5,7 @@ import {  motion } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
 import {useAuth} from '../../../Context/AuthProvider'
 import {useLoader} from '../../../Context/LoaderProvider'
+import { auth } from '../../../firebase';
 function LoginScreen() {
     const [signUpScreen, setSignUpScreen]= useState(false);
     const [forgotPassword, setForgotPassword]= useState(false);
@@ -16,7 +17,7 @@ function LoginScreen() {
     const [spanUsername, setSpanUsername]= useState("");
     const [spanPassword, setSpanPassword]= useState("");
     const [spanConfirmPassword, setSpanConfirmPassword]= useState("");
-    const { signup, login, currentUser, logout, setCurrentUser, resetPassword } = useAuth();
+    const { signup, login, currentUser, logout, setCurrentUser, resetPassword, updatePassword } = useAuth();
     const { turnOnLoader, turnOffLoader }= useLoader();
     const handleSwitch = () =>{
         setSpanConfirmPassword("");
@@ -48,11 +49,9 @@ function LoginScreen() {
     const handleLogin = async() => {
         turnOnLoader();
         login(email, password)
-            .then(async (res) => {
-                setCurrentUser(res);
-                console.log("login");
-                console.log(currentUser.user.uid);
-                window.localStorage.setItem("user", JSON.stringify(currentUser));
+            .then(async () => {
+                setCurrentUser(auth.currentUser);
+                window.localStorage.setItem("user", auth.currentUser);
                 turnOffLoader();
             })
             .catch(err => {
@@ -64,6 +63,7 @@ function LoginScreen() {
                 }
                 setSpanPassword("Wrong password");
                 setSpanEmail("");
+                console.log(err);
                 // console.log(errc)
             });
 
@@ -117,6 +117,7 @@ function LoginScreen() {
         alert("Sended, please check your email");
         resetPassword(email);
     }
+
     return (<>
         {
             !forgotPassword?
@@ -124,6 +125,7 @@ function LoginScreen() {
             initial= {{ opacity: 0.4, y: -100}}
             animate= {{ opacity: 1, y: 0}}
             className={styles.mainComponent}>
+
                 <input  type="text" 
                         placeholder="email" 
                         onChange={e => setEmail(e.target.value)}

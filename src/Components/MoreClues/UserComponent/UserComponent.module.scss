@@ -1,0 +1,88 @@
+@import '../../init';
+
+.component {
+    z-index: 5;
+    width: 321px;
+    height: 400px;
+    // border: 1px solid black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+//    @include b;
+//    align-items: center;
+
+}
+.changePassword {
+    display: flex;
+    flex-direction: column;
+//    @include b;
+   align-items: center;
+   position: absolute;
+    bottom: 0;
+}
+.input {
+    width: 278px;
+    height: 44px;
+    border-radius: 14px 28px;
+    padding: 0px 19.5px;
+    box-shadow: -4px 4px 18px rgba(0, 0, 0, 0.09);
+    @include font-rob;
+    transition: 0.3s;
+    &::placeholder{
+        color: #636773;
+    }
+    border: 1.6px solid transparent;
+}
+.input_warn {
+    @extend .input;
+    border: 1.6px solid #ec0000;
+}
+.span {
+    @include font-rob;
+    font-size: 10px;
+    height: 10px;
+    color: #ec0000;
+    margin-bottom: 12px;
+    line-height: 22px;
+    justify-self: left;
+    align-self: flex-start;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+.boxInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.label {
+    @include font-rob;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: map-get($colors, "brown" );
+    font-weight: 500
+}
+.content {
+    @include font-rob;
+    width: 100%;
+    border-bottom: 1px solid map-get($colors, "brown");
+    padding-bottom: 5px;
+    // margin-left: 3%;
+    // font-weight: 400;
+}
+.btn {
+    @include font-rob;
+    height: 30px;
+    width: 150px;
+    border-radius: 3px;
+    background-color: map-get($colors, "purple" );
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+        transform: scale(1.1);
+    }
+}

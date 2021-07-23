@@ -9,13 +9,14 @@ function LoaderScreen() {
             right: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "black",
+            backgroundColor: "##0000008c",
             justifyContent: "center",
             alignItems: 'center',
-            opacity: 0.4,
+            // opacity: 0.4,
             zIndex: 100
          }}>
-            <div className={styles["lds-roller"]}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            {/* <div className={styles["lds-roller"]}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
+            <img src="/Image/svg/butterfly.svg" className={styles.butterfly}/>
         </div>
     )
 }

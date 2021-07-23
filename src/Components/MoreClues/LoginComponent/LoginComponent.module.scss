@@ -31,14 +31,17 @@
 }
 .forgotpassword {
     display: block;
-    // justify-self:flex-end;
     align-self: flex-end;
     font-size: 13px;
     @include font-rob;
     color: #636773;
     cursor: pointer;
     margin-bottom: 21px;
-    // font-weight: 500;
+    text-decoration:underline;
+    position: absolute;
+    right: 0;
+    bottom: 80px;
+
 }
 .descript {
     margin-left: 0  ;

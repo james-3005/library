@@ -8,10 +8,10 @@ import ReviewPage from './Components/Page/ReviewPage/ReviewPage';
 import {useLoader} from './Context/LoaderProvider';
 import LoaderScreen from './Components/MoreClues/LoaderScreen/LoaderScreen';
 import {useAuth} from './Context/AuthProvider'
+import UserPage from './Components/Page/UserPage/UserPage';
 function App() {
   const {isLoading} = useLoader();
   const {currentUser} =useAuth();
-  console.log(currentUser);
   return (
       <div>
           {
@@ -23,6 +23,7 @@ function App() {
           <Route path="/loginPage" component={LoginPage}/>
           <Route path="/paymentPage" component={PaymentPage}/>
           <Route path="/reviewPage" component={ReviewPage}/>
+          <Route path="/userPage" component={UserPage}/>
         </Switch>
       </div>
 

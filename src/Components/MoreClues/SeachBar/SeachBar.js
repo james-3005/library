@@ -12,7 +12,6 @@ function SeachBar({activeSearch, setActiveSearch, activeFilter, setActiveFilter}
         }
         else {
             setActiveSearch(!activeSearch);
-            // setValue("");
         }
             
         
