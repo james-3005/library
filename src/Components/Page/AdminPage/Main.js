@@ -3,8 +3,9 @@ import React from 'react';
 import { makeStyles, CssBaseline, createMuiTheme, ThemeProvider } from '@material-ui/core';
 //import Header from "../components/Header";
 //import PageHeader from '../components/PageHeader';
+import Background6 from '../../Template/Background6/Background6';
 
-import Employees from "./AdminPage";
+import BookAdminPage from "./BookAdminPage";
 
 const theme = createMuiTheme({
   palette: {
@@ -37,8 +38,23 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
   appMain: {
-    paddingLeft: '320px',
-    width: '100%'
+    
+    //justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    // display: 'flex',
+    width: window.width,
+    height: window.height,
+    flex: 1,
+    overflowY: 'scroll',
+    paddingTop: 50,
+    position: 'absolute',
+    zIndex: 5,
+    top:0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+
   }
 })
 
@@ -48,11 +64,13 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       {/* <SideMenu /> */}
-      <div className={classes.appMain}>
+      <Background6>
+      <div className={classes.appMain}  >
         {/* <Header /> */}
         
-        <Employees />
+        <BookAdminPage />
       </div>
+      </Background6>
       <CssBaseline />
     </ThemeProvider>
   );
