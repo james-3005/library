@@ -10,31 +10,46 @@
     position: absolute;
     z-index: 5;
     @include font-bar;
+    background-color: map-get($colors, "white" );
     
 }
 .boxImage {
-    width: 18%;
-    height: 50%;
-    background-color: map-get($colors, "purple");
+    width: 184px;
+    height: 352px;
+    // background-color: map-get($colors, "purple");
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 30px;
-    box-shadow: 2px 2px 15px black;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
+    margin: 67px 78px 0 65px;
+    z-index: 3;
 }
 .img {
-    width: 90%;
-    height: 95%;
+    width: 166px;
+    height: 269px;
 }
 
 .details {
-    width: 70%;
+    margin-top: 67px;
+    width: 1040px;
+    height: 620px;
+    z-index: 3;
     display: flex;
     flex-direction: column;
-    background-color: map-get($colors, "purple");
-    box-shadow: 2px 2px 15px black;
+    background-color: #edfff14a;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
     padding: 20px;
-    overflow: auto;
+    overflow-y:  scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+     
+    &::-webkit-scrollbar-thumb {
+        background-color: map-get($colors, "brown" )
+        // border-radius: 100px;
+    }
 }
 .boxDes {
     //height: 65%;
@@ -59,7 +74,7 @@
     flex-direction: row;
     width: 70%;
     padding-bottom: 10px;
-    //align-items: center;
+    @include font-rob;
     margin-left: 15px;
 }
 
@@ -69,6 +84,7 @@
 }
 .title {
     margin-bottom: 15px;
+    @include font-rob;
 }
 
 .boxPrice {
@@ -93,11 +109,12 @@
     max-lines: 7;
     text-overflow: ellipsis;
     width: 90%;
-    //background-color: black;
+    @include font-rob;
     margin-left: 30px;
     
 }
 .quantity {
+    // @include b;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
@@ -105,30 +122,32 @@
     padding: 5px;
 }
 .sl {
-    height: 40px;
-    width: 40px;
+    height: 48px;
+    width: 48px;
     border-radius: 8px;
-    background-color: #240423;
+    background-color: #2A282E;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center;
     color: white;
-    font-size: 20;
+    font-size: 16px;
     margin-left: 5px;
     margin-right: 5px;
+    @include font-mont;
 }
 
 .boxBuy {
     display: flex;
-    align-items: flex-end;
     flex-direction: column;
-    //background-color: brown;
-    width: 90%;
+    @include center;
+    // @include b;
+    margin-left: 45%;   
 }
 .slt {
-    font-size: 14;
-    font-weight: 50w;
+    font-size: 14px;
+    // font-weight: 50w;
     padding-right: 15px;
+    @include font-rob;
+
 }
 
 .divider {
@@ -143,16 +162,16 @@
     color: white;
     display: flex;
     @include center;
-    @include font-mont;
+    @include font-rob;
     border-radius: 3px;
-    font-weight: 700;
+    cursor: pointer;
     height: 28px;
     width: 200px;
 }
 
 .bt2 {
     @extend .bt1;
-    background-color: rgb(53, 53, 175);
+    background-color: #6A47CC;
     margin-top: 10px;
 }
 
@@ -201,12 +220,12 @@
     margin-left: 95px;
 }
 .input {
-    height: 35px;
-    width: 80%;
-    font-size: 18px;
-    border-radius: 5px;
-    border-width: 0px 0px 2px 0px;
-	border-color: grey;
+    height: 55px;
+    width: 90%;
+    font-size: 14px;
+    padding: 5px 20px;
+    outline: none;
+    @include font-rob;
 }
 
 input::placeholder {
@@ -214,4 +233,10 @@ input::placeholder {
 }
 .commentItem {
     width: 80%;
+}
+.selectType {
+    width: 150px;
+    height: 30px;
+    @include font-rob;
+    outline: none;
 }

@@ -1,4 +1,4 @@
-import Background2 from '../../Template/Background2/Background2';
+import Background2 from '../../Template/Background4/Background4';
 import styles from './BookDetail.module.scss';
 import { AiFillPlusSquare, AiFillMinusSquare, AiOutlineBulb, AiOutlineQuestionCircle,AiOutlineRocket } from "react-icons/ai";
 import { useState } from "react";
@@ -6,6 +6,8 @@ import CommentItem from "./components/CommentItem";
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import EcoIcon from '@material-ui/icons/Eco';
 import Button from '@material-ui/core/Button';
+import OrangeButton from '../../Atoms/OrangeButton/OrangeButton';
+import {motion} from 'framer-motion'
 
 
 
@@ -79,55 +81,68 @@ const BookDetailsScreen = () => {
 
     return (
         <Background2>
-            <div className = {styles.container}>
-                <div className = {styles.boxImage}>
-                    <img className = {styles.img} src={book.img}/>
-                </div>
-                <div className = {styles.details}>
+            <motion.div 
+            initial= {{ opacity: 0.4, y: -100}}
+            animate= {{ opacity: 1, y: 0}} 
+            className = {styles.boxImage}>
+                <img className = {styles.img} src={"/image/svg/book.svg"}/>
+            </motion.div>
+            <motion.div 
+                initial= {{ opacity: 0.4, y: -100}}
+                animate= {{ opacity: 1, y: 0}} 
+                className = {styles.details}>
                     <div className = {styles.boxDes}>
                         <div className = {styles.infomation}>
                             <h2 className = {styles.title}>{book.ten}</h2>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Tác giả</p><p>{book.tg}</p></span>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Năm phát hành</p><p>{book.nxb}</p></span>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Thể loại</p><p>{book.tl}</p></span>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Nhà phát hành</p><p>{book.nph}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>Tác giả:</p><p>{book.tg}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>Năm phát hành:</p><p>{book.nxb}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>Thể loại:</p><p>{book.tl}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>Nhà phát hành:</p><p>{book.nph}</p></span>
                             <div className ={styles.boxPrice} >
-                                <p>{book.gia}</p>
+                                <OrangeButton text="200.000$" size="small"/>
                             </div>
                         </div>
                         <div className = {styles.introduction}>
-                            <h2 className = {styles.title}>{book.ten}</h2>
+                            <h2 className = {styles.title}>Giới thiệu</h2>
                             <p className = {styles.textDes}>{book.des}</p>
                             <div className = {styles.boxBuy}>
                                 <div className = {styles.quantity} >
                                     <p className = {styles.slt}>Số lượng: </p>
                                 
-                                        <AiFillMinusSquare color="#240423" size={25} onClick={ () => {if(quantity > 0) setQuantity(quantity - 1)}}/>
+                                        <img src='/image/svg/subtract.svg' alt="" onClick={ () => {if(quantity > 0) setQuantity(quantity - 1)}}/>
                                         <div className = {styles.sl}>
                                             {quantity}
                                         </div>
-                                        <AiFillPlusSquare color="#240423" size={25} onClick={ () => setQuantity(quantity + 1)}/>
+                                        <img src='/image/svg/plus.svg' alt="" onClick={ () => setQuantity(quantity + 1)}/>
                                 </div>
-                                <button className = {styles.bt1} >Thêm vào giỏ hàng</button>
+                                <OrangeButton text="Thêm vào giỏ hàng" size="large"/>
                             </div>
                         </div> 
                         
                     </div>
-                    <div className = {styles.divider}>
-                    </div>
+                    <div className = {styles.divider}/>
                     <div className = {styles.boxComment}>
                         {!openComment?<button className ={styles.bt2} onClick={() => setOpenComment(true)} >Thêm đánh giá</button>: (<div className = {styles.addCommentBox}>
                             <div className = {styles.optionBox}>
-                                {options.map((result)=> (
+                                {/* {options.map((result)=> (
                                     <div className = {styles.radio}>
                                     <input style={{marginRight: 5}} type = "radio" value={result} name ="options" checked={result === option} onChange = {(e) => setOption(e.target.value)} />
                                     <RenderIcon title={result} />
                                     <p style={{marginLeft: 8}}>{result}</p>
                                     </div>
-                                ))}
+                                ))} */}
+                                <select id="type" className={styles.selectType}>
+                                    <option value="question">Hỏi đáp</option>
+                                    <option value="bold">Trả lời</option>
+                                    <option value="crazy">Đánh giá</option>
+                                </select>
+
                             </div>
-                            <input type="text" placeholder="Enter to add a comment" className = {styles.input} onChange={(e) => setTextComment(e.target.value)} />
-                            <Button className={styles.bt2} onClick = {() => {
+                            {/* <input type="text" placeholder="Add comment"  onChange={(e) => setTextComment(e.target.value)} /> */}
+                            <textarea   className = {styles.input} 
+                                        placeholder="Add comment"
+                                        onChange={(e) => setTextComment(e.target.value)}/>
+                            <button className={styles.bt2} onClick = {() => {
                                 //setLimit(limit +1);
                                 if(textComment != "") {
                                     setListComments([...listComments, {title: option, content: textComment}]);
@@ -137,7 +152,7 @@ const BookDetailsScreen = () => {
                             }}>
                                 
                                 Comment
-                            </Button>
+                            </button>
                         </div>)}
                         
                         <ul className = {styles.commentList}>
@@ -148,10 +163,7 @@ const BookDetailsScreen = () => {
                             setShowMore(true);
                         }} >Tải thêm bình luận</button>}
                     </div>
-                    
-                </div>
-                
-            </div>
+            </motion.div>
         </Background2>
     );
 }
