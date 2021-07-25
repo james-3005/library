@@ -15,19 +15,20 @@
     outline: none;
     cursor: pointer;
     @include center;
-    z-index: 3;
+    z-index: 100;
   
 
 }
 
 .searchComponent {
-
+    display: flex;
     // height: 50px;
     // border-radius: 23px;
     // padding-left: 3px;
     // @include b;
     position: relative;
     // overflow: hidden;
+    z-index: 3;
 }
 .input {
     width: 700px;

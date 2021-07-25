@@ -1,9 +1,6 @@
 @import '../../init';
 
-div {
-    display: flex;
-}
-.mainContainer {
+.mainComponent {
     width: 99.5%;
     height: 110px;
     font-size: 14px;
@@ -11,8 +8,8 @@ div {
     @include font-bar;
     justify-content: space-between;
     padding: 8px 0px;
-    // @include b;
-    // border-bottom: 1px solid #393C49;
+    display: flex;
+    flex-direction: row;
 }
 
 .delete {
@@ -38,6 +35,7 @@ div {
 }
 
 .box {
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     overflow: hidden;
@@ -65,6 +63,7 @@ div {
 }
 
 .number {
+    display: flex;
     width: 45px;
     height: 45px;
     border-radius: 8px;

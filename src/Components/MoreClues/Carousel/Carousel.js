@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import styles from './Carousel.module.scss'
 import CarouselSilde from '../CardItem/CardItem'
 import { motion } from 'framer-motion';
+import { Block } from '@material-ui/icons';
 function Carousel({data}) {
     const carouselRef = useRef();
     const handleScroll = (key) => {
@@ -21,12 +22,13 @@ function Carousel({data}) {
             className={styles.back} onClick={() => handleScroll(-300)}/>
          
             <div className={styles.carousel} ref={carouselRef}>
-            <div>
+            <div style={{display:'flex'}}>
                 {
                     data?
                     data.map((item, index) => (<CarouselSilde key={index} data={item}/>)):
                     <div/>
                 }
+
             </div>
 
                 

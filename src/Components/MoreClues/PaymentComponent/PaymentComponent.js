@@ -90,19 +90,19 @@ function PaymenScreen() {
                 </div>
                 <div className={styles.information_total}>
                 <img src="image/svg/giraff.svg" alt="" className={styles.giraff}/>
-                <div>
+                <div style={{display:'flex'}}>
                         <div className={styles.date}>
-                        <InfoPair keyy={"Thêm ngày trả"} value={""}/>  
-                        <DatePickerComponent 
-                        id="datepicker" 
-                        cssClass="e-custom-style"
-                        format="dd/MM/yyyy"
-                        value={selectedDate}
-                        min={minValue} 
-                        max={maxValue}
-                        change={(day) => setSelectedDate(day.value)}
-                        />
-                    </div>
+                            <InfoPair keyy={"Thêm ngày trả"} value={""}/>  
+                            <DatePickerComponent 
+                            id="datepicker" 
+                            cssClass="e-custom-style"
+                            format="dd/MM/yyyy"
+                            value={selectedDate}
+                            min={minValue} 
+                            max={maxValue}
+                            change={(day) => setSelectedDate(day.value)}
+                            />
+                        </div>
                 </div>
                 
   

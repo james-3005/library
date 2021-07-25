@@ -3,15 +3,17 @@
 .slidebox {
   width: 185px;
   height: 352px;
-  // @include b;  
   margin-right: 62px;
-  // float: left;
   display: inline-block;
   background-color: white;
   &:last-child {
       margin-right: 0;
   }
-  text-align: center;
+  text-align: start;
+  & p {
+    margin-left: 15%;
+    @include font-mont;
+  }
 }
 
 .imagecard {
@@ -28,9 +30,10 @@
   @include font-mont;
   font-style: normal;
 }
+
+
 .price {
-
-
+  margin-left: 0;
   font-weight: bold;
   font-size: 18px;
   margin-top: 11px;
@@ -45,8 +48,8 @@
   font-size: 12px;
   margin-top: 14px;
 }
-form {
-    margin-left: 15%;
+.form {
+    margin-left: 8%;
     margin-top: 5px;
   display: flex;
   // justify-content: space-between;

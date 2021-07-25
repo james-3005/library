@@ -116,6 +116,7 @@ function SearchScreen() {
                           setActiveSearch={setActiveSearch}
                           activeFilter={activeFilter}
                           setActiveFilter={setActiveFilter}/>
+              
           </div>
           <div className={styles.component}>
               <div className={styles.list}>

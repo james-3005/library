@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Unkempt:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
 @mixin font-bar {
     font-family: "Barlow";
 }
@@ -11,6 +12,9 @@
 }
 @mixin font-rob {
     font-family: "Roboto"
+}
+@mixin font-ibm {
+  font-family: "IBM Plex Mono";
 }
 $colors : (
     "white": #FAEBFF,
