@@ -7,6 +7,8 @@
     overflow: hidden;
     position: relative;
     scroll-snap-align: center;
+    display: flex;
+    // flex-direction: row;
 }
 
 .footer_animal {

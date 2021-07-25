@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './navComponent.module.scss'
-
+import {Link} from 'react-router-dom'
 function navComponent() {
     return (
         <div>
@@ -8,15 +8,16 @@ function navComponent() {
                 <li className={styles.dropDown}>
                     <a href="">Menu</a>
                     <ul className={styles.dropDown_content}>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Login</a></li>
-                        <li><a href="">Logout</a></li>
-                        <li><a href="">History</a></li>
+                        <li><Link to="/adminPage">Admin</Link></li>
+                        <li><Link to="/loginPage">Login</Link></li>
+                        <li><Link to="/paymentPage">Payment</Link></li>
+                        <li><Link to="/reviewPage">Review</Link></li>
+                        <li><Link to="/userPage">User</Link></li>
                     </ul>
                 </li>
-                <li><a href="">Contact</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Help</a></li>
+                <li>Contact</li>
+                <li>About</li>
+                <li>Help</li>
             </ul>
         </div>
     )

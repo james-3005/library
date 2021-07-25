@@ -8,6 +8,7 @@
   justify-content: space-between;
   align-items: center;
   li {
+    @include font-mont;
     a {
       margin: 5px;
       position: relative;
@@ -26,7 +27,9 @@
       min-width: 100px;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       li {
+        @include font-mont;
         list-style: none;
+        background-color: white;
       }
     }
   }
@@ -35,7 +38,7 @@
     .dropDown_content {
       display: block;
       li:hover {
-        background-color: map-get($colors, "light-yellow");
+        background-color: map-get($colors, "white" )
       }
     }
   }

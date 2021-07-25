@@ -11,7 +11,6 @@ import Footer from '../../MoreClues/Footer/Footer';
 function MainPage() {
   return (
     <div className={styles.mainPage}>
-
       <HomePage/>
       <Carousel1 />
       <Carousel2 />

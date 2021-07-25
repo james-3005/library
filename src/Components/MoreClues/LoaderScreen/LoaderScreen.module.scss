@@ -95,4 +95,21 @@
       transform: rotate(360deg);
     }
   }
+  .butterfly {
+    animation: fly 2s infinite linear ;
+  }
+  @keyframes fly {
+    0% {
+      transform: translateX(-100px) translateY(0) rotate(40deg); 
+    }
+    33% {
+      transform: translateX(-33px) translateY(30px) rotate(30deg); 
+    }
+    66% {
+      transform: translateX(33px) translateY(-30px) rotate(-30deg); 
+    }
+    100% {
+      transform: translateX(100px) translateY(0) rotate(40deg); 
+    }
+  }
   

@@ -1,18 +1,20 @@
 import React from 'react'
 import CartComponent from '../../Atoms/cartComponent/cartComponent'
-import LogoComponent from '../../Atoms/logoComponent/logoComponent'
+import LogoComponent from '../../Atoms/LogoComponent/LogoComponent'
 import NavComponent from '../../Atoms/navComponent/navComponent'
 import styles from './NavBar.module.scss'
+import { useHistory } from 'react-router-dom'
 function NavBar() {
+    const history= useHistory();
     return (
         <div className={styles.header}>
             <LogoComponent/>
             <NavComponent/>
             <div className={styles.search}>
-                <a href="" alt="search"><img src="image/svg/search.svg" />Search</a> 
+                <p alt="search"><img src="image/svg/search.svg" />Search</p> 
             </div>
-            <div className={styles.login}>
-                <a href=""><img src="image/svg/login.svg" />Login</a> 
+            <div className={styles.login} onClick={() => history.push('/loginPage')}>
+                <p><img src="image/svg/login.svg" />Login</p> 
             </div>
             <CartComponent />
 

@@ -1,8 +1,11 @@
 import React from 'react'
 import styles from './logoComponent.module.scss'
-function logoComponent() {
+import { Link, useHistory } from 'react-router-dom'
+
+function LogoComponent() {
+    const history= useHistory();
     return (
-        <div className={styles.logo}>
+        <div className={styles.logo} onClick={() =>history.push('/')}>
             <div>
                 <img src="image/svg/logo.svg" alt="logo" />
             </div>
@@ -16,4 +19,4 @@ function logoComponent() {
     )
 }
 
-export default logoComponent
+export default LogoComponent

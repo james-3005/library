@@ -6,14 +6,18 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 15px;    
+    top: 25px;    
     margin: 0 auto;
     width: 80%;
     height: 42px;
-    background-color: #00000026;
+    background-color: #ffffff2b ;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
     .search, .login {
+        cursor: pointer;
         align-items: center;
-        a{
+        p{
             display: flex;
             align-items: center;
             font-size: medium;

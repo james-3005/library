@@ -7,7 +7,7 @@ function Background1({children}) {
             {/* <img className={styles.footer} alt="" src="image/svg/footer3.svg"/> */}
             <img className={styles.footer_animal} alt="" src="image/svg/footer5-animal.svg"/>
             {/* <img className={styles.footer_cloud} alt="" src="image/svg/footer2-cloud.svg"/> */}
-            <img className={styles.footer_moon} alt="" src="image/svg/footer5-moon.svg"/>
+            <img className={styles.footer_moon} alt="" src="Image/svg/footer5-moon.svg"/>
             {children}
         </div>
     )

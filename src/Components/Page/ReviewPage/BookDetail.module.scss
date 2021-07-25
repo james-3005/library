@@ -1,0 +1,242 @@
+@import '../../init';
+
+;
+.container {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    position: absolute;
+    z-index: 5;
+    @include font-bar;
+    background-color: map-get($colors, "white" );
+    
+}
+.boxImage {
+    width: 184px;
+    height: 352px;
+    // background-color: map-get($colors, "purple");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
+    margin: 67px 78px 0 65px;
+    z-index: 3;
+}
+.img {
+    width: 166px;
+    height: 269px;
+}
+
+.details {
+    margin-top: 67px;
+    width: 1040px;
+    height: 620px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    background-color: #edfff14a;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
+    padding: 20px;
+    overflow-y:  scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+     
+    &::-webkit-scrollbar-thumb {
+        background-color: map-get($colors, "brown" )
+        // border-radius: 100px;
+    }
+}
+.boxDes {
+    //height: 65%;
+    display: flex;
+    flex-direction: row;
+}
+.infomation {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    //align-items: center;
+}
+.introduction {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+.textRow {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    padding-bottom: 10px;
+    @include font-rob;
+    margin-left: 15px;
+}
+
+.t1 {
+    display: block;
+    width: 75%;
+}
+.title {
+    margin-bottom: 15px;
+    @include font-rob;
+}
+
+.boxPrice {
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
+    background-color: orangered;
+    color: white;
+    font-size: 20;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 35px;
+}
+.textDes {
+    font-size: 20;
+    font-weight:600;
+    color:darkslategray;
+    line-height: 1.5em;
+    max-lines: 7;
+    text-overflow: ellipsis;
+    width: 90%;
+    @include font-rob;
+    margin-left: 30px;
+    
+}
+.quantity {
+    // @include b;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.sl {
+    height: 48px;
+    width: 48px;
+    border-radius: 8px;
+    background-color: #2A282E;
+    display: flex;
+    @include center;
+    color: white;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    @include font-mont;
+}
+
+.boxBuy {
+    display: flex;
+    flex-direction: column;
+    @include center;
+    // @include b;
+    margin-left: 45%;   
+}
+.slt {
+    font-size: 14px;
+    // font-weight: 50w;
+    padding-right: 15px;
+    @include font-rob;
+
+}
+
+.divider {
+    margin-top: 10px;
+    height: 2px;
+    width: 100%;
+    background-color: gray;
+    padding: 1.5px;
+}
+.bt1 {
+    background-color: #E16A00;
+    color: white;
+    display: flex;
+    @include center;
+    @include font-rob;
+    border-radius: 3px;
+    cursor: pointer;
+    height: 28px;
+    width: 200px;
+}
+
+.bt2 {
+    @extend .bt1;
+    background-color: #6A47CC;
+    margin-top: 10px;
+}
+
+.boxComment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+.item {
+    background-color: black;
+    height: 40px;
+    width: 80%;
+}
+.commentList {
+    
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    //margin: auto;
+}
+
+.radio {
+    display: flex;
+    flex-direction: row;
+    height: 22px;
+    width: 120px;
+    background-color: rgb(53, 53, 175);
+    margin-left: 15px;
+    align-items: center;
+    color: white;
+    
+}
+.optionBox {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.addCommentBox {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 95px;
+}
+.input {
+    height: 55px;
+    width: 90%;
+    font-size: 14px;
+    padding: 5px 20px;
+    outline: none;
+    @include font-rob;
+}
+
+input::placeholder {
+    padding-left: 10px;
+}
+.commentItem {
+    width: 80%;
+}
+.selectType {
+    width: 150px;
+    height: 30px;
+    @include font-rob;
+    outline: none;
+}

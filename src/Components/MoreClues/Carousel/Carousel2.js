@@ -18,10 +18,10 @@ function Carousel({data}) {
             className={styles.back} onClick={() => handleScroll(-300)}/>
          
             <div className={styles.carousel} ref={carouselRef}>
-            <div>
+            <div style={{display: 'flex'}}>
                 {
                     data?
-                    data.map((item, index) => (<CarouselSilde data={item}/>)):
+                    data.map((item, index) => (<CarouselSilde key={index} data={item}/>)):
                     <div/>
                 }
             </div>

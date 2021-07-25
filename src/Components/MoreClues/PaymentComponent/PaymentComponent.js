@@ -5,6 +5,7 @@ import InfoPair from '../InfoPair/InfoPair';
 import Receipt from '../Receipt/Receipt';
 import OrangeButton from '../../Atoms/OrangeButton/OrangeButton';
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
+import { useHistory } from 'react-router-dom';
 function PaymenScreen() {
     const [info, setInfo]= useState("flex");
     const [pay, setPay]= useState(true);
@@ -13,6 +14,7 @@ function PaymenScreen() {
     const [receiveaddress, setReceiveaddress]= useState("");
     const [receivephone, setReceivephone]= useState("");
     const [total, setTotal]= useState(0);
+    const history= useHistory();
     const handlePayment = () => {
         if(!pay) setInfo("none");
             else setInfo("block");
@@ -73,7 +75,7 @@ function PaymenScreen() {
                 <div className={styles.information_listFood}>
                     <div className={styles.head}>
                         <div className={styles.information_manageButton}>
-                            <img src="image/svg/back.svg" className={styles.back} />
+                            <img src="image/svg/back.svg" className={styles.back} onClick={() => history.push('/')} />
                         </div>
                         <p className={styles.confirmation}>Confirmation</p>
                         
@@ -88,19 +90,19 @@ function PaymenScreen() {
                 </div>
                 <div className={styles.information_total}>
                 <img src="image/svg/giraff.svg" alt="" className={styles.giraff}/>
-                <div>
+                <div style={{display:'flex'}}>
                         <div className={styles.date}>
-                        <InfoPair keyy={"Thêm ngày trả"} value={""}/>  
-                        <DatePickerComponent 
-                        id="datepicker" 
-                        cssClass="e-custom-style"
-                        format="dd/MM/yyyy"
-                        value={selectedDate}
-                        min={minValue} 
-                        max={maxValue}
-                        change={(day) => setSelectedDate(day.value)}
-                        />
-                    </div>
+                            <InfoPair keyy={"Thêm ngày trả"} value={""}/>  
+                            <DatePickerComponent 
+                            id="datepicker" 
+                            cssClass="e-custom-style"
+                            format="dd/MM/yyyy"
+                            value={selectedDate}
+                            min={minValue} 
+                            max={maxValue}
+                            change={(day) => setSelectedDate(day.value)}
+                            />
+                        </div>
                 </div>
                 
   
