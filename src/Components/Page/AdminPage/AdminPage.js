@@ -5,7 +5,7 @@ function AdminPage() {
         <Background6>
             Admin Pagefdsfafdsfd
             <div>
-                dsds
+                dsdt
             </div>
         </Background6>
     )

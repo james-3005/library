@@ -1,0 +1,21 @@
+@import "../../init";
+
+.logo {
+  height: 100%;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  .logoTitle {
+    flex-direction: column;
+    margin-left: 10px;
+    @include font-mont;
+    line-height: 17px;
+    .line {
+      background-color: rgba(0, 0, 0, 0.59);
+      height: 1px;
+    }
+    p {
+      margin-left: 0;
+    }
+  }
+}

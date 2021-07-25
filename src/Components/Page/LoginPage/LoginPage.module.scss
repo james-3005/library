@@ -1,9 +1,17 @@
-@import '../../init';
+@import "../../init";
 
-.component {
-    position: absolute;
-    top: 25%;
-    right: 9%;
-    @include font-bar;
-    // background-color: map-get($colors, "black");
+.loginComponent {
+  position: absolute;
+  top: 25%;
+  right: 9%;
+  @include font-bar;
+  background-color: map-get($colors, "black");
+}
+.headerComponent {
+  position: absolute;
+  width: 1170px;
+  height: 42px;
+  left: 135px;
+  top: 40px;
+  justify-content: space-between;
 }

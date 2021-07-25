@@ -1,0 +1,21 @@
+@import "../../init";
+
+.search {
+  width: 200px;
+  height: 30px;
+  position: relative;
+  border-bottom: 1px solid rgba(105, 103, 100, 0.59);
+  align-items: center;
+  .iconSearch {
+    position: absolute;
+    height: 15px;
+  }
+  input {
+    align-items: center;
+    line-height: 196.19%;
+    left: 20px;
+    position: absolute;
+    font-size: 12px;
+    background: none;
+  }
+}

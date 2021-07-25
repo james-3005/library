@@ -9,15 +9,15 @@
 }
 .footer {
     width: 100%;
-    position: absolute;
+    position: relative;
     bottom: -4%;
-    z-index: 2;
+    z-index: 1;
 }
 .footer_animal {
-    position: absolute;
+    position: relative;
     left: 5%;
     bottom: -10%;
-    z-index: 3;
+    z-index: 1;
 }
 .footer_moon {
     position: absolute;

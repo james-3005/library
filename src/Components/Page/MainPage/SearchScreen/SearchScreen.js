@@ -6,6 +6,7 @@ import classnames from "classnames";
 import SearchBar from '../../../MoreClues/SeachBar/SeachBar'
 import FilterBar from '../../../MoreClues/FilterBar/FilterBar';
 import Carousel3 from '../../../MoreClues/Carousel/Carousel3';
+import Logo from '../../../Atoms/logoComponent/logoComponent'
 const array = [
     {
       image:
@@ -122,8 +123,24 @@ function SearchScreen() {
                   <Carousel3 data={array}/>
               </div>
           </div>
-            
-            
+          <div  className={styles.footer}>
+            <div className={styles.logo}>
+              <Logo/>
+            </div>
+            <div className={styles.social}>
+                <h2>Theo dõi để cập nhật những thông tin mới nhất</h2>
+                <div className={styles.iconSocial}>
+                    <img src="image/svg/iconFb.svg"/>
+                    <img src="image/svg/iconTwitter.svg"/>
+                    <img src="image/svg/iconInsta.svg"/>
+                    <img src="image/svg/iconVK.svg"/>
+                    <img src="image/svg/iconYoutube.svg"/>
+                </div>
+            </div>
+            <div className={styles.contact}>
+                <h2>Liên hệ: +38 (071) 339-16-26</h2>
+            </div>
+          </div>
         </Background4>
     )
 }

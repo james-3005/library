@@ -5,6 +5,7 @@ import Carousel1 from "./List/FavouriteBook";
 import Carousel2 from "./List/NewlyPublishedBook";
 import styles from './MainPage.module.scss'
 import Background2 from '../../Template/Background2/Background2';
+import HomePage from './HomePage/HomePage'
 
 function MainPage() {
   return (
@@ -17,7 +18,7 @@ function MainPage() {
       <Link to="/paymentPage">paymentPage</Link>
       <Link to="/reviewPage">reviewPage</Link>
       </div>
-      
+      <HomePage/>
       <Carousel1 />
       <Carousel2 />
       <SearchScreen/>
