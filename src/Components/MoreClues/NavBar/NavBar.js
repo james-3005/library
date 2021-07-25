@@ -1,6 +1,6 @@
 import React from 'react'
 import CartComponent from '../../Atoms/cartComponent/cartComponent'
-import LogoComponent from '../../Atoms/LogoComponent/LogoComponent'
+import LogoComponent from '../../Atoms/LogoCom/LogoComponent'
 import NavComponent from '../../Atoms/navComponent/navComponent'
 import styles from './NavBar.module.scss'
 import { useHistory } from 'react-router-dom'
