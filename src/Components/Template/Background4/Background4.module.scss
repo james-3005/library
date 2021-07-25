@@ -8,17 +8,12 @@
     position: relative;
     scroll-snap-align: center;
 }
-.footer {
-    width: 100%;
-    position: absolute;
-    bottom: -4%;
-    z-index: 2;
-}
+
 .footer_animal {
     position: absolute;
     // left: 5%;
     bottom: 0;
-    z-index: 2;
+    z-index: 1;
 }
 .footer_flower {
     position: absolute;

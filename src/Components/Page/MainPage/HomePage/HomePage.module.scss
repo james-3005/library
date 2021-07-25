@@ -1,20 +1,35 @@
 @import "../../../init";
-.header {
-    top: 10%;
+
+.name {
+    font-size: 69px;
+    font-weight: bold;
+    @include font-unk;
+    color: #7C6063;
     position: absolute;
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 42px;
-    .search,.login {
-        align-items: center;
-        a{
-            display: flex;
-            align-items: center;
-            font-size: medium;
-            @include font-mont;
-            text-decoration: none;
-            color: black;
-        }
-    }
+    top: 200px;
+    left: 150px;
+    width: 150px;
+}
+.button {
+    position: absolute;
+    height: auto;
+    left: 947px;
+    top: 400px
+}
+.title {
+    @include font-mont;
+    font-weight: bold;
+    font-size: 36px;
+    position: absolute;
+    left: 947px;
+    top: 300px;
+    color: #241400;
+}
+.title2 {
+    @include font-mont;
+    font-size: 13px;
+    position: absolute;
+    left: 947px;
+    top: 350px;
+    color: #241400;
 }

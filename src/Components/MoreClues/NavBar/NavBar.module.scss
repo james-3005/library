@@ -1,0 +1,26 @@
+@import "../../init";
+.header {
+    z-index: 100;
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 15px;    
+    margin: 0 auto;
+    width: 80%;
+    height: 42px;
+    background-color: #00000026;
+    .search, .login {
+        align-items: center;
+        a{
+            display: flex;
+            align-items: center;
+            font-size: medium;
+            @include font-mont;
+            text-decoration: none;
+            color: black;
+        }
+    }
+    // scroll-snap-align: center;    
+}

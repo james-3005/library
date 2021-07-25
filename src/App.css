@@ -24,3 +24,15 @@ input {
 .e-date-wrapper.e-custom-style .e-input-group-icon.e-date-icon.e-icons.e-active{ /* csslint allow: adjoining-classes */
     color: white !important;
 }
+.App--Navbar {
+  width: 100%;
+  display: block;
+  position: absolute;
+  right: 0;
+  right: 0;
+  z-index: 100;
+}
+.container {
+  width: 100vw;
+  position: relative;
+}

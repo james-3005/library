@@ -5,10 +5,14 @@ import AdminPage from './Components/Page/AdminPage/AdminPage';
 import LoginPage from './Components/Page/LoginPage/LoginPage';
 import PaymentPage from './Components/Page/PaymentPage/PaymentPage';
 import ReviewPage from './Components/Page/ReviewPage/ReviewPage';
+import NavBar from './Components/MoreClues/NavBar/NavBar';
+
 function App() {
   return (
-      <div>
-      
+      <div className="comtainer">
+        {/* <div className="App--Navbar"> */}
+          <NavBar/>
+        {/* </div> */}
         <Switch>
           <Route path="/" exact component={MainPage}/>
           <Route path="/adminPage" component={AdminPage}/>

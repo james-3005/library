@@ -6,22 +6,17 @@ import Carousel2 from "./List/NewlyPublishedBook";
 import styles from './MainPage.module.scss'
 import Background2 from '../../Template/Background2/Background2';
 import HomePage from './HomePage/HomePage'
+import Footer from '../../MoreClues/Footer/Footer';
 
 function MainPage() {
   return (
     <div className={styles.mainPage}>
-      <div className={styles.cc}>
-        MainPage
-      <Link to="/">main</Link>
-      <Link to="/adminPage">adminPage</Link>
-      <Link to="/loginPage">loginPage</Link>
-      <Link to="/paymentPage">paymentPage</Link>
-      <Link to="/reviewPage">reviewPage</Link>
-      </div>
+
       <HomePage/>
       <Carousel1 />
       <Carousel2 />
       <SearchScreen/>
+      <Footer/>
     </div>
   );
 }

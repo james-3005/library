@@ -40,32 +40,4 @@
   position: absolute;
   right: 13%;
 }
-.footer {
-  width: 100vw;
-  height: 200px;
-  position: absolute;
-  bottom: 0%;
-  z-index: 4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  h2 {
-    color: #7c6063;
-    @include font-mont;
-    font-size: 20px;
-  }
-  .logo {
-    width: 250px;
-    height: auto;
-  }
-  .social {
-    flex-direction: column;
-    align-items: center;
-    width: 600px;
-    .iconSocial {
-      margin: 25px 0 0 0;
-      align-items: center;
-      height: 70px;
-    }
-  }
-}
+
