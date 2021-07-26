@@ -13,7 +13,7 @@ import {useAuth} from './Context/AuthProvider'
 import UserPage from './Components/Page/UserPage/UserPage';
 function App() {
   const {isLoading} = useLoader();
-  const {currentUser} =useAuth();
+  const {currentUser} = useAuth();
   return (
       <div className="container">
           <NavBar/>

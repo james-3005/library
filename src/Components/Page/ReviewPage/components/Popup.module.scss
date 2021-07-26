@@ -1,0 +1,27 @@
+@import '../../../init';
+
+.containerPopup {
+    @include font-bar;
+}
+.containerContent {
+    @include font-bar;
+    display: flex;
+    flex-direction: column;
+}
+.input {
+    font-size: 17px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    outline: none;
+    padding: 10px
+}
+
+.input :focus {
+    outline: none;
+}
+
+// .input::placeholder {
+//     padding-left: 10px;
+//     padding-top: 10px;
+// }

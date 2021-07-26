@@ -165,7 +165,7 @@
     @include font-rob;
     border-radius: 3px;
     cursor: pointer;
-    height: 28px;
+    height: 30px;
     width: 200px;
 }
 
@@ -173,6 +173,8 @@
     @extend .bt1;
     background-color: #6A47CC;
     margin-top: 10px;
+    font-size: 15px;
+    padding: 10px;
 }
 
 .boxComment {

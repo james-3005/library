@@ -3,6 +3,7 @@ import styles from './BookDetail.module.scss';
 import { AiFillPlusSquare, AiFillMinusSquare, AiOutlineBulb, AiOutlineQuestionCircle,AiOutlineRocket } from "react-icons/ai";
 import { useState } from "react";
 import CommentItem from "./components/CommentItem";
+import AddCommentPopup from "./components/AddCommentPopup";
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import EcoIcon from '@material-ui/icons/Eco';
 import Button from '@material-ui/core/Button';
@@ -26,15 +27,15 @@ const BookDetailsScreen = () => {
     const listComment = [
         {
             title: "Giải đáp",
-            content: "commentttttttttttt"
+            content: "After an agonising three months of searching and waiting, a match was found and she received a liver transplant in January this year. Now, six months after her surgery, Raenelle, who turns two this September, is recovering just how her parents hoped she would."
         },
         {
             title: "Câu hỏi",
-            content: "commentttttttttttt"
+            content: "After an agonising three months of searching and waiting, a match was found and she received a liver transplant in January this year. Now, six months after her surgery, Raenelle, who turns two this September, is recovering just how her parents hoped she would."
         },
         {
             title: "Đánh giá",
-            content: "commentttttttttttt"
+            content: "After an agonising three months of searching and waiting, a match was found and she received a liver transplant in January this year. Now, six months after her surgery, Raenelle, who turns two this September, is recovering just how her parents hoped she would."
         },
         {
             title: "Giải đáp",
@@ -61,12 +62,13 @@ const BookDetailsScreen = () => {
     const [quantity, setQuantity] = useState(0);
     const [showMore, setShowMore] = useState(false);
     const [limit, setLimit] = useState(3);
-    
+    const [openPopup, setOpenPopup] = useState(false);
     const [openComment, setOpenComment] = useState(false);
     const [option, setOption] = useState("");
     const [textComment, setTextComment] = useState("");
     const [listComments, setListComments] = useState(listComment);
     var comments = listComments.slice(0, limit);
+
     
     const RenderIcon = (props) => {
         const {title} = props;
@@ -122,7 +124,7 @@ const BookDetailsScreen = () => {
                     </div>
                     <div className = {styles.divider}/>
                     <div className = {styles.boxComment}>
-                        {!openComment?<button className ={styles.bt2} onClick={() => setOpenComment(true)} >Thêm đánh giá</button>: (<div className = {styles.addCommentBox}>
+                        {!openComment?<button className ={styles.bt2} onClick={() => setOpenPopup(true)} >Thêm đánh giá</button>: (<div className = {styles.addCommentBox}>
     
                             <textarea   className = {styles.input} 
                                         placeholder="Add comment"
@@ -147,8 +149,14 @@ const BookDetailsScreen = () => {
                             setLimit(listComments.length);
                             setShowMore(true);
                         }} >Tải thêm bình luận</button>}
+                        
                     </div>
+                    
             </motion.div>
+            <AddCommentPopup 
+                openPopup = {openPopup}
+                setOpenPopup = {setOpenPopup}
+            />
         </Background2>
     );
 }

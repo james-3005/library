@@ -1,38 +1,55 @@
-import { AiOutlineBulb, AiOutlineQuestionCircle,AiOutlineRocket } from "react-icons/ai";
-import EcoOutlinedIcon from '@material-ui/icons/EcoOutlined';
-import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined';
+
 import styles from "./CommentItem.module.scss";
 import { useEffect } from "react";
-import { black } from "material-ui/styles/colors";
 import { useState } from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 const CommentItem = ({item}) => {
 
-    const RenderIcon = ({title}) => {
-        if(title == "Giải đáp") {
-            return (<img src="image/svg/bold.svg" alt=""/>);
-        } else if (title == "Câu hỏi") {
-            return (<img src="image/svg/question.svg" alt=""/>);
-        } else {
-            return (<img src="image/svg/crazy.svg" alt=""/>);
-        }
-    }
-    const [pickcolor, setPickcolor]= useState('#E4A5EE');
-    useEffect(() => {
-        if(item.title === "Giải đáp"){
-            setPickcolor("#EED4A5");
-            return;
-        }
-        if(item.title === "Câu hỏi"){
-            setPickcolor("#AAE0D6");
-            return;
-        }
-    },[])
+    const labels = {
+        0.5: 'Useless',
+        1: 'Useless+',
+        1.5: 'Poor',
+        2: 'Poor+',
+        2.5: 'Ok',
+        3: 'Ok+',
+        3.5: 'Good',
+        4: 'Good+',
+        4.5: 'Excellent',
+        5: 'Excellent+',
+      };
+
+      const useStyles = makeStyles({
+        root: {
+          width: 200,
+          display: 'flex',
+          alignItems: 'center',
+        },
+      });
+
+      const [value, setValue] = React.useState(2);
+        const [hover, setHover] = React.useState(-1);
+        const classes = useStyles();
     return (
         <div className={styles.containerItem}>
             <div className={styles.boxTitle}>
-                <RenderIcon title = {item.title} />
-                <p className={styles.title} style={{color: pickcolor}}>{item.title}</p>
+                <div className={styles.nameAndRating} >
+                    <p className ={styles.userName}>
+                        user name
+                    </p>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'row'
+                    }} >
+                        <Rating name="read-only" value={value} readOnly />
+                        <p className ={styles.numberRating}>{value.toFixed(1)}</p>
+                    </div>
+                    
+                </div>
+                <p className={styles.commentedTime}>2 minutes ago</p>
             </div>
             <p className={styles.content}>{item.content}</p>
         </div>
