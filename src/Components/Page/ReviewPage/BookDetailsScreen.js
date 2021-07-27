@@ -8,6 +8,7 @@ import EcoIcon from '@material-ui/icons/Eco';
 import Button from '@material-ui/core/Button';
 import OrangeButton from '../../Atoms/OrangeButton/OrangeButton';
 import {motion} from 'framer-motion'
+import RateStar from '../../MoreClues/RateStar/RateStar';
 
 
 
@@ -80,7 +81,7 @@ const BookDetailsScreen = () => {
     }
 
     return (
-        <Background2>
+        <div className={styles.container}>
             <motion.div 
             initial= {{ opacity: 0.4, y: -100}}
             animate= {{ opacity: 1, y: 0}} 
@@ -122,7 +123,7 @@ const BookDetailsScreen = () => {
                     </div>
                     <div className = {styles.divider}/>
                     <div className = {styles.boxComment}>
-                        {!openComment?<button className ={styles.bt2} onClick={() => setOpenComment(true)} >Thêm đánh giá</button>: (<div className = {styles.addCommentBox}>
+                        {/* {!openComment?<button className ={styles.bt2} onClick={() => setOpenComment(true)} >Thêm đánh giá</button>: (<div className = {styles.addCommentBox}>
     
                             <textarea   className = {styles.input} 
                                         placeholder="Add comment"
@@ -138,8 +139,8 @@ const BookDetailsScreen = () => {
                                 
                                 Comment
                             </button>
-                        </div>)}
-                        
+                        </div>)} */}
+                        <RateStar/>
                         <ul className = {styles.commentList}>
                             {listComments.slice(0, limit).map((item, index) => <li key = {index} className={styles.commentItem}><CommentItem item = {item}/></li>)}
                         </ul>
@@ -148,8 +149,10 @@ const BookDetailsScreen = () => {
                             setShowMore(true);
                         }} >Tải thêm bình luận</button>}
                     </div>
+                    
             </motion.div>
-        </Background2>
+            <img src="/image/svg/footer2.svg" className={styles.footer}/>
+        </div>
     );
 }
 

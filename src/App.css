@@ -24,7 +24,7 @@ input {
 .e-date-wrapper.e-custom-style .e-input-group-icon.e-date-icon.e-icons.e-active{ /* csslint allow: adjoining-classes */
     color: white !important;
 }
-.App--Navbar {
+/* .App--Navbar {
   width: 100%;
   display: block;
   position: absolute;
@@ -35,4 +35,5 @@ input {
 .container {
   width: 100vw;
   position: relative;
-}
+  overflow: hidden;
+} */

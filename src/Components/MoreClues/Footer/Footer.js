@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from './Footer.module.scss'
 import Logo from '../../Atoms/LogoCom/LogoComponent'
+import { useTranslation } from 'react-i18next'
 
 function Footer() {
+    const {t}= useTranslation();
     return (
         <div  className={styles.component}>
             <div className={styles.wraper}>
@@ -12,7 +14,7 @@ function Footer() {
             <Logo/>
             </div>
         <div className={styles.social}>
-            <h2 className={styles.header}>Theo dõi để cập nhật những thông tin mới nhất</h2>
+            <h2 className={styles.header}>{t("footer")}</h2>
             <div className={styles.iconSocial}>
                 <img src="image/svg/iconFb.svg"/>
                 <img src="image/svg/iconTwitter.svg"/>
@@ -23,7 +25,7 @@ function Footer() {
         </div>
         <div className={styles.contact}>
             <p className={styles.phonenumber}>+38 (071) 339-16-26</p>
-            <p className={styles.f}>Liên hệ </p>
+            <p className={styles.f}>{t("contact")}</p>
         </div> 
     </div>
     )

@@ -6,7 +6,7 @@ function navComponent() {
         <div>
             <ul className={styles.nav}>
                 <li className={styles.dropDown}>
-                    <a href="">Menu</a>
+                    <p style={{cursor: 'pointer'}}>Menu</p>
                     <ul className={styles.dropDown_content}>
                         <li><Link to="/adminPage">Admin</Link></li>
                         <li><Link to="/loginPage">Login</Link></li>

@@ -4,17 +4,21 @@ import LogoComponent from '../../Atoms/LogoCom/LogoComponent'
 import NavComponent from '../../Atoms/navComponent/navComponent'
 import styles from './NavBar.module.scss'
 import { useHistory } from 'react-router-dom'
+import {useTranslation} from 'react-i18next'
+import i18n from '../../../Translate/i18n'
 function NavBar() {
     const history= useHistory();
+    const {t}= useTranslation()
     return (
         <div className={styles.header}>
             <LogoComponent/>
             <NavComponent/>
-            <div className={styles.search}>
-                <p alt="search"><img src="image/svg/search.svg" />Search</p> 
+            <div className={styles.changeLanguage}>
+                <p onClick={() => i18n.changeLanguage('vi')}>VI</p>
+                <p onClick={() => i18n.changeLanguage('en')}>EN</p>
             </div>
             <div className={styles.login} onClick={() => history.push('/loginPage')}>
-                <p><img src="image/svg/login.svg" />Login</p> 
+                <p><img src="image/svg/login.svg" />{t("login")}</p> 
             </div>
             <CartComponent />
 
