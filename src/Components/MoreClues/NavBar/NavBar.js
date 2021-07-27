@@ -1,5 +1,5 @@
 import React from 'react'
-import CartComponent from '../../Atoms/cartComponent/cartComponent'
+import CartComponent from '../../Atoms/CartCom/CartCom'
 import LogoComponent from '../../Atoms/LogoCom/LogoComponent'
 import NavComponent from '../../Atoms/navComponent/navComponent'
 import styles from './NavBar.module.scss'

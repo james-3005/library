@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
             backgroundColor: '#fffbf2',
             cursor: 'pointer',
         },
+        backgroundColor: 'white',
     },
 }))
 

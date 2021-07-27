@@ -1,19 +1,18 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from './cartComponent.module.scss'
-function cartComponent() {
+function CartCom() {
+    const history= useHistory();
     return (
         <div className={styles.cart}>
-            <div>
+            <div style={{cursor: 'pointer'}} onClick={() => history.push('/paymentPage')}>
                 <img src="image/svg/cart.svg" />
             </div>
             <div class={styles.total}>
-                <p>180.000</p>
-            </div>
-            <div>
-                <img src="image/svg/option.svg" />
+                <p>$1.12</p>
             </div>
         </div>
     )
 }
 
-export default cartComponent
+export default CartCom

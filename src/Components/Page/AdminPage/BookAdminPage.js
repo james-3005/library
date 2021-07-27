@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import BookForm from "./BookForm";
 //import PageHeader from "../../components/PageHeader";
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
-import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment, Box } from '@material-ui/core';
+import { Paper, makeStyles, TableBody, TableRow, TableCell, Toolbar, InputAdornment, Box, TableHead } from '@material-ui/core';
 import useTable from "./components/useTable";
 //import * as employeeService from "../../services/employeeService";
 import Controls from "./components/controls/Controls";
@@ -127,7 +127,8 @@ const books = [
     },
 ]
 
-export default function AdminPage() {
+
+export default function BookAdminPage() {
 
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
@@ -135,12 +136,14 @@ export default function AdminPage() {
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     const [openPopup, setOpenPopup] = useState(false)
 
+
     const {
         TblContainer,
         TblHead,
         TblPagination,
         recordsAfterPagingAndSorting
     } = useTable(records, headCells, filterFn);
+
 
     const handleSearch = e => {
         let target = e.target;
@@ -171,14 +174,7 @@ export default function AdminPage() {
     }
 
     return (
-        <div style={{width: '100%'}}>
-            {/* <PageHeader
-                title="New Employee"
-                subTitle="Form design with validation"
-                icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
-            /> */}
-             <div style ={{alignItems: 'center', width: '100%'}}>
-
+        <div style={{width: '70%', flexDirection: 'column' ,}}>
             
             <Box display="flex" flexDirection="column" className={useStyles.tableBox}>
 
@@ -231,7 +227,6 @@ export default function AdminPage() {
                 </TblContainer>
                 <TblPagination />
             </Box>
-            </div>
             <Popup
                 title="Book Form"
                 openPopup={openPopup}
