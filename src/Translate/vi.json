@@ -32,5 +32,21 @@
     "EnterName": "Nhập tên sách",
     "EnterAuthor": "Nhập tác giả",
     "EnterYear": "Nhập năm",
-    "All": "Tất cả"
+    "All": "Tất cả",
+    "5": "Tuyệt vời",
+    "4": "Tốt",
+    "3": "Khá tốt",
+    "2": "Trung bình",
+    "1": "Tệ",
+    "AddComment": "Để lại đánh giá",
+    "vote": "Đánh giá",
+    "baseOn1": "Dựa trên",
+    "baseOn2": "đánh giá",
+    "author": "Tác giả",
+    "type": "Thể loại",
+    "year": "Năm",
+    "quantity": "Số lượng",
+    "addToBorrow": "Thêm vào giỏ mượn",
+    "loadComment": "Tải thêm đánh giá",
+    "gt": "Giới thiệu"
 }

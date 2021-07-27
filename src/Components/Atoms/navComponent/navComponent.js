@@ -14,6 +14,7 @@ function navComponent() {
                         <li><Link to="/reviewPage" className={styles.link}>Review</Link></li>
                         <li><Link to="/userPage" className={styles.link}>User</Link></li>
                         <li><Link to="/adminPage/user" className={styles.link}>Manage User</Link></li>
+                        <li><Link to="/historyPage" className={styles.link}>History</Link></li>
                     </ul>
                 </li>
                 <li>Contact</li>

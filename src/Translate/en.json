@@ -1,6 +1,6 @@
 {
     "mainPage_name": "The magic library",
-    "mainPage_title": "Huge store of book",
+    "mainPage_title": "Huge store of books",
     "mainPage_smallTitle": "This is a final project for Web application development",
     "mainPage_button": "Book now",
     "mainPage_bestSelling": "Best selling books",
@@ -32,5 +32,21 @@
     "EnterName": "Enter text",
     "EnterAuthor": "Enter author",
     "EnterYear": "Enter year",
-    "All": "All"
+    "All": "All",
+    "5": "Excellent",
+    "4": "Good",
+    "3": "Quite good",
+    "2": "Average",
+    "1": "Bad",
+    "AddComment": "Leave your comment",
+    "vote": "Vote",
+    "baseOn1": "Base on",
+    "baseOn2": "votes",
+    "author": "Author",
+    "type": "Type",
+    "year": "Year",
+    "quantity": "Quantity",
+    "addToBorrow": "Add to borrow cart",
+    "loadComment": "Load more comments",
+    "gt": "Review"
 }

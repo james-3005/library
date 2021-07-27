@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import OrangeButton from '../../Atoms/OrangeButton/OrangeButton';
 import {motion} from 'framer-motion'
 import RateStar from '../../MoreClues/RateStar/RateStar';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -69,7 +70,7 @@ const BookDetailsScreen = () => {
     const [textComment, setTextComment] = useState("");
     const [listComments, setListComments] = useState(listComment);
     var comments = listComments.slice(0, limit);
-
+    const {t}= useTranslation();
     
     const RenderIcon = (props) => {
         const {title} = props;
@@ -97,20 +98,19 @@ const BookDetailsScreen = () => {
                     <div className = {styles.boxDes}>
                         <div className = {styles.infomation}>
                             <h2 className = {styles.title}>{book.ten}</h2>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Tác giả:</p><p>{book.tg}</p></span>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Năm phát hành:</p><p>{book.nxb}</p></span>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Thể loại:</p><p>{book.tl}</p></span>
-                            <span className = {styles.textRow}><p className = {styles.t1}>Nhà phát hành:</p><p>{book.nph}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>{t("author")}:</p><p>{book.tg}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>{t("type")}:</p><p>{book.tl}</p></span>
+                            <span className = {styles.textRow}><p className = {styles.t1}>{t("year")}:</p><p>{book.nph}</p></span>
                             <div className ={styles.boxPrice} >
-                                <OrangeButton text="200.000$" size="small"/>
+                                <OrangeButton text="$1.12" size="small"/>
                             </div>
                         </div>
                         <div className = {styles.introduction}>
-                            <h2 className = {styles.title}>Giới thiệu</h2>
+                            <h2 className = {styles.title}>{t("gt")}</h2>
                             <p className = {styles.textDes}>{book.des}</p>
                             <div className = {styles.boxBuy}>
                                 <div className = {styles.quantity} >
-                                    <p className = {styles.slt}>Số lượng: </p>
+                                    <p className = {styles.slt}>{t("quantity")}: </p>
                                 
                                         <img src='/image/svg/subtract.svg' alt="" onClick={ () => {if(quantity > 0) setQuantity(quantity - 1)}} className={styles.pointer}/>
                                         <div className = {styles.sl}>
@@ -118,7 +118,7 @@ const BookDetailsScreen = () => {
                                         </div>
                                         <img src='/image/svg/plus.svg' alt="" onClick={ () => setQuantity(quantity + 1)} className={styles.pointer}/>
                                 </div>
-                                <OrangeButton text="Thêm vào giỏ hàng" size="large"/>
+                                <OrangeButton text={t("addToBorrow")}size="large"/>
                             </div>
                         </div> 
                         
@@ -149,7 +149,7 @@ const BookDetailsScreen = () => {
                         {showMore? null : <button className = {styles.bt2} onClick = {() => {
                             setLimit(listComments.length);
                             setShowMore(true);
-                        }} >Tải thêm bình luận</button>}
+                        }} >{t("loadComment")}</button>}
                         
                     </div>
                     
