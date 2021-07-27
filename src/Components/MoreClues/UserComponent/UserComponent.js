@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import styles from './UserComponent.module.scss'
 import {useAuth} from '../../../Context/AuthProvider'
 import {motion} from 'framer-motion'
+import { useTranslation } from 'react-i18next';
 function UserComponent() {
     const [newpassword, setNewPassword]= useState("");
     const [reNewpassword, setReNewPassword]= useState("");
     const [spanNewPassword, setSpanNewPassword]= useState("");
     const [spanReNewPassword, setSpanReNewPassword]= useState("");
     const { updatePassword } = useAuth();
+    const {t}= useTranslation();
     const checkvalid = (type) => {
         switch (type){
             case "newpassword":
                 if(newpassword.length < 6){
-                    setSpanNewPassword("Must Contain at Least 6 characters and an Uppercase");
+                    setSpanNewPassword(t("PassNotValid"));
                     break;
                 }
                 let y= false;
@@ -22,11 +24,11 @@ function UserComponent() {
                         break;
                     }
                 if(!y)
-                    setSpanNewPassword("Must Contain at Least 6 characters and an Uppercase");
+                    setSpanNewPassword(t("PassNotValid"));
                 break;
             case "confirmpassword":
                 if(newpassword !== reNewpassword)
-                    setSpanReNewPassword("Not match");
+                    setSpanReNewPassword(t("PassNotSame"));
                 break;
                 }
     }
@@ -40,7 +42,7 @@ function UserComponent() {
             className={styles.component}>
             <div className={styles.userInfo}>
                 <div className={styles.boxInfo}>
-                    <label className={styles.label}>Email address</label>
+                    <label className={styles.label}>Email</label>
                     <p className={styles.content}>Huygg12345@gmail.com</p>
                 </div>
                 <div className={styles.boxInfo}>
@@ -66,7 +68,7 @@ function UserComponent() {
                         onFocus={()=>setSpanReNewPassword("")}/>
                 <span className={styles.span}>{spanReNewPassword}</span>
                 <button className={styles.btn} 
-                        onClick={handleChangePassword}>Change password</button>
+                        onClick={handleChangePassword}>{t("ChangePass")}</button>
             </div>
             
         </motion.div>

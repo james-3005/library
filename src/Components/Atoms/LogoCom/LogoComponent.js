@@ -1,18 +1,20 @@
 import React from 'react'
 import styles from './logoComponent.module.scss'
 import { Link, useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 function LogoComponent() {
     const history= useHistory();
+    const {t}= useTranslation();
     return (
         <div className={styles.logo} onClick={() =>history.push('/')}>
             <div>
                 <img src="image/svg/logo.svg" alt="logo" />
             </div>
             <div className={styles.logoTitle}>
-                <h3>Nhà sách</h3>
+                <h3>{t("library")}</h3>
                 <div className={styles.line}></div>
-                <p>Sở thú ma thuật</p>
+                <p>{t("libraryName")}</p>
             </div>
         </div>
 

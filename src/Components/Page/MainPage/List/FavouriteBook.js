@@ -16,6 +16,7 @@ import "swiper/components/scrollbar/scrollbar.scss";
 import styles from "./Carousel.module.scss";
 import Background2 from "../../../Template/Background2/Background2";
 import Carousel from "../../../MoreClues/Carousel/Carousel";
+import { useTranslation } from "react-i18next";
 // install Swiper modules
 SwiperCore.use([Autoplay, Navigation, Pagination, Scrollbar, A11y]);
 
@@ -112,11 +113,11 @@ export default () => {
       id: 10,
     },
   ];
-
+  const {t}= useTranslation();
   return (
     <Background2>
       <div className={styles.Carousel}>
-        <h2 className={styles.Header}>Sách bán chạy</h2>
+        <h2 className={styles.Header}>{t("mainPage_bestSelling")}</h2>
         <Carousel data={array}/>
       </div>
     </Background2>

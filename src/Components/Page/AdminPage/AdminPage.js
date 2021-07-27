@@ -177,7 +177,7 @@ export default function AdminPage() {
                 subTitle="Form design with validation"
                 icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
             /> */}
-            <div style ={{alignItems: 'center', width: '100%'}}>
+             <div style ={{alignItems: 'center', width: '100%'}}>
 
             
             <Box display="flex" flexDirection="column" className={useStyles.tableBox}>

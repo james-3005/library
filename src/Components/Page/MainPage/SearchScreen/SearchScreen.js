@@ -6,6 +6,7 @@ import classnames from "classnames";
 import SearchBar from '../../../MoreClues/SeachBar/SeachBar'
 import FilterBar from '../../../MoreClues/FilterBar/FilterBar';
 import Carousel3 from '../../../MoreClues/Carousel/Carousel3';
+import { useTranslation } from 'react-i18next';
 
 const array = [
     {
@@ -102,9 +103,10 @@ const array = [
 function SearchScreen() {
     const [activeSearch, setActiveSearch]= useState(true);
     const [activeFilter, setActiveFilter]= useState(false);
+    const {t}= useTranslation();
     return (
         <Background4>
-          <p className={styles.header}>Tìm kiếm</p>
+          <p className={styles.header}>{t("search")}</p>
           <div className={styles.searchBar}>
               <SearchBar  activeSearch={activeSearch} 
                           setActiveSearch={setActiveSearch}

@@ -25,11 +25,12 @@
       display: none;
       z-index: 1;
       min-width: 100px;
+      background-color: white;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       li {
         @include font-mont;
         list-style: none;
-        background-color: white;
+        
       }
     }
   }
@@ -42,4 +43,10 @@
       }
     }
   }
+}
+.link {
+  width: 100%;
+  // @include b;
+  height: 100%;
+  display: block;
 }

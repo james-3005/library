@@ -5,6 +5,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {AuthProvider} from './Context/AuthProvider';
 import {LoaderProvider} from './Context/LoaderProvider'
 import {NotificationProvider} from './Context/NotificationProvider'
+import  './Translate/i18n'
 ReactDOM.render(
   <Router>
   <AuthProvider>

@@ -2,54 +2,57 @@
 
 ;
 .container {
-    width: 100%;
-    height: 90%;
-    display: flex;
-    flex-direction: row;
-    padding: 40px;
-    position: absolute;
-    z-index: 5;
-    @include font-bar;
-    background-color: map-get($colors, "white" );
+    width: 100vw;
+    // @include b;
+    position: relative;
+    height: 100vh;
+    background-color: map-get($colors, "yellow" );
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 4;
+    &::-webkit-scrollbar{
+        z-index: 4 !important;
+    }
     
 }
 .boxImage {
     width: 184px;
     height: 352px;
-    // background-color: map-get($colors, "purple");
+    background-color: #C9D8B6;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 30px;
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
-    margin: 67px 78px 0 65px;
     z-index: 3;
+    position: fixed;
+    top: 80px;
+    left: 30px;
 }
 .img {
     width: 166px;
     height: 269px;
 }
 
+.footer {
+    position: fixed;
+    bottom: 0px;
+    z-index: 1;
+}
 .details {
-    margin-top: 67px;
+    // @include b;
+    top: 80px;
+    left: 350px;
     width: 1040px;
-    height: 620px;
+    height: auto;
+    position: absolute;
     z-index: 3;
     display: flex;
     flex-direction: column;
     background-color: #edfff14a;
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
+    background-color: #C9D8B6;
     padding: 20px;
-    overflow-y:  scroll;
-    overflow-x: hidden;
-    &::-webkit-scrollbar {
-        width: 10px;
-    }
-     
-    &::-webkit-scrollbar-thumb {
-        background-color: map-get($colors, "brown" )
-        // border-radius: 100px;
-    }
+    overflow: hidden;
 }
 .boxDes {
     //height: 65%;
@@ -167,14 +170,25 @@
     cursor: pointer;
     height: 30px;
     width: 200px;
+    outline: none;
 }
 
 .bt2 {
-    @extend .bt1;
-    background-color: #6A47CC;
     margin-top: 10px;
-    font-size: 15px;
-    padding: 10px;
+    width: 400px;
+    height: 40px;
+    border: 2px solid #0E52E1;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #0E52E1;
+    font-size: 16px;
+    @include font-mont;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+        transition: 0.4s;
+        transform: scale(1.05);
+    }
 }
 
 .boxComment {
@@ -241,4 +255,7 @@ input::placeholder {
     height: 30px;
     @include font-rob;
     outline: none;
+}
+.pointer {
+    cursor: pointer;
 }

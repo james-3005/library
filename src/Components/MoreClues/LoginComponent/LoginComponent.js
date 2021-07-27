@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import {useAuth} from '../../../Context/AuthProvider'
 import {useLoader} from '../../../Context/LoaderProvider'
 import { auth } from '../../../firebase';
+import { useTranslation } from 'react-i18next';
 function LoginScreen() {
     const [signUpScreen, setSignUpScreen]= useState(false);
     const [forgotPassword, setForgotPassword]= useState(false);
@@ -19,6 +20,7 @@ function LoginScreen() {
     const [spanConfirmPassword, setSpanConfirmPassword]= useState("");
     const { signup, login, currentUser, logout, setCurrentUser, resetPassword, updatePassword } = useAuth();
     const { turnOnLoader, turnOffLoader }= useLoader();
+    const {t}= useTranslation();
     const handleSwitch = () =>{
         setSpanConfirmPassword("");
         setSpanUsername("");
@@ -40,7 +42,7 @@ function LoginScreen() {
                 setSignUpScreen(false);
                 })
             .catch(err => {
-            setSpanEmail("Email already in use");
+            setSpanEmail(t("emailInUse"));
             turnOffLoader();
         })
   
@@ -57,11 +59,11 @@ function LoginScreen() {
             .catch(err => {
                 turnOffLoader();
                 if(err.code === "auth/user-not-found"){
-                    setSpanEmail("Email not found");
+                    setSpanEmail(t("EmailNotFound"));
                     setSpanPassword("");
                     return;
                 }
-                setSpanPassword("Wrong password");
+                setSpanPassword(t("wrongPass"));
                 setSpanEmail("");
                 console.log(err);
                 // console.log(errc)
@@ -75,12 +77,12 @@ function LoginScreen() {
             case "email":
                 const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 if(!re.test(String(email).toLowerCase()))
-                    setSpanEmail("Email not valid");
+                    setSpanEmail(t("EmailNotValid"));
                 else setSpanEmail("");
                 break;
             case "password":
                 if(password.length < 6){
-                    setSpanPassword("Must Contain at Least 6 characters and an Uppercase");
+                    setSpanPassword(t("PassNotValid"));
                     break;
                 }
                 let x= false;
@@ -90,22 +92,22 @@ function LoginScreen() {
                         break;
                     }
                 if(!x)
-                    setSpanPassword("Must Contain at Least 6 characters and an Uppercase");
+                    setSpanPassword(t("PassNotValid"));
                 break;
             case "confirmpassword":
                 if(password !== confirmPassword)
-                    setSpanConfirmPassword("Confirm and password must be the same");
+                    setSpanConfirmPassword(t("PassNotSame"));
                 break;
             case "username":
                 if(username === "")
-                setSpanUsername("Username not valid");
+                setSpanUsername(t("UsernameNotValid"));
                     break;
         }
     }
     const history= useHistory();
     const setForgotPasswordScreen = () => {
         if(!forgotPassword)
-            setSpanEmail("Enter email to reset Password");
+            setSpanEmail(t("EnterEmail"));
         else
             setSpanEmail("");
         setForgotPassword(!forgotPassword);
@@ -114,7 +116,7 @@ function LoginScreen() {
     const handleForgotPassword = () => {
         checkvalid("email");
         if(spanEmail !== "") return;
-        alert("Sended, please check your email");
+        alert(t("CheckEmail"));
         resetPassword(email);
     }
 
@@ -168,17 +170,17 @@ function LoginScreen() {
                 <div className={styles.footer}>
                     {
                         forgotPassword||!signUpScreen?
-                        <p className={styles.forgotpassword} onClick={setForgotPasswordScreen}>Forgot password?</p>:
+                        <p className={styles.forgotpassword} onClick={setForgotPasswordScreen}>{t("ForgotPass")}?</p>:
                         <div/>
                     }
-                    <OrangeButton size="medium" text={signUpScreen?"Sign Up":"Log In"} action={signUpScreen? handleSignUp: handleLogin}/>
+                    <OrangeButton size="medium" text={signUpScreen?t("signUp"):t("login")} action={signUpScreen? handleSignUp: handleLogin}/>
                     <p className={styles.descript}>
                         <span>
-                            {signUpScreen?"Already have an account, ":"Don't have an account, "}
+                            {signUpScreen?t("HaveAcc"):t("NotHaveAcc")}
                         </span>
                         <span className={styles.signUp} onClick={()=>handleSwitch()}>
-                            {signUpScreen?"Sign In":"Sign Up"}
-                        </span> now.
+                            {signUpScreen?t("login"):t("signUp")}
+                        </span> {t("now")}.
                     </p>
                 </div>
         </motion.div>:
@@ -195,15 +197,15 @@ function LoginScreen() {
                     onFocus={()=>setSpanEmail("")}/>
             <span className={styles.span}>{spanEmail}</span>
             <div className={styles.footer}>
-                    <p className={styles.forgotpassword} onClick={setForgotPasswordScreen}>Turn back</p>:
-                <OrangeButton size="medium" text={"Send Email"} action={handleForgotPassword}/>
+                    <p className={styles.forgotpassword} onClick={setForgotPasswordScreen}>{t("turnBack")}</p>:
+                <OrangeButton size="medium" text={t("sendEmail")} action={handleForgotPassword}/>
                 <p className={styles.descript}>
                     <span>
-                        {"Already have an account, "}
+                        {t("HaveAcc")}
                     </span>
                     <span className={styles.signUp} onClick={setForgotPasswordScreen}>
-                        Sign In
-                    </span> now.
+                        {t("login")}
+                    </span> {t("now")}.
                 </p>
             </div>
     </motion.div>
