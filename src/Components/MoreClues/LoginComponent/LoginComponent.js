@@ -58,13 +58,18 @@ function LoginScreen() {
                 turnOffLoader();
             });
     };
+    const axios = require('axios')
     const handleLogin = async () => {
         turnOnLoader();
-        login(email, password)
-            .then(async () => {
+        axios.post("https://library-mini.xyz/api/v1/auth/login", {
+            email: "19020325@vnu.edu.vn",
+            password: "123456789"
+        })
+            .then(async (result) => {
                 setCurrentUser(auth.currentUser);
                 window.localStorage.setItem("user", auth.currentUser);
                 turnOffLoader();
+                console.log(result)
             })
             .catch((err) => {
                 turnOffLoader();

@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     height: window.height,
     flex: 1,
     overflowY: 'scroll',
-    paddingTop: 50,
+    paddingTop: 80,
     position: 'absolute',
     zIndex: 5,
     top:0,
@@ -71,7 +71,7 @@ function Main() {
         <BookAdminPage />
       </div>
       </Background6>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
     </ThemeProvider>
   );
 }

@@ -14,12 +14,15 @@ const genderItems = [
 const options = ["Tiểu thuyết", "Truyện tranh", "Ngôn tình", "Kinh tế", "Khoa học"]
 
 const initialFValues = {
-    id: 0,
-    name: '',
-    category: "Tiểu thuyết",
+    book_id: 0,
+    name_book: '',
+    type_id: 1,
     author: '',
-    publishingDate: new Date(),
-    imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIT6ea5wT-e2ainq21_nXBrkX02S5-iEg52g&usqp=CAU"
+    publication_date: new Date(),
+    book_image: "",
+    price: "0",
+    translator: "",
+    review: ""
 }
 
 export default function BookForm(props) {
@@ -69,31 +72,38 @@ export default function BookForm(props) {
     return (
         <Form onSubmit={handleSubmit}  style={{width: "100%" }}>
             <Grid container style={{width: "100%"}}>
-                <Grid item xs={6} direction='column'  >
+                <Grid item xs={6}  >
                     
                 <div style={{height: 220, width: 200, marginLeft: 80}} >
-                    <img style={{height: 210, width: 180}} src ={values.imgSrc} />
+                    <img style={{height: 210, width: 180}} src ={values.book_image} />
                 </div>
                 <Controls.Input
-                        name="imgSrc"
+                        name="book_image"
                         label="Image Source"
-                        value={values.imgSrc}
+                        value={values.book_image}
                         onChange={handleInputChange}
                         //error={errors.fullName}
                     />
                     <Controls.Input
-                        name="id"
-                        label="Book ID"
-                        value={values.id}
+                        name="price"
+                        label="Price"
+                        value={values.price}
+                        onChange={handleInputChange}
+                        //error={errors.id}
+                    />
+                    <Controls.Input
+                        name="translator"
+                        label="Translator"
+                        value={values.translator}
                         onChange={handleInputChange}
                         //error={errors.id}
                     />
                 </Grid>
-                <Grid item xs={6}  direction='column'>
+                <Grid item xs={6} >
                 <Controls.Input
-                        name="name"
+                        name="name_book"
                         label="Name"
-                        value={values.name}
+                        value={values.name_book}
                         onChange={handleInputChange}
                         error={errors.Name}
                     />
@@ -108,23 +118,32 @@ export default function BookForm(props) {
 
                     <Controls.Select
                         label="Category"
-                        name="category"
-                        value={values.category}
-                        onChange={handleInputChange}
+                        name="type_id"
+                        //value={values.type_id}
+                        //onChange={handleInputChange}
                         //error={errors.email}
                         options= {options}
                     />
                     <Controls.DatePicker 
                         label="Publishing Date"
-                        name="publishingDate"
-                        value={Date.parse(values.publishingDate)}
+                        name="publication_date"
+                        value={Date.parse(values.publication_date)}
                         onChange={handleInputChange}
+                    />
+                    <Controls.Input
+                        name="review"
+                        label="Review"
+                        value={values.review}
+                        onChange={handleInputChange}
+                        //error={errors.id}
                     />
 
                     <div style={{marginTop: 20}}>
                         <Controls.Button
                             type="submit"
-                            text="Submit" />
+                            text="Submit" 
+                            onClick = {handleSubmit}
+                            />
                         <Controls.Button
                             text="Reset"
                             color="default"

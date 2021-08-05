@@ -1,0 +1,27 @@
+.container {
+    height: 50px;
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid #8DC6F2 ;
+    border-radius: 5px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.image {
+    width: 70px;
+    height: 40px;
+}
+.groupText {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.title {
+    font-size: 13px;
+    font-weight: bold;
+}
+.amount {
+    font-size: 11px;
+}
