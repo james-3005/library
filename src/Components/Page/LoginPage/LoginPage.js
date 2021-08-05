@@ -1,17 +1,16 @@
-import React from 'react'
-import Background5 from '../../Template/Background5/Background5'
-import LoginComponent from '../../MoreClues/LoginComponent/LoginComponent'
-import styles from './LoginPage.module.scss'
+import React from "react";
+import Background5 from "../../Template/Background5/Background5";
+import LoginComponent from "../../MoreClues/LoginComponent/LoginComponent";
+import styles from "./LoginPage.module.scss";
 
-
-function LoginPage() {
+function LoginPage({ setIsAdmin }) {
     return (
         <Background5>
             <div className={styles.loginComponent}>
-                <LoginComponent />
+                <LoginComponent setIsAdmin={setIsAdmin} />
             </div>
         </Background5>
-    )
+    );
 }
 
-export default LoginPage
+export default LoginPage;

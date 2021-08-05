@@ -1,31 +1,29 @@
-@import '../../init';
+@import "../../init";
 
-;
 .container {
     width: 100vw;
     // @include b;
     position: relative;
     height: 100vh;
-    background-color: map-get($colors, "yellow" );
+    background-color: map-get($colors, "yellow");
     overflow-x: hidden;
     overflow-y: scroll;
     z-index: 4;
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
         z-index: 4 !important;
     }
-    
 }
 .boxImage {
     width: 184px;
     height: 352px;
-    background-color: #C9D8B6;
+    background-color: #c9d8b6;
     display: flex;
     align-items: center;
     justify-content: center;
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
     z-index: 3;
     position: fixed;
-    top: 80px;
+    top: 120px;
     left: 30px;
 }
 .img {
@@ -33,6 +31,10 @@
     height: 269px;
 }
 
+.back {
+    position: absolute;
+    top: 10px;
+}
 .footer {
     position: fixed;
     bottom: 0px;
@@ -40,37 +42,43 @@
 }
 .details {
     // @include b;
-    top: 80px;
+    top: 120px;
     left: 350px;
     width: 1040px;
-    height: auto;
+    height: 70%;
     position: absolute;
     z-index: 3;
     display: flex;
     flex-direction: column;
     background-color: #edfff14a;
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.25));
-    background-color: #C9D8B6;
+    background-color: #c9d8b6;
     padding: 20px;
     overflow: hidden;
 }
 .boxDes {
-    //height: 65%;
+    // height: 65%;
     display: flex;
     flex-direction: row;
+    // @include b;
 }
 .infomation {
     display: flex;
     flex-direction: column;
     width: 35%;
     //align-items: center;
+    position: absolute;
+    top: 35px;
 }
 .introduction {
     width: 65%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+    position: absolute;
+    top: 35px;
+    left: 350px;
+    // @include b;
 }
 .textRow {
     display: flex;
@@ -83,10 +91,11 @@
 
 .t1 {
     display: block;
-    width: 75%;
+    width: 30%;
 }
 .title {
     margin-bottom: 15px;
+    width: 320px;
     @include font-rob;
 }
 
@@ -103,18 +112,18 @@
     align-items: center;
     border-radius: 5px;
     margin-left: 35px;
+    // border-style: ;
 }
 .textDes {
     font-size: 20;
-    font-weight:600;
-    color:darkslategray;
+    font-weight: 600;
+    color: darkslategray;
     line-height: 1.5em;
     max-lines: 7;
     text-overflow: ellipsis;
     width: 90%;
     @include font-rob;
     margin-left: 30px;
-    
 }
 .quantity {
     // @include b;
@@ -128,7 +137,7 @@
     height: 48px;
     width: 48px;
     border-radius: 8px;
-    background-color: #2A282E;
+    background-color: #2a282e;
     display: flex;
     @include center;
     color: white;
@@ -143,14 +152,13 @@
     flex-direction: column;
     @include center;
     // @include b;
-    margin-left: 45%;   
+    margin-left: 45%;
 }
 .slt {
     font-size: 14px;
     // font-weight: 50w;
     padding-right: 15px;
     @include font-rob;
-
 }
 
 .divider {
@@ -161,7 +169,7 @@
     padding: 1.5px;
 }
 .bt1 {
-    background-color: #E16A00;
+    background-color: #e16a00;
     color: white;
     display: flex;
     @include center;
@@ -177,10 +185,10 @@
     margin-top: 10px;
     width: 400px;
     height: 40px;
-    border: 2px solid #0E52E1;
+    border: 2px solid #0e52e1;
     border-radius: 8px;
     background-color: transparent;
-    color: #0E52E1;
+    color: #0e52e1;
     font-size: 16px;
     @include font-mont;
     cursor: pointer;
@@ -204,7 +212,6 @@
     width: 80%;
 }
 .commentList {
-    
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -222,7 +229,6 @@
     margin-left: 15px;
     align-items: center;
     color: white;
-    
 }
 .optionBox {
     display: flex;

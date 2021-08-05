@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../../Context/AuthProvider";
 import { useLoader } from "../../../Context/LoaderProvider";
-import { auth } from "../../../firebase";
 import { useTranslation } from "react-i18next";
-function LoginScreen() {
+import { useNoti } from "../../../Context/NotificationProvider";
+function LoginScreen({ setIsAdmin }) {
     const [signUpScreen, setSignUpScreen] = useState(false);
     const [forgotPassword, setForgotPassword] = useState(false);
     const [username, setUsername] = useState("");
@@ -18,6 +18,7 @@ function LoginScreen() {
     const [spanUsername, setSpanUsername] = useState("");
     const [spanPassword, setSpanPassword] = useState("");
     const [spanConfirmPassword, setSpanConfirmPassword] = useState("");
+    const { addNoti } = useNoti();
     const {
         signup,
         login,
@@ -47,24 +48,31 @@ function LoginScreen() {
         )
             return;
         turnOnLoader();
-        signup(email, password)
-            .then(() => {
+        signup(email, username, password)
+            .then((res) => {
                 turnOffLoader();
-                console.log("signUp");
+                addNoti(t("notiRegisterSuccess"), "success");
                 setSignUpScreen(false);
             })
             .catch((err) => {
                 setSpanEmail(t("emailInUse"));
+                addNoti(t("notiRegisterFail"), "fail");
                 turnOffLoader();
             });
     };
     const handleLogin = async () => {
+        checkvalid("email");
+        checkvalid("password");
+        if (spanEmail !== "" || spanPassword !== "") return;
         turnOnLoader();
         login(email, password)
-            .then(async () => {
-                setCurrentUser(auth.currentUser);
-                window.localStorage.setItem("user", auth.currentUser);
+            .then((res) => {
+                addNoti(t("notiLoginSuccess"), "success");
+                setCurrentUser(res["access_token"]);
+                window.localStorage.setItem("user", res["access_token"]);
+                history.push("/");
                 turnOffLoader();
+                setIsAdmin(true);
             })
             .catch((err) => {
                 turnOffLoader();
@@ -90,24 +98,18 @@ function LoginScreen() {
                 else setSpanEmail("");
                 break;
             case "password":
-                if (password.length < 6) {
+                if (password.length < 8) {
                     setSpanPassword(t("PassNotValid"));
-                    break;
-                }
-                let x = false;
-                for (let i = 0; i < password.length; i++)
-                    if (password[i] <= "Z" && password[i] >= "A") {
-                        x = true;
-                        break;
-                    }
-                if (!x) setSpanPassword(t("PassNotValid"));
+                } else setSpanPassword("");
                 break;
             case "confirmpassword":
                 if (password !== confirmPassword)
                     setSpanConfirmPassword(t("PassNotSame"));
+                else setSpanConfirmPassword("");
                 break;
             case "username":
-                if (username === "") setSpanUsername(t("UsernameNotValid"));
+                if (username.length < 2) setSpanUsername(t("UsernameNotValid"));
+                else setSpanUsername("");
                 break;
         }
     };
@@ -219,7 +221,7 @@ function LoginScreen() {
                             text={signUpScreen ? t("signUp") : t("login")}
                             action={signUpScreen ? handleSignUp : handleLogin}
                         />
-                        <p className={styles.descript}>
+                        {/* <p className={styles.descript}>
                             <span>
                                 {signUpScreen ? t("HaveAcc") : t("NotHaveAcc")}
                             </span>
@@ -230,7 +232,7 @@ function LoginScreen() {
                                 {signUpScreen ? t("login") : t("signUp")}
                             </span>{" "}
                             {t("now")}.
-                        </p>
+                        </p> */}
                     </div>
                 </motion.div>
             ) : (
@@ -264,16 +266,6 @@ function LoginScreen() {
                             text={t("sendEmail")}
                             action={handleForgotPassword}
                         />
-                        <p className={styles.descript}>
-                            <span>{t("HaveAcc")}</span>
-                            <span
-                                className={styles.signUp}
-                                onClick={setForgotPasswordScreen}
-                            >
-                                {t("login")}
-                            </span>{" "}
-                            {t("now")}.
-                        </p>
                     </div>
                 </motion.div>
             )}

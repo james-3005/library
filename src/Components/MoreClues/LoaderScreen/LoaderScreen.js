@@ -12,6 +12,7 @@ function LoaderScreen() {
             backgroundColor: "#0000008c",
             justifyContent: "center",
             alignItems: 'center',
+            display: 'flex',
             // opacity: 0.4,
             zIndex: 100
          }}>

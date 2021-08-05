@@ -1,4 +1,4 @@
-@import '../../init';
+@import "../../init";
 
 .component {
     width: 100vw;
@@ -6,7 +6,7 @@
     scroll-snap-align: center;
     position: relative;
     // @include b;
-    // overflow: hidden;
+    overflow: hidden;
 }
 .wraper {
     width: 100%;
@@ -43,12 +43,11 @@
     justify-content: space-between;
 }
 .phonenumber {
-    color: #7C6063;
+    color: #7c6063;
 }
 .f {
-    border: 1px solid #A8A3EC;
-    color: #A8A3EC;
-
+    border: 1px solid #a8a3ec;
+    color: #a8a3ec;
 }
 .social {
     position: absolute;
@@ -72,5 +71,5 @@
 .header {
     @include font-mont;
     font-size: 25px;
-    color: map-get($colors, "brown" )
+    color: map-get($colors, "brown");
 }

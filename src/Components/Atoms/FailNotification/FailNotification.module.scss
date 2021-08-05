@@ -1,4 +1,4 @@
-@import '../../init';
+@import "../../init";
 
 .component {
     width: 250px;
@@ -8,7 +8,7 @@
     top: 10px;
     z-index: 1000;
     @include b;
-    background-color: #F05454;
+    background-color: #f05454;
     // border-radius: 12px;
     border-width: 0;
     color: white;
@@ -23,6 +23,9 @@
 }
 .icon2 {
     width: 80px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
 }
 .turnOff {
     position: absolute;
@@ -33,7 +36,6 @@
     cursor: pointer;
 }
 .title {
-    
     display: block;
     // @include b;
     height: fit-content;

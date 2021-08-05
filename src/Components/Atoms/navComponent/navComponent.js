@@ -1,28 +1,76 @@
-import React from 'react'
-import styles from './navComponent.module.scss'
-import {Link} from 'react-router-dom'
-function navComponent() {
+import React, { useEffect, useState } from "react";
+import styles from "./navComponent.module.scss";
+import { Link } from "react-router-dom";
+import axios from "axios";
+function NavComponent({ isAdmin, setIsAdmin }) {
+    useEffect(() => {
+        axios
+            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem(
+                        "user"
+                    )}`,
+                },
+            })
+            .then((res) => {
+                setIsAdmin(true);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            });
+    }, []);
     return (
         <div>
             <ul className={styles.nav}>
                 <li className={styles.dropDown}>
-                    <p style={{cursor: 'pointer'}}>Menu</p>
+                    <p style={{ cursor: "pointer" }}>Menu</p>
                     <ul className={styles.dropDown_content}>
-                        <li><Link to="/adminPage/book" className={styles.link}>Manage Book</Link></li>
-                        <li><Link to="/loginPage" className={styles.link}>Login</Link></li>
-                        <li><Link to="/paymentPage" className={styles.link}>Payment</Link></li>
-                        <li><Link to="/reviewPage" className={styles.link}>Review</Link></li>
-                        <li><Link to="/userPage" className={styles.link}>User</Link></li>
-                        <li><Link to="/adminPage/user" className={styles.link}>Manage User</Link></li>
-                        <li><Link to="/historyPage" className={styles.link}>History</Link></li>
+                        {isAdmin ? (
+                            <>
+                                <li>
+                                    <Link
+                                        to="/userPage"
+                                        className={styles.link}
+                                    >
+                                        User information
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/adminPage/book"
+                                        className={styles.link}
+                                    >
+                                        Manage Book
+                                    </Link>
+                                </li>
+
+                                <li>
+                                    <Link
+                                        to="/adminPage/user"
+                                        className={styles.link}
+                                    >
+                                        Manage User
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/historyPage"
+                                        className={styles.link}
+                                    >
+                                        Manage History
+                                    </Link>
+                                </li>
+                            </>
+                        ) : (
+                            <div />
+                        )}
                     </ul>
                 </li>
                 <li>Contact</li>
-                <li>About</li>
                 <li>Help</li>
             </ul>
         </div>
-    )
+    );
 }
 
-export default navComponent
+export default NavComponent;
