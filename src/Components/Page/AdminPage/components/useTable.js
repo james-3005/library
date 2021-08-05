@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
             backgroundColor: '#fffbf2',
             cursor: 'pointer',
         },
+
         backgroundColor: 'white',
     },
 }))
@@ -48,7 +49,9 @@ export default function useTable(records, headCells,filterFn) {
             <TableRow>
                 {
                     headCells.map(headCell => (
-                        <TableCell key={headCell.id}
+                        <TableCell
+                            size="small"
+                            key={headCell.id}
                             sortDirection={orderBy === headCell.id ? order : false}>
                             {headCell.disableSorting ? headCell.label :
                                 <TableSortLabel

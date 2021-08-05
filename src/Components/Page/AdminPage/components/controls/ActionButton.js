@@ -5,7 +5,9 @@ import { Button, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     root: {
         minWidth: 0,
-        margin: theme.spacing(0.5)
+        height: 27,
+        width: 27,
+        marginRight: theme.spacing(0.5)
     },
     secondary: {
         backgroundColor: theme.palette.secondary.light,

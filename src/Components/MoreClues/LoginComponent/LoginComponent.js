@@ -60,6 +60,7 @@ function LoginScreen({ setIsAdmin }) {
                 turnOffLoader();
             });
     };
+    const axios = require("axios");
     const handleLogin = async () => {
         checkvalid("email");
         checkvalid("password");

@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
     dialogWrapper: {
         padding: theme.spacing(2),
         position: 'absolute',
-        top: theme.spacing(5),
+        top: theme.spacing(0),
         right: theme.spacing(20),
         //sbackgroundColor: 'green',
         //height: "50%"
