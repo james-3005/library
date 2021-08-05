@@ -16,7 +16,7 @@ function ShowCard({ data }) {
         <div className={styles.slidebox}>
             <img
                 src={book_image ? book_image : "image/svg/book.svg"}
-                alt="picture"
+                alt="Error loading"
                 className={styles.imagecard}
             />
             <p className={styles.author}>{name_book}</p>
