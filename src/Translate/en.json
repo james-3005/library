@@ -25,6 +25,8 @@
     "HaveAcc": "Already have account, ",
     "NotHaveAcc": "Don't have account, ",
     "now": "now",
+    "price": "Price",
+    "isbn": "ISBN",
     "turnBack": "Turn back",
     "sendEmail": "Send email",
     "ForgotPass": "Forgot password",
@@ -57,5 +59,14 @@
     "datemuon": "Borrow day",
     "datetra": "Return day",
     "total": "Total",
-    "view": "View"
+    "view": "View",
+    "timeout": "Time out",
+    "name": "Name",
+    "phone": "Phone",
+    "notiChangePassSuccess": "Change password success",
+    "notiChangePassFail": "Change password fail",
+    "addMember": "Add member",
+    "pass": "Password",
+    "newpass": "New password",
+    "confirmpass": "Confirm password"
 }

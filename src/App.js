@@ -14,6 +14,7 @@ import UserPage from "./Components/Page/UserPage/UserPage";
 import { useNoti } from "./Context/NotificationProvider";
 import PrivateRoute from "./Components/Atoms/PrivateRoute/PrivateRouteReviewPage";
 import RegisterPage from "./Components/Page/RegisterPage/RegisterPage";
+import AddMemberPage from "./Components/Page/AddMemberPage/RegisterPage";
 import { useState } from "react";
 function App() {
     const { isLoading } = useLoader();
@@ -27,13 +28,15 @@ function App() {
             <>{noti}</>
             <Switch>
                 <Route path="/" exact component={MainPage} />
-                <Route path="/adminPage/book" component={Main} />
+
                 <Route path="/loginPage">
                     <LoginPage setIsAdmin={setIsAdmin} />
                 </Route>
                 <Route path="/userPage" component={UserPage} />
                 <Route path="/registerPage" component={RegisterPage} />
+                <Route path="/addMemberPage" component={AddMemberPage} />
                 <Route path="/AdminPage/user" component={UserAdminPage} />
+                <Route path="/adminPage/book" component={Main} />
                 <Route path="/HistoryPage" component={HistoryPage} />
                 <PrivateRoute path="/reviewPage" component={ReviewPage} />
             </Switch>

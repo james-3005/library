@@ -27,16 +27,16 @@
     margin-right: auto;
     left: -2.1%;
     right: 0;
-    top: 200px;
+    top: 220px;
 }
 .searchBar {
     position: absolute;
-    top: 10%;
+    top: 18%;
     left: 11%;
-}
-
-.filterBar {
-    top: 10%;
-    position: absolute;
-    right: 13%;
+    z-index: 4;
+    display: flex;
+    // justify-content: ;
+    align-items: flex-end;
+    // @include b;
+    width: 450px;
 }

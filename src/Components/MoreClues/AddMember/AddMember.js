@@ -8,16 +8,12 @@ import { useLoader } from "../../../Context/LoaderProvider";
 import { useTranslation } from "react-i18next";
 import { useNoti } from "../../../Context/NotificationProvider";
 import axios from "axios";
-function RegisterComponent() {
-    const [signUpScreen, setSignUpScreen] = useState(false);
+function AddMember() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [phone, setPhone] = useState("");
     const [spanEmail, setSpanEmail] = useState("");
     const [spanUsername, setSpanUsername] = useState("");
-    const [spanPassword, setSpanPassword] = useState("");
-    const [spanConfirmPassword, setSpanConfirmPassword] = useState("");
     const { addNoti } = useNoti();
     const { signup } = useAuth();
     const { turnOnLoader, turnOffLoader } = useLoader();
@@ -25,22 +21,13 @@ function RegisterComponent() {
 
     const handleSignUp = () => {
         checkvalid("email");
-        checkvalid("password");
         checkvalid("username");
-        checkvalid("confirmpassword");
-        if (
-            spanEmail !== "" ||
-            spanPassword !== "" ||
-            spanConfirmPassword !== "" ||
-            spanUsername !== ""
-        )
-            return;
+        if (spanEmail !== "" || spanUsername !== "") return;
         turnOnLoader();
-        signup(email, username, password)
+        signup(email, username, "1234567890", phone)
             .then((res) => {
                 turnOffLoader();
                 addNoti(t("notiRegisterSuccess"), "success");
-                setSignUpScreen(false);
             })
             .catch((err) => {
                 setSpanEmail(t("emailInUse"));
@@ -57,16 +44,6 @@ function RegisterComponent() {
                 if (!re.test(String(email).toLowerCase()))
                     setSpanEmail(t("EmailNotValid"));
                 else setSpanEmail("");
-                break;
-            case "password":
-                if (password.length < 8) {
-                    setSpanPassword(t("PassNotValid"));
-                } else setSpanPassword("");
-                break;
-            case "confirmpassword":
-                if (password !== confirmPassword)
-                    setSpanConfirmPassword(t("PassNotSame"));
-                else setSpanConfirmPassword("");
                 break;
             case "username":
                 if (username.length < 2) setSpanUsername(t("UsernameNotValid"));
@@ -87,7 +64,7 @@ function RegisterComponent() {
             })
             .then((res) => {})
             .catch((err) => {
-                addNoti("Time out", "fail");
+                addNoti(t("timeout"), "fail");
                 history.push("/");
             });
     }, []);
@@ -100,7 +77,7 @@ function RegisterComponent() {
             >
                 <input
                     type="text"
-                    placeholder="email"
+                    placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     className={
@@ -129,40 +106,17 @@ function RegisterComponent() {
                     {spanUsername}
                 </span>
                 <input
-                    type="password"
-                    placeholder={t("pass")}
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    className={
-                        spanPassword !== "" ? styles.input_warn : styles.input
-                    }
-                    onBlur={() => checkvalid("password")}
-                    onFocus={() => setSpanPassword("")}
+                    type="text"
+                    placeholder={t("phone")}
+                    onChange={(e) => setPhone(e.target.value)}
+                    value={phone}
+                    className={styles.input}
                 />
-                <span className={styles.span}>{spanPassword}</span>
-                <div className={styles.visible}>
-                    <input
-                        type="password"
-                        placeholder={t("confirmpass")}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        value={confirmPassword}
-                        className={
-                            spanConfirmPassword !== ""
-                                ? styles.input_warn
-                                : styles.input
-                        }
-                        onBlur={() => checkvalid("confirmpassword")}
-                        onFocus={() => setSpanConfirmPassword("")}
-                    />
-                </div>
-                <span className={styles.span} style={{ marginTop: -20 }}>
-                    {spanConfirmPassword}
-                </span>
 
                 <div className={styles.footer}>
                     <OrangeButton
                         size="medium"
-                        text={t("signUp")}
+                        text={t("addMember")}
                         action={handleSignUp}
                     />
                 </div>
@@ -171,4 +125,4 @@ function RegisterComponent() {
     );
 }
 
-export default RegisterComponent;
+export default AddMember;

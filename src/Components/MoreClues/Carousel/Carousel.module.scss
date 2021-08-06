@@ -1,4 +1,4 @@
-@import '../../init';
+@import "../../init";
 
 .component {
     width: 76vw;
@@ -26,12 +26,11 @@
     @extend .next;
     left: 0;
     margin-left: -5%;
-
 }
 .test {
     width: 185px;
     height: 90%;
-    @include b;  
+    @include b;
     margin-right: 62px;
     // float: left;
     display: inline-block;
@@ -44,35 +43,34 @@
     height: 100%;
     display: flex;
     // @include b;
-    flex-shrink:  unset;
+    flex-shrink: unset;
     overflow-x: scroll;
     overflow-y: hidden;
     &::-webkit-scrollbar {
-      display: block;
-      width: 5px;
-      height: 12px;
-      background-color: transparent;
-      overflow: visible;
-  }
-  &::-webkit-scrollbar-track {
-      // background: transparent;
-      height:  200px !important;
-      background: transparent;
-      // border: 4px solid map-get($colors, "greeen" );
-      background-clip: content-box;   /* THIS IS IMPORTANT */
-  }
-      
-  &::-webkit-scrollbar-thumb {
-      background-color: #4D2900;
-    //   border: 2px solid black;
-  }
-  
-  &::-webkit-scrollbar-track-piece {
-    background-color: #D7D7D7;
-          border: 4px solid map-get($colors, "purple" );
-      height:  200px !important;
-      margin-right: 380px; 
-      margin-left: 380px;
-  }
-  
+        display: block;
+        width: 5px;
+        height: 12px;
+        background-color: transparent;
+        overflow: visible;
+    }
+    &::-webkit-scrollbar-track {
+        // background: transparent;
+        height: 200px !important;
+        background: transparent;
+        // border: 4px solid map-get($colors, "greeen" );
+        background-clip: content-box; /* THIS IS IMPORTANT */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #4d2900;
+        //   border: 2px solid black;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        background-color: #d7d7d7;
+        border: 4px solid map-get($colors, "purple");
+        height: 200px !important;
+        margin-right: 380px;
+        margin-left: 380px;
+    }
 }

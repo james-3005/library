@@ -15,7 +15,10 @@
         @include font-mont;
     }
 }
-
+.available {
+    margin-left: 15%;
+    margin: 6px 15%;
+}
 .imagecard {
     display: block;
     margin: 0 auto;
@@ -23,6 +26,8 @@
     width: 128px;
     height: 190px;
     // object-fit: scale-down;
+    background-image: url("./book.svg");
+    border: none;
 }
 .slidebox p {
     text-align: left;
@@ -75,8 +80,7 @@
     align-items: center;
     background-color: #e16a00;
     color: white;
-    display: flex;
-    @include center;
+
     @include font-mont;
     border-radius: 3px;
     font-weight: 700;
@@ -84,4 +88,5 @@
     width: 100px;
     height: 30px;
     font-size: 12px;
+    margin-left: 15%;
 }

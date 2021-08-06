@@ -25,6 +25,8 @@
     "HaveAcc": "Đã có tài khoản, ",
     "NotHaveAcc": "Chưa có tài khoản, ",
     "now": "ngay",
+    "price": "Giá",
+    "isbn": "ISBN",
     "turnBack": "Quay lại",
     "sendEmail": "Gửi email",
     "ForgotPass": "Quên mật khẩu",
@@ -57,5 +59,14 @@
     "datemuon": "Ngày mượn",
     "datetra": "Ngày trả",
     "total": "Tổng",
-    "view": "Xem"
+    "view": "Xem",
+    "timeout": "Hết thời gian",
+    "name": "Tên thành viên",
+    "phone": "Số điện thoại",
+    "notiChangePassSuccess": "Thay mật khẩu thành công",
+    "notiChangePassFail": "Thay mật khẩu thất bại",
+    "addMember": "Thêm thành viên",
+    "pass": "Mật khẩu",
+    "newpass": "Mật khẩu mới",
+    "confirmpass": "Xác nhận mật khẩu"
 }

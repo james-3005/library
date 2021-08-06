@@ -40,12 +40,12 @@ function UserComponent() {
         turnOnLoader();
         updatePassword(currentPassword, newpassword, currentUser)
             .then((res) => {
-                addNoti("Đổi mật khẩu thành công", "success");
+                addNoti(t("notiChangePassSuccess"), "success");
                 history.push("/");
             })
             .catch((err) => {
                 // console.log(err);
-                addNoti("Đổi mật khẩu thất bại", "fail");
+                addNoti(t("notiChangePassFail"), "fail");
             })
             .finally(() => {
                 turnOffLoader();
@@ -65,7 +65,7 @@ function UserComponent() {
             })
             .catch((err) => {
                 console.log(err.response.data);
-                addNoti("Time out", "fail");
+                addNoti(t("Time out"), "fail");
                 history.push("/loginPage");
             });
     }, []);
@@ -81,14 +81,14 @@ function UserComponent() {
                     <p className={styles.content}>{user.email}</p>
                 </div>
                 <div className={styles.boxInfo}>
-                    <label className={styles.label}>Username</label>
+                    <label className={styles.label}>{t("name")}</label>
                     <p className={styles.content}>{user.name}</p>
                 </div>
             </div>
             <div className={styles.changePassword}>
                 <input
                     type="password"
-                    placeholder="Current Password"
+                    placeholder={t("pass")}
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     value={currentPassword}
                     className={styles.input}
@@ -96,7 +96,7 @@ function UserComponent() {
                 <span className={styles.span}></span>
                 <input
                     type="password"
-                    placeholder="New Password"
+                    placeholder={t("newpass")}
                     onChange={(e) => setNewPassword(e.target.value)}
                     value={newpassword}
                     className={
@@ -110,7 +110,7 @@ function UserComponent() {
                 <span className={styles.span}>{spanNewPassword}</span>
                 <input
                     type="password"
-                    placeholder="Confirm new Password"
+                    placeholder={t("confirmpass")}
                     onChange={(e) => setReNewPassword(e.target.value)}
                     value={reNewpassword}
                     className={

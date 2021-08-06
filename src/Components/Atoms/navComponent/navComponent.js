@@ -29,6 +29,22 @@ function NavComponent({ isAdmin, setIsAdmin }) {
                             <>
                                 <li>
                                     <Link
+                                        to="/registerPage"
+                                        className={styles.link}
+                                    >
+                                        Register Admin
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/addMemberPage"
+                                        className={styles.link}
+                                    >
+                                        Add member
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
                                         to="/userPage"
                                         className={styles.link}
                                     >

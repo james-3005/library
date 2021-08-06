@@ -12,7 +12,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
-    function signup(email, username, password) {
+    function signup(email, username, password, phone = "none") {
         async function register() {
             try {
                 let res = await axios.post(
@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
                         email: email,
                         password: password,
                         password_confirmation: password,
-                        phone: "none",
+                        phone: phone,
                         address: "none",
                         dob: "2001-02-19",
                     }

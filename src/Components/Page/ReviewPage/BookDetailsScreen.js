@@ -19,6 +19,7 @@ import RateStar from "../../MoreClues/RateStar/RateStar";
 import { useTranslation } from "react-i18next";
 import { useCurrentBook } from "../../../Context/CurrentBookProvider";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const BookDetailsScreen = () => {
     const { currentBook } = useCurrentBook();
@@ -70,11 +71,17 @@ const BookDetailsScreen = () => {
                         </span>
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("year")}:</p>
-                            <p>{publication_date}</p>
+                            <p>
+                                {moment(publication_date).format("DD-MM-YYYY")}
+                            </p>
                         </span>
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("price")}:</p>
                             <p>{`$${Number(price).toFixed(1)}`}</p>
+                        </span>
+                        <span className={styles.textRow}>
+                            <p className={styles.t1}>{t("isbn")}:</p>
+                            <p>{isbn}</p>
                         </span>
                     </div>
                     <div className={styles.introduction}>

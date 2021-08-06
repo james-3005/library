@@ -23,6 +23,7 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import ActionFindInPage from "material-ui/svg-icons/action/find-in-page";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     tableBox: {},
@@ -118,7 +119,7 @@ export default function BookAdminPage() {
                 getBooks();
             });
     };
-
+    const history = useHistory();
     const addOrEdit = (book, resetForm) => {
         // const checkBook = axios.get(`https://library-mini.xyz/api/v1/book/3`)
         // .then((result) => console.log())
@@ -186,7 +187,20 @@ export default function BookAdminPage() {
         setRecordForEdit(item);
         setOpenPopup(true);
     };
-
+    useEffect(() => {
+        axios
+            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem(
+                        "user"
+                    )}`,
+                },
+            })
+            .then((res) => {})
+            .catch((err) => {
+                history.push("/loginPage");
+            });
+    }, []);
     return (
         <div style={{ width: "70%", flexDirection: "column", marginLeft: 200 }}>
             <Box
