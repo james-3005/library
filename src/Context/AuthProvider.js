@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
 
 const url = "https://librarymini.ga/api/v1/auth/";
 
@@ -53,14 +52,6 @@ export function AuthProvider({ children }) {
         return login2();
     }
 
-    function resetPassword(email) {
-        return auth.sendPasswordResetEmail(email);
-    }
-
-    function updateEmail(email) {
-        return currentUser.updateEmail(email);
-    }
-
     function updatePassword(password, newpassword, token) {
         async function resetpass() {
             try {
@@ -101,8 +92,6 @@ export function AuthProvider({ children }) {
         setCurrentUser,
         login,
         signup,
-        resetPassword,
-        // updateEmail,
         updatePassword,
     };
 
