@@ -11,9 +11,9 @@ function RateStar({ openAddComment, star = 3, number = 0 }) {
         for (let i = 0; i < 5; i++) {
             if (i < star)
                 exp.push(
-                    <img key={i} src="/image/svg/yellowStar.svg" alt="" />
+                    <img key={i} src="/Image/svg/yellowStar.svg" alt="" />
                 );
-            else exp.push(<img key={i} src="/image/svg/grayStar.svg" alt="" />);
+            else exp.push(<img key={i} src="/Image/svg/grayStar.svg" alt="" />);
         }
         setListStar(exp);
     }, []);

@@ -7,7 +7,7 @@ function Receipt(props) {
         <div className={styles.mainComponent}>
             <img
                 className={styles.img}
-                src={img ? img : "image/svg/book.svg"}
+                src={img ? img : "/Image/svg/book.svg"}
                 alt=""
             />
             <div className={styles.box}>
@@ -15,7 +15,7 @@ function Receipt(props) {
                 <p className={styles.price}>{`$${price}`}</p>
             </div>
             <button className={styles.delete} onClick={onDelete}>
-                <img src="./image/svg/trashcan.svg" />
+                <img src="/Image/svg/trashcan.svg" />
             </button>
         </div>
     );

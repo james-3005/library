@@ -47,7 +47,7 @@ const BookDetailsScreen = () => {
             >
                 <img
                     className={styles.img}
-                    src={book_image ? book_image : "/image/svg/book.svg"}
+                    src={book_image ? book_image : "/Image/svg/book.svg"}
                 />
             </motion.div>
             <motion.div
@@ -67,7 +67,7 @@ const BookDetailsScreen = () => {
                             )
                         }
                     >
-                        <img src="image/svg/back.svg" alt="" />
+                        <img src="/Image/svg/back.svg" alt="" />
                     </Link>
 
                     <div className={styles.infomation}>

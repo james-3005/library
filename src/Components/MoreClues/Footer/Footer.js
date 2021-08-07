@@ -8,7 +8,11 @@ function Footer() {
     return (
         <div className={styles.component}>
             <div className={styles.wraper}>
-                <img className={styles.bg} alt="" src="image/svg/footer7.svg" />
+                <img
+                    className={styles.bg}
+                    alt=""
+                    src="/Image/svg/footer7.svg"
+                />
             </div>
             <div className={styles.logo}>
                 <Logo />
@@ -16,9 +20,9 @@ function Footer() {
             <div className={styles.social}>
                 <h2 className={styles.header}>{t("footer")}</h2>
                 <div className={styles.iconSocial}>
-                    <img src="image/svg/iconFb.svg" />
-                    <img src="image/svg/iconTwitter.svg" />
-                    <img src="image/svg/iconInsta.svg" />
+                    <img src="/Image/svg/iconFb.svg" />
+                    <img src="/Image/svg/iconTwitter.svg" />
+                    <img src="/Image/svg/iconInsta.svg" />
                 </div>
             </div>
             <div className={styles.contact}>

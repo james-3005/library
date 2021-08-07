@@ -9,7 +9,7 @@ function LogoComponent() {
     return (
         <div className={styles.logo} onClick={() => history.push("/")}>
             <div>
-                <img src="/image/svg/logo.svg" alt="logo" />
+                <img src="/Image/svg/logo.svg" alt="logo" />
             </div>
             <div className={styles.logoTitle}>
                 <h3>{t("library")}</h3>

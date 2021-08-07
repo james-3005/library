@@ -219,17 +219,17 @@ export default function BookAdminPage() {
                     <Controls.FilterItem
                         title={"Tổng số đơn"}
                         amount={44}
-                        imgSource={"/image/svg/filterTSD.svg"}
+                        imgSource={"/Image/svg/filterTSD.svg"}
                     />
                     <Controls.FilterItem
                         title={"Đang mượn"}
                         amount={44}
-                        imgSource={"/image/svg/filterDangMuon.svg"}
+                        imgSource={"/Image/svg/filterDangMuon.svg"}
                     />
                     <Controls.FilterItem
                         title={"Đã trả"}
                         amount={44}
-                        imgSource={"/image/svg/filterDaTra.svg"}
+                        imgSource={"/Image/svg/filterDaTra.svg"}
                     />
                 </div>
 

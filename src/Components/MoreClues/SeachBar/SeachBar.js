@@ -39,7 +39,7 @@ function SeachBar({
     return (
         <div className={styles.searchComponent} ref={searchRef}>
             <button className={styles.btn} onClick={handleToggle}>
-                <img src="/image/svg/search.svg" alt="" />
+                <img src="/Image/svg/search.svg" alt="" />
             </button>
 
             <input
