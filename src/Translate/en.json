@@ -3,7 +3,7 @@
     "mainPage_title": "Huge store of books",
     "mainPage_smallTitle": "This is a final project for Web application development",
     "mainPage_button": "View all book",
-    "mainPage_bestSelling": "Best selling books",
+    "mainPage_bestSelling": "Top borrowing books",
     "mainPage_lastest": "Lastest Books",
     "login": "Login",
     "logout": "Logout",
@@ -68,5 +68,6 @@
     "addMember": "Add member",
     "pass": "Password",
     "newpass": "New password",
-    "confirmpass": "Confirm password"
+    "confirmpass": "Confirm password",
+    "translator": "Translator"
 }

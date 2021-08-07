@@ -18,7 +18,7 @@ import { motion } from "framer-motion";
 import RateStar from "../../MoreClues/RateStar/RateStar";
 import { useTranslation } from "react-i18next";
 import { useCurrentBook } from "../../../Context/CurrentBookProvider";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
 
 const BookDetailsScreen = () => {
@@ -33,10 +33,11 @@ const BookDetailsScreen = () => {
         type_id,
         publication_date,
         book_id,
+        translator,
     } = currentBook;
 
     const { t } = useTranslation();
-
+    const history = useHistory();
     return (
         <div className={styles.container}>
             <motion.div
@@ -55,7 +56,17 @@ const BookDetailsScreen = () => {
                 className={styles.details}
             >
                 <div className={styles.boxDes}>
-                    <Link to="/" className={styles.back}>
+                    <Link
+                        to="../#search"
+                        className={styles.back}
+                        style={{ cursor: "pointer" }}
+                        onClick={() =>
+                            window.localStorage.setItem(
+                                "path",
+                                "bookdetailpage"
+                            )
+                        }
+                    >
                         <img src="image/svg/back.svg" alt="" />
                     </Link>
 
@@ -77,11 +88,15 @@ const BookDetailsScreen = () => {
                         </span>
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("price")}:</p>
-                            <p>{`$${Number(price).toFixed(1)}`}</p>
+                            <p>{`${Number(price).toFixed(1)}`}</p>
                         </span>
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("isbn")}:</p>
                             <p>{isbn}</p>
+                        </span>
+                        <span className={styles.textRow}>
+                            <p className={styles.t1}>{t("translator")}:</p>
+                            <p>{translator}</p>
                         </span>
                     </div>
                     <div className={styles.introduction}>

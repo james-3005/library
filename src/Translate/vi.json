@@ -3,7 +3,7 @@
     "mainPage_title": "Kho tàng sách bổ ích",
     "mainPage_smallTitle": "Đây là bài tập lớn môn phát triển ứng dụng web",
     "mainPage_button": "Xem thông tin sách",
-    "mainPage_bestSelling": "Sách bán chạy",
+    "mainPage_bestSelling": "Sách được mượn nhiều",
     "mainPage_lastest": "Sách mới nhất",
     "login": "Đăng nhập",
     "logout": "Đăng xuất",
@@ -68,5 +68,6 @@
     "addMember": "Thêm thành viên",
     "pass": "Mật khẩu",
     "newpass": "Mật khẩu mới",
-    "confirmpass": "Xác nhận mật khẩu"
+    "confirmpass": "Xác nhận mật khẩu",
+    "translator": "Dịch"
 }

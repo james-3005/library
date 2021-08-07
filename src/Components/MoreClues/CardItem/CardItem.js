@@ -5,7 +5,17 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 function ShowCard({ data }) {
-    const { image, price, author, name_book, book_image } = data;
+    const {
+        image,
+        price,
+        author,
+        name_book,
+        book_image,
+        book_id,
+        country_id,
+        translator,
+        type_id,
+    } = data;
     const { setCurrentBook } = useCurrentBook();
     const history = useHistory();
     const { t } = useTranslation();
@@ -15,8 +25,15 @@ function ShowCard({ data }) {
     };
     const [available, setAvailable] = useState(true);
     useState(() => {
-        // axios;
-    }, []);
+        axios
+            .get(
+                `http://library-mini.xyz/api/v1/borrowing-book/check/${book_id}`
+            )
+            .then((res) => {
+                setAvailable(!res.data.borrowing);
+            })
+            .catch((err) => console.log(err.response.data));
+    }, [book_id]);
     return (
         <div className={styles.slidebox}>
             <img

@@ -1,8 +1,8 @@
 import SearchScreen from "./SearchScreen/SearchScreen";
 import React from "react";
 import { Link } from "react-router-dom";
-import Carousel1 from "./List/FavouriteBook";
-import Carousel2 from "./List/NewlyPublishedBook";
+import FavoriteBook from "./List/FavouriteBook";
+import LastestBook from "./List/NewlyPublishedBook";
 import styles from "./MainPage.module.scss";
 import Background2 from "../../Template/Background2/Background2";
 import HomePage from "./HomePage/HomePage";
@@ -12,6 +12,8 @@ function MainPage() {
     return (
         <div className={styles.mainPage}>
             <HomePage />
+            <FavoriteBook />
+            <LastestBook />
             <SearchScreen />
             <Footer />
         </div>

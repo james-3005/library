@@ -1,12 +1,12 @@
 @import "../../init";
 .component {
     width: 500px;
-    height: 300px;
+    height: 550px;
     // border: 1px solid black;
     display: flex;
     padding: 10px;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 .input {
     margin-bottom: 10px !important;
@@ -15,4 +15,5 @@
     // border: 1px solid black;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }

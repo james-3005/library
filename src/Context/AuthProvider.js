@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
                 );
                 return res.data.original;
             } catch (err) {
-                throw err;
+                throw err.response.data;
             }
         }
         return login2();

@@ -6,6 +6,7 @@ import { AuthProvider } from "./Context/AuthProvider";
 import { LoaderProvider } from "./Context/LoaderProvider";
 import { NotificationProvider } from "./Context/NotificationProvider";
 import { CurrentBookProvider } from "./Context/CurrentBookProvider";
+import { FilterBookProvider } from "./Context/FilterBookProvider";
 import "./Translate/i18n";
 
 ReactDOM.render(
@@ -14,7 +15,9 @@ ReactDOM.render(
             <LoaderProvider>
                 <NotificationProvider>
                     <CurrentBookProvider>
-                        <App />
+                        <FilterBookProvider>
+                            <App />
+                        </FilterBookProvider>
                     </CurrentBookProvider>
                 </NotificationProvider>
             </LoaderProvider>
