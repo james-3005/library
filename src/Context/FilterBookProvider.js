@@ -17,20 +17,22 @@ export function FilterBookProvider({ children }) {
     useEffect(() => {
         turnOnLoader();
         axios
-            .get("http://library-mini.xyz/api/v1/book/get-latest-books?limit=5")
+            .get(
+                "https://library-mini.xyz/api/v1/book/get-latest-books?limit=5"
+            )
             .then((res) => {
                 // console.log(res.data);
                 setNewBook(res.data.books);
             })
             .catch((err) => console.log(err.response.data));
         axios
-            .get("http://library-mini.xyz/api/v1/book/top-borrowing")
+            .get("https://library-mini.xyz/api/v1/book/top-borrowing")
             .then((res) => {
                 setFavBook(res.data.books);
             })
             .catch((err) => console.log(err.response.data));
         axios
-            .get("http://library-mini.xyz/api/v1/book")
+            .get("https://library-mini.xyz/api/v1/book")
             .then((res) => {
                 console.log(res.data.books);
                 setAllBook(res.data.books);

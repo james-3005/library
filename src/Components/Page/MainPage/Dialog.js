@@ -57,11 +57,13 @@ function Popup(props) {
         onClose(selectedValue);
     };
     useEffect(() => {
-        axios.get("http://library-mini.xyz/api/v1/type?level=1").then((res) => {
-            console.log(res.data);
-            setListType1(res.data);
-        });
-        axios.get("http://library-mini.xyz/api/v1/country").then((res) => {
+        axios
+            .get("https://library-mini.xyz/api/v1/type?level=1")
+            .then((res) => {
+                console.log(res.data);
+                setListType1(res.data);
+            });
+        axios.get("https://library-mini.xyz/api/v1/country").then((res) => {
             setListCountry(res.data.countries);
         });
     }, []);
@@ -69,7 +71,7 @@ function Popup(props) {
         setListType3([]);
         setType3("All");
         axios
-            .get(`http://library-mini.xyz/api/v1/type?parent_id=${type1}`)
+            .get(`https://library-mini.xyz/api/v1/type?parent_id=${type1}`)
             .then((res) => {
                 setListType2(res.data);
                 setType2("All");
@@ -78,7 +80,7 @@ function Popup(props) {
     useEffect(() => {
         setType3("All");
         axios
-            .get(`http://library-mini.xyz/api/v1/type?parent_id=${type2}`)
+            .get(`https://library-mini.xyz/api/v1/type?parent_id=${type2}`)
             .then((res) => {
                 setListType3(res.data);
             });

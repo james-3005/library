@@ -36,7 +36,7 @@ function SearchScreen() {
         console.log(exptype);
         axios
             .get(
-                `http://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
+                `https://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
                     exptype - 1
                 }&country_name=${country === "All" ? "" : country}`
             )

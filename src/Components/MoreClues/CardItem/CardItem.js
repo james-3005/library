@@ -27,7 +27,7 @@ function ShowCard({ data }) {
     useState(() => {
         axios
             .get(
-                `http://library-mini.xyz/api/v1/borrowing-book/check/${book_id}`
+                `https://library-mini.xyz/api/v1/borrowing-book/check/${book_id}`
             )
             .then((res) => {
                 setAvailable(!res.data.borrowing);

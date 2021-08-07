@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
         async function register() {
             try {
                 let res = await axios.post(
-                    "http://library-mini.xyz/api/v1/auth/register",
+                    "https://library-mini.xyz/api/v1/auth/register",
                     {
                         name: username,
                         email: email,
@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
         async function login2() {
             try {
                 let res = await axios.post(
-                    "http://library-mini.xyz/api/v1/auth/login",
+                    "https://library-mini.xyz/api/v1/auth/login",
                     {
                         email: email,
                         password: password,
@@ -56,7 +56,7 @@ export function AuthProvider({ children }) {
         async function resetpass() {
             try {
                 let res = await axios.post(
-                    "http://library-mini.xyz/api/v1/auth/change-password",
+                    "https://library-mini.xyz/api/v1/auth/change-password",
                     {
                         old_password: password,
                         new_password: newpassword,
@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const user = window.localStorage.getItem("user");
         axios
-            .get("http://library-mini.xyz/api/v1/auth/user-profile", {
+            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
                 headers: { Authorization: `Bearer ${user}` },
             })
             .then((res) => {
