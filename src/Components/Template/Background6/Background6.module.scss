@@ -1,9 +1,9 @@
-@import '../../init';
+@import "../../init";
 
 .component {
     width: 100vw;
     height: 100vh;
-    background-color: #FAEBFF;
+    background-color: #faebff;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -16,5 +16,17 @@
     bottom: 0;
     z-index: 3;
 }
-
-
+.cloud {
+    position: absolute;
+    right: 0;
+    top: 0;
+    animation: floating 10s infinite alternate;
+}
+@keyframes floating {
+    from {
+        transform: translateX(-100px);
+    }
+    to {
+        transform: translateX(10px);
+    }
+}

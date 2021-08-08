@@ -1,22 +1,47 @@
+@import "../../../../init";
 .container {
-    height: 50px;
-    width: 160px;
+    height: 60px;
+    width: 180px;
     display: flex;
     flex-direction: row;
-    border: 2px solid #8DC6F2 ;
+    border: 2px solid #8dc6f2;
     border-radius: 5px;
     align-items: center;
     margin-bottom: 10px;
+    @include font-rob;
+    cursor: pointer;
+    position: relative;
 }
 
-.image {
-    width: 70px;
+.boxImg {
+    height: 100%;
+    width: 65px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.img {
+    position: absolute;
+    width: 40px;
     height: 40px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+.blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 .groupText {
+    position: absolute;
+    left: 70px;
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 .title {
     font-size: 13px;

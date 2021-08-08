@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 //import Header from "../components/Header";
 //import PageHeader from '../components/PageHeader';
-import Background6 from "../../Template/Background6/Background6";
+import Background6 from "../../Template/Background3/Background3";
 
 import BookAdminPage from "./BookAdminPage";
 import axios from "axios";
@@ -44,10 +44,8 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
     appMain: {
-        //justifyContent: 'center',
         alignItems: "center",
         flexDirection: "column",
-        // display: 'flex',
         width: window.width,
         height: window.height,
         flex: 1,
@@ -81,15 +79,11 @@ function Main() {
     }, []);
     return (
         <ThemeProvider theme={theme}>
-            {/* <SideMenu /> */}
             <Background6>
                 <div className={classes.appMain}>
-                    {/* <Header /> */}
-
                     <BookAdminPage />
                 </div>
             </Background6>
-            {/* <CssBaseline /> */}
         </ThemeProvider>
     );
 }

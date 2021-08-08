@@ -38,7 +38,7 @@ function NavBar({ isAdmin, setIsAdmin }) {
             ) : (
                 <div className={styles.login} onClick={handleLogout}>
                     <p>
-                        <img src="image/svg/login.svg" />
+                        <img src="/Image/svg/login.svg" />
                         {t("logout")}
                     </p>
                 </div>

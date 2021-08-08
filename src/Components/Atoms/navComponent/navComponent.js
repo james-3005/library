@@ -37,14 +37,6 @@ function NavComponent({ isAdmin, setIsAdmin }) {
                                 </li>
                                 <li>
                                     <Link
-                                        to="/addMemberPage"
-                                        className={styles.link}
-                                    >
-                                        Add member
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
                                         to="/userPage"
                                         className={styles.link}
                                     >

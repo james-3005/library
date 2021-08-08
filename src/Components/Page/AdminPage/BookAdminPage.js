@@ -3,6 +3,11 @@ import BookForm from "./BookForm";
 //import PageHeader from "../../components/PageHeader";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import {
     Paper,
     makeStyles,
     TableBody,
@@ -12,24 +17,39 @@ import {
     InputAdornment,
     Box,
     TableHead,
+    TextField,
 } from "@material-ui/core";
 import useTable from "./components/useTable";
-//import * as employeeService from "../../services/employeeService";
 import Controls from "./components/controls/Controls";
 import { Search, SlowMotionVideoOutlined } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Popup from "./components/Popup";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
-import ActionFindInPage from "material-ui/svg-icons/action/find-in-page";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-
+import styles from "./BookAdminPage.module.scss";
+import c from "classnames";
+import { useLoader } from "../../../Context/LoaderProvider";
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
-    tableBox: {},
+    tableBox: {
+        paddingLeft: 200,
+    },
     searchInput: {
+        width: "100%",
+        borderColor: "#8DC6F2",
+        //backgroundColor: 'red',
+    },
+    searchInputByName: {
         width: "75%",
         borderColor: "#8DC6F2",
+        //backgroundColor: 'red',
+    },
+    yearPicker: {
+        width: "100%",
+        borderColor: "#8DC6F2",
+        //backgroundColor: 'red',
     },
     newButton: {
         position: "absolute",
@@ -48,6 +68,7 @@ const headCells = [
 ];
 
 export default function BookAdminPage() {
+    const token = window.localStorage.getItem("user");
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null);
     const [records, setRecords] = useState([]);
@@ -59,17 +80,18 @@ export default function BookAdminPage() {
     const [openPopup, setOpenPopup] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [deletedId, setDeletedId] = useState(0);
-
-    const axios = require("axios");
+    const { turnOnLoader, turnOffLoader } = useLoader();
     async function getBooks() {
         try {
+            turnOnLoader();
             const response = await axios.get(
-                "https://library-mini.xyz/api/v1/book"
+                "https://library-mini.xyz/api/v1/book?"
             );
-            console.log(response.data.data);
-            setRecords(response.data.data);
+            turnOffLoader();
+            setRecords(response.data.books);
         } catch (error) {
             console.error(error);
+            turnOffLoader();
         }
     }
 
@@ -101,9 +123,6 @@ export default function BookAdminPage() {
         setOpenDialog(true);
     };
 
-    const token =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbGlicmFyeS1taW5pLnh5elwvYXBpXC92MVwvYXV0aFwvbG9naW4iLCJpYXQiOjE2MjgxMzg1NzgsImV4cCI6MTYyODE0MjE3OCwibmJmIjoxNjI4MTM4NTc4LCJqdGkiOiJYbWI4UEpBNFhhd2dYcDNuIiwic3ViIjo0LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZV9pZCI6MX0.VhNRXTxZDhUI2YXT85blh8vFXug8cJbJU4j-MDlJD6E";
-
     const deleteBook = (id) => {
         axios
             .delete(`https://library-mini.xyz/api/v1/book/${id}`, {
@@ -121,12 +140,8 @@ export default function BookAdminPage() {
     };
     const history = useHistory();
     const addOrEdit = (book, resetForm) => {
-        // const checkBook = axios.get(`https://library-mini.xyz/api/v1/book/3`)
-        // .then((result) => console.log())
-        // .catch((err) => console.log(err))
-        // if(checkBook.data.data == [])
         if (book.book_id == 0) {
-            console.log(book);
+            turnOnLoader();
             axios
                 .post(
                     "https://library-mini.xyz/api/v1/book",
@@ -151,8 +166,10 @@ export default function BookAdminPage() {
                     }
                 )
                 .then((res) => console.log(res.data))
-                .catch((err) => console.log(err.response.data));
+                .catch((err) => console.log(err.response.data))
+                .finally(() => turnOffLoader());
         } else {
+            turnOnLoader();
             axios
                 .post(
                     `https://library-mini.xyz/api/v1/book/${book.book_id}`,
@@ -175,7 +192,8 @@ export default function BookAdminPage() {
                     }
                 )
                 .then((res) => console.log(res.data))
-                .catch((err) => console.log(err.response.data));
+                .catch((err) => console.log(err.response.data))
+                .finally(() => turnOffLoader());
         }
         resetForm();
         setRecordForEdit(null);
@@ -188,6 +206,7 @@ export default function BookAdminPage() {
         setOpenPopup(true);
     };
     useEffect(() => {
+        turnOnLoader();
         axios
             .get("https://library-mini.xyz/api/v1/auth/user-profile", {
                 headers: {
@@ -199,44 +218,128 @@ export default function BookAdminPage() {
             .then((res) => {})
             .catch((err) => {
                 history.push("/loginPage");
-            });
+            })
+            .finally(() => turnOffLoader());
     }, []);
-    return (
-        <div style={{ width: "70%", flexDirection: "column", marginLeft: 200 }}>
-            <Box
-                display="flex"
-                flexDirection="column"
-                className={useStyles.tableBox}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        padding: 10,
-                    }}
-                >
-                    <Controls.FilterItem
-                        title={"Tổng số đơn"}
-                        amount={44}
-                        imgSource={"/image/svg/filterTSD.svg"}
-                    />
-                    <Controls.FilterItem
-                        title={"Đang mượn"}
-                        amount={44}
-                        imgSource={"/image/svg/filterDangMuon.svg"}
-                    />
-                    <Controls.FilterItem
-                        title={"Đã trả"}
-                        amount={44}
-                        imgSource={"/image/svg/filterDaTra.svg"}
-                    />
-                </div>
 
+    const options = [
+        "Tiểu thuyết",
+        "Truyện tranh",
+        "Ngôn tình",
+        "Kinh tế",
+        "Khoa học",
+    ];
+
+    return (
+        <div className={c(styles.mainContainer, styles.hideScroll)}>
+            {/* <div className={c(styles.childcom, styles.hideScroll)}>
+                <Controls.Select
+                    label="Category"
+                    name="type_id"
+                    size="small"
+                    //value={values.type_id}
+                    //onChange={handleInputChange}
+                    //error={errors.email}
+                    options={options}
+                />
+
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                        disableToolbar
+                        variant="inline"
+                        inputVariant="outlined"
+                        label="năm xuất bản"
+                        views={["year"]}
+                        //format="yyyy/mm/dd"
+                        name="year"
+                        //value={value}
+                        //onChange={date =>onChange(convertToDefEventPara(name,date))}
+                        size="small"
+                        className={classes.yearPicker}
+                    />
+                </MuiPickersUtilsProvider>
+
+                <Controls.Input
+                    label="Theo tên sách"
+                    size="small"
+                    className={classes.searchInput}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>
+                        ),
+                    }}
+                    onChange={handleSearch}
+                />
+
+                <Controls.Input
+                    label="Theo tên sách"
+                    size="small"
+                    className={classes.searchInput}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>
+                        ),
+                    }}
+                    onChange={handleSearch}
+                />
+
+                <Controls.Input
+                    label="Theo tên sách"
+                    size="small"
+                    className={classes.searchInput}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>
+                        ),
+                    }}
+                    onChange={handleSearch}
+                />
+                <Controls.Input
+                    label="Theo tên sách"
+                    size="small"
+                    className={classes.searchInput}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>
+                        ),
+                    }}
+                    onChange={handleSearch}
+                />
+
+                <Controls.Input
+                    label="Theo tên tác giả"
+                    size="small"
+                    className={classes.searchInput}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Search />
+                            </InputAdornment>
+                        ),
+                    }}
+                    onChange={handleSearch}
+                />
+            </div> */}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    paddingTop: 10,
+                }}
+                className={styles.hideScroll}
+            >
                 <Toolbar>
                     <Controls.Input
-                        label="Search Books"
-                        className={classes.searchInput}
+                        label="Theo tên sách"
+                        className={classes.searchInputByName}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -246,6 +349,7 @@ export default function BookAdminPage() {
                         }}
                         onChange={handleSearch}
                     />
+
                     <Controls.Button
                         text="Add New"
                         variant="outlined"
@@ -257,81 +361,96 @@ export default function BookAdminPage() {
                         }}
                     />
                 </Toolbar>
-                <TblContainer>
-                    <TblHead />
-                    <TableBody style={{ width: "100%" }}>
-                        {recordsAfterPagingAndSorting().map((item, index) => (
-                            <TableRow key={item.id} style={{ height: "45%" }}>
-                                <TableCell
-                                    algin="left"
-                                    size="small"
-                                    style={{
-                                        width: "1%",
-                                    }}
-                                >
-                                    {index}
-                                </TableCell>
-                                <TableCell
-                                    algin="left"
-                                    size="small"
-                                    style={{
-                                        width: "1%",
-                                    }}
-                                >
-                                    {item.book_id}
-                                </TableCell>
-                                <TableCell
-                                    size="small"
-                                    algin="left"
-                                    style={{ width: "35%" }}
-                                >
-                                    {item.name_book}
-                                </TableCell>
-                                <TableCell
-                                    size="small"
-                                    style={{ width: "10%" }}
-                                >
-                                    {item.type_id}
-                                </TableCell>
-                                <TableCell
-                                    size="small"
-                                    style={{ width: "20%" }}
-                                >
-                                    {item.author}
-                                </TableCell>
-                                <TableCell
-                                    size="small"
-                                    style={{ width: "20%" }}
-                                >
-                                    {item.publication_date}
-                                </TableCell>
-                                <TableCell
-                                    size="small"
-                                    style={{ width: "24%" }}
-                                >
-                                    <Controls.ActionButton
-                                        color="primary"
-                                        onClick={() => {
-                                            openInPopup(item);
-                                        }}
+                <div
+                    style={{
+                        height: 450,
+                        overflow: "scroll",
+                    }}
+                    className={styles.hideScroll}
+                >
+                    <TblContainer>
+                        <TblHead />
+                        <TableBody style={{ width: "100%", height: "100%" }}>
+                            {recordsAfterPagingAndSorting().map(
+                                (item, index) => (
+                                    <TableRow
+                                        key={item.id}
+                                        style={{ height: "45%" }}
                                     >
-                                        <EditOutlinedIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                    <Controls.ActionButton
-                                        color="secondary"
-                                        onClick={() => {
-                                            openDeleteDialog(item.book_id);
-                                        }}
-                                    >
-                                        <CloseIcon fontSize="small" />
-                                    </Controls.ActionButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </TblContainer>
-                <TblPagination />
-            </Box>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{
+                                                width: "1%",
+                                            }}
+                                        >
+                                            {index}
+                                        </TableCell>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{
+                                                width: "1%",
+                                            }}
+                                        >
+                                            {item.book_id}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            algin="left"
+                                            style={{ width: "35%" }}
+                                        >
+                                            {item.name_book}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{ width: "10%" }}
+                                        >
+                                            {item.type_id}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{ width: "20%" }}
+                                        >
+                                            {item.author}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{ width: "20%" }}
+                                        >
+                                            {item.publication_date}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{ width: "24%" }}
+                                        >
+                                            <Controls.ActionButton
+                                                color="primary"
+                                                onClick={() => {
+                                                    openInPopup(item);
+                                                }}
+                                            >
+                                                <EditOutlinedIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                            <Controls.ActionButton
+                                                color="secondary"
+                                                onClick={() => {
+                                                    openDeleteDialog(
+                                                        item.book_id
+                                                    );
+                                                }}
+                                            >
+                                                <CloseIcon fontSize="small" />
+                                            </Controls.ActionButton>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            )}
+                        </TableBody>
+                    </TblContainer>
+                    <TblPagination />
+                </div>
+            </div>
             <Controls.Dialogg
                 title="Xóa Sách"
                 content="Bạn có thực sự muốn xóa thông tin cuốn sách này?"

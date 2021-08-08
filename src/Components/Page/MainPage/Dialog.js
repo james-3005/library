@@ -119,11 +119,13 @@ function Popup(props) {
                         onChange={(e) => setCountry(e.target.value)}
                     >
                         <MenuItem value="All">All</MenuItem>
-                        {listCountry.map((item, index) => (
-                            <MenuItem value={item.country_id} key={index}>
-                                {item.country_name}
-                            </MenuItem>
-                        ))}
+                        {listCountry
+                            ? listCountry.map((item, index) => (
+                                  <MenuItem value={item.country_id} key={index}>
+                                      {item.country_name}
+                                  </MenuItem>
+                              ))
+                            : []}
                     </Select>
                 </FormControl>
 
