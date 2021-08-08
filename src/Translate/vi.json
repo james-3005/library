@@ -69,5 +69,10 @@
     "pass": "Mật khẩu",
     "newpass": "Mật khẩu mới",
     "confirmpass": "Xác nhận mật khẩu",
-    "translator": "Dịch"
+    "translator": "Dịch",
+    "filter": "Lọc",
+    "all": "Tất cả",
+    "country": "Quốc gia",
+    "publishyear": "Năm xuất bản",
+    "trans": "Dịch giả"
 }

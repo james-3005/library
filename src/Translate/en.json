@@ -69,5 +69,10 @@
     "pass": "Password",
     "newpass": "New password",
     "confirmpass": "Confirm password",
-    "translator": "Translator"
+    "translator": "Translator",
+    "fliter": "Filter",
+    "all": "All",
+    "country": "Country",
+    "publishyear": "Publish year",
+    "trans": "Translator"
 }

@@ -17,7 +17,6 @@ function SearchScreen() {
     const { turnOnLoader, turnOffLoader } = useLoader();
     const { allBook, allBookCurrent, setAllBookCurrent } = useFilterBook();
     const searchRef = useRef();
-    // const [array, setArray] = useState(allBook);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -25,20 +24,17 @@ function SearchScreen() {
         setOpen(false);
     };
 
-    // useEffect(() => {
-    //     setArray(allBook);
-    // }, [allBook]);
     const Filter = () => {
         turnOnLoader();
-        let exptype = 1;
+        let exptype = type1;
         if (type3 !== "All") exptype = type3;
         else if (type2 !== "All") exptype = type2;
-        console.log(exptype);
+        if (exptype == "All") exptype = 1;
         axios
             .get(
                 `http://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
                     exptype - 1
-                }&country_name=${country === "All" ? "" : country}`
+                }&country_id=${country === "All" ? "" : country}`
             )
             .then((res) => {
                 setAllBookCurrent(res.data.books);
@@ -70,7 +66,7 @@ function SearchScreen() {
                         <Grid item>
                             <TextField
                                 id="input-with-icon-grid"
-                                label="Search"
+                                label={t("search")}
                                 value={valueSearch}
                                 onChange={(e) => setValueSearch(e.target.value)}
                                 style={{ width: 300 }}

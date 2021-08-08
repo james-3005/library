@@ -13,11 +13,14 @@ import {
     Button,
 } from "@material-ui/core";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 function Popup(props) {
     const useStyles = makeStyles((theme) => ({
         formControl: {
             margin: theme.spacing(1),
-            minWidth: 120,
+            // minWidth: 120,
+            marginLeft: 0,
+            width: "91%",
         },
         selectEmpty: {
             marginTop: theme.spacing(2),
@@ -44,6 +47,7 @@ function Popup(props) {
         translator,
         setTranslator,
     } = props;
+    const { t } = useTranslation();
     const [listType1, setListType1] = useState([]);
     const [listType2, setListType2] = useState([]);
     const [listType3, setListType3] = useState([]);
@@ -62,7 +66,7 @@ function Popup(props) {
             setListType1(res.data);
         });
         axios.get("http://library-mini.xyz/api/v1/country").then((res) => {
-            setListCountry(res.data.countries);
+            setListCountry(res.data);
         });
     }, []);
     useEffect(() => {
@@ -85,17 +89,17 @@ function Popup(props) {
     }, [type2]);
     return (
         <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>Filter</DialogTitle>
+            <DialogTitle>{t("filter")}</DialogTitle>
             <div className={styles.component}>
                 <TextField
-                    label="Author"
+                    label={t("author")}
                     className={styles.input}
                     variant="outlined"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
                 />
                 <TextField
-                    label="Publish year"
+                    label={t("publishyear")}
                     type="number"
                     className={styles.input}
                     variant="outlined"
@@ -103,7 +107,7 @@ function Popup(props) {
                     onChange={(e) => setYear(e.target.value)}
                 />
                 <TextField
-                    label="Translator"
+                    label={t("trans")}
                     className={styles.input}
                     variant="outlined"
                     value={translator}
@@ -112,13 +116,14 @@ function Popup(props) {
 
                 <FormControl variant="outlined" className={classes.formControl}>
                     <InputLabel style={{ backgroundColor: "white" }}>
-                        Country
+                        {t("country")}
                     </InputLabel>
                     <Select
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
+                        style={{ width: "110%" }}
                     >
-                        <MenuItem value="All">All</MenuItem>
+                        <MenuItem value="All">{t("all")}</MenuItem>
                         {listCountry
                             ? listCountry.map((item, index) => (
                                   <MenuItem value={item.country_id} key={index}>
@@ -129,7 +134,7 @@ function Popup(props) {
                     </Select>
                 </FormControl>
 
-                <InputLabel>Type DDC</InputLabel>
+                <InputLabel>DDC</InputLabel>
                 <div className={styles.select}>
                     <FormControl
                         variant="outlined"
@@ -141,8 +146,9 @@ function Popup(props) {
                         <Select
                             value={type1}
                             onChange={(e) => setType1(e.target.value)}
+                            style={{ width: "110%" }}
                         >
-                            {/* <MenuItem value="All">All</MenuItem> */}
+                            <MenuItem value={"All"}>{t("all")}</MenuItem>
                             {listType1
                                 ? listType1.map((item, index) => (
                                       <MenuItem
@@ -155,61 +161,75 @@ function Popup(props) {
                                 : []}
                         </Select>
                     </FormControl>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <InputLabel style={{ backgroundColor: "white" }}>
-                            2
-                        </InputLabel>
-                        <Select
-                            value={type2}
-                            onChange={(e) => setType2(e.target.value)}
+                    {listType2.length != 0 ? (
+                        <FormControl
+                            variant="outlined"
+                            className={classes.formControl}
                         >
-                            <MenuItem value="All">All</MenuItem>
-                            {listType2
-                                ? listType2.map((item, index) => (
-                                      <MenuItem
-                                          value={item.type_id}
-                                          key={index}
-                                      >
-                                          {item.name}
-                                      </MenuItem>
-                                  ))
-                                : []}
-                        </Select>
-                    </FormControl>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <InputLabel style={{ backgroundColor: "white" }}>
-                            3
-                        </InputLabel>
-                        <Select
-                            value={type3}
-                            onChange={(e) => setType3(e.target.value)}
-                        >
-                            <MenuItem value="All">All</MenuItem>
-                            {listType3
-                                ? listType3.map((item, index) => (
-                                      <MenuItem
-                                          value={item.type_id}
-                                          key={index}
-                                      >
-                                          {item.name}
-                                      </MenuItem>
-                                  ))
-                                : []}
-                        </Select>
-                    </FormControl>
+                            <InputLabel style={{ backgroundColor: "white" }}>
+                                2
+                            </InputLabel>
+                            <Select
+                                value={type2}
+                                onChange={(e) => setType2(e.target.value)}
+                                style={{ width: "110%" }}
+                            >
+                                <MenuItem value="All">{t("all")}</MenuItem>
+                                {listType2
+                                    ? listType2.map((item, index) => (
+                                          <MenuItem
+                                              value={item.type_id}
+                                              key={index}
+                                          >
+                                              {item.name}
+                                          </MenuItem>
+                                      ))
+                                    : []}
+                            </Select>
+                        </FormControl>
+                    ) : (
+                        <div />
+                    )}
+                    <>
+                        {listType3.length != 0 ? (
+                            <FormControl
+                                variant="outlined"
+                                className={classes.formControl}
+                            >
+                                <InputLabel
+                                    style={{ backgroundColor: "white" }}
+                                >
+                                    3
+                                </InputLabel>
+                                <Select
+                                    value={type3}
+                                    onChange={(e) => setType3(e.target.value)}
+                                    style={{ width: "110%" }}
+                                >
+                                    <MenuItem value="All">{t("all")}</MenuItem>
+                                    {listType3
+                                        ? listType3.map((item, index) => (
+                                              <MenuItem
+                                                  value={item.type_id}
+                                                  key={index}
+                                              >
+                                                  {item.name}
+                                              </MenuItem>
+                                          ))
+                                        : []}
+                                </Select>
+                            </FormControl>
+                        ) : (
+                            <div />
+                        )}
+                    </>
                 </div>
                 <Button
                     color="primary"
                     variant="contained"
                     onClick={handleFilter}
                 >
-                    Filter
+                    {t("filter")}
                 </Button>
             </div>
         </Dialog>
