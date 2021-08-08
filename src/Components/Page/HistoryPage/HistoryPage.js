@@ -209,8 +209,7 @@ export default function HistoryPage() {
 
     const confirm = (id) => {
         turnOnLoader();
-        axios
-            .get(
+        axios.get(
                 `https://library-mini.xyz/api/v1/manage/borrowing-book/return-book/${id}`,
                 {
                     headers: {
@@ -220,7 +219,7 @@ export default function HistoryPage() {
             )
             .then(() => getBorrows())
             .catch((err) => console.log(err))
-            .finaly(() => turnOffLoader());
+            .finally(() => turnOffLoader());
     };
 
     return (
@@ -294,9 +293,6 @@ export default function HistoryPage() {
                                     <TableCell
                                         algin="left"
                                         size="small"
-                                        style={{
-                                            width: "1%",
-                                        }}
                                     >
                                         {index}
                                     </TableCell>
@@ -304,7 +300,7 @@ export default function HistoryPage() {
                                         algin="left"
                                         size="small"
                                         style={{
-                                            width: "15%",
+                                            width: 200,
                                         }}
                                     >
                                         {item.user[0].name}
@@ -320,7 +316,7 @@ export default function HistoryPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "15%",
+                                            width: 150,
                                         }}
                                     >
                                         {moment(item.from_date).format(
@@ -330,7 +326,7 @@ export default function HistoryPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "15%",
+                                            width: 150,
                                         }}
                                     >
                                         {moment(item.to_date).format(
@@ -340,7 +336,7 @@ export default function HistoryPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "15%",
+                                            width: 150,
                                         }}
                                     >
                                         {moment(item.promissory_date).format(
@@ -350,7 +346,7 @@ export default function HistoryPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "1%",
+                                            width: 30,
                                         }}
                                     >
                                         {item.status_id}
@@ -358,7 +354,7 @@ export default function HistoryPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "1%",
+                                            width: 50,
                                         }}
                                     >
                                         {item.status_id == 1 ? (

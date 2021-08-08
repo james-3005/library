@@ -30,8 +30,6 @@ const useStyles = makeStyles((theme) => ({
     },
     containerUser: {
         flexDirection: "column",
-        // height: window.height,
-        // flex: 1,
         overflowY: "scroll",
         paddingTop: 50,
         position: "fixed",
@@ -192,7 +190,7 @@ export default function UserAdminPage() {
                                         algin="left"
                                         size="small"
                                         style={{
-                                            width: "1%",
+                                            width: 30,
                                         }}
                                     >
                                         {index}
@@ -201,7 +199,7 @@ export default function UserAdminPage() {
                                         algin="left"
                                         size="small"
                                         style={{
-                                            width: "1%",
+                                            width: 30,
                                         }}
                                     >
                                         {item.id}
@@ -209,7 +207,7 @@ export default function UserAdminPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "20%",
+                                            width: 200,
                                         }}
                                     >
                                         {item.name}
@@ -217,7 +215,7 @@ export default function UserAdminPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "30%",
+                                            width: 350,
                                         }}
                                     >
                                         {item.address}
@@ -225,7 +223,7 @@ export default function UserAdminPage() {
                                     <TableCell
                                         size="small"
                                         style={{
-                                            width: "20%",
+                                            width: 250,
                                         }}
                                     >
                                         {item.email}

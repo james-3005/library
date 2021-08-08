@@ -25,7 +25,7 @@ export default function useTable(records, headCells,filterFn) {
 
     const classes = useStyles();
 
-    const pages = [5, 10, 25]
+    const pages = [5, 10, 25,"all"]
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(pages[page])
     const [order, setOrder] = useState()
@@ -72,7 +72,13 @@ export default function useTable(records, headCells,filterFn) {
     }
 
     const handleChangeRowsPerPage = event => {
-        setRowsPerPage(parseInt(event.target.value, 10))
+        if (event.target.value == "all") {
+            setRowsPerPage(records.length)
+        } else {
+            setRowsPerPage(parseInt(event.target.value, 10))
+        }
+       
+        
         setPage(0);
     }
 
