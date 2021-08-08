@@ -1,0 +1,8 @@
+@import "../../init";
+.container {
+    width: "85%";
+    display: 'flex'; 
+    flex-direction: row;
+    margin-left: 100px;
+    position: "fixed";
+}

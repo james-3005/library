@@ -5,12 +5,6 @@ import { useForm, Form } from './components/useForm';
 //import * as employeeService from "../../services/employeeService";
 
 
-const genderItems = [
-    { id: 'male', title: 'Male' },
-    { id: 'female', title: 'Female' },
-    { id: 'other', title: 'Other' },
-]
-
 const options = ["Tiểu thuyết", "Truyện tranh", "Ngôn tình", "Kinh tế", "Khoa học"]
 
 const initialFValues = {
@@ -27,6 +21,7 @@ const initialFValues = {
 
 export default function BookForm(props) {
     const { addOrEdit, recordForEdit } = props
+    const [image, setImage] = useState(); 
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -55,6 +50,16 @@ export default function BookForm(props) {
         resetForm
     } = useForm(initialFValues, true, validate);
 
+    const getUrlImage = (file) => {
+        var reader = new FileReader();
+        var url = reader.readAsDataURL(file);
+
+        reader.onloadend = function (e) {
+            setImage(reader.result)
+           }
+        return reader;
+    }
+
     const handleSubmit = e => {
         e.preventDefault()
         if (validate()) {
@@ -75,15 +80,43 @@ export default function BookForm(props) {
                 <Grid item xs={6}  >
                     
                 <div style={{height: 220, width: 200, marginLeft: 80}} >
-                    <img style={{height: 210, width: 180}} src ={values.book_image} />
+                    <img style={{height: 210, width: 180}} src ={image} />
                 </div>
-                <Controls.Input
-                        name="book_image"
-                        label="Image Source"
-                        value={values.book_image}
-                        onChange={handleInputChange}
-                        //error={errors.fullName}
-                    />
+                <input 
+                    type="file" 
+                    onChange={(event) => {
+                        const file = event.target.files[0];
+                        setValues({
+                            ...values,
+                            book_image: file
+                        })
+                        var reader = new FileReader();
+                        var url = reader.readAsDataURL(file);
+
+                        reader.onloadend = function (e) {
+                            setImage(reader.result)
+                        }
+                        
+                        }} 
+                    id = "file" 
+                    style={{ display: 'none'}} 
+                />
+                <label for="file"
+                    style ={{
+                        display: 'flex',
+                        marginLeft: 90,
+                        width: 155,
+                        height: 40,
+                        backgroundColor: "#0a0a94",
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        color: 'white',
+                        fontSize: 15,
+                        fontWeight: 'bold',
+                        borderRadius: 5,
+                    }}>
+                    Upload a image
+                </label>
                     <Controls.Input
                         name="price"
                         label="Price"

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import BookForm from "./BookForm";
 //import PageHeader from "../../components/PageHeader";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 import {
     Paper,
     makeStyles,
@@ -12,6 +14,7 @@ import {
     InputAdornment,
     Box,
     TableHead,
+    TextField
 } from "@material-ui/core";
 import useTable from "./components/useTable";
 //import * as employeeService from "../../services/employeeService";
@@ -23,12 +26,26 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import ActionFindInPage from "material-ui/svg-icons/action/find-in-page";
 import moment from "moment";
+import styles from './BookAdminPage.module.scss';
 
 const useStyles = makeStyles((theme) => ({
-    tableBox: {},
+    tableBox: {
+        paddingLeft: 200
+    },
     searchInput: {
+        width: "100%",
+        borderColor: "#8DC6F2",
+        //backgroundColor: 'red',
+    },
+    searchInputByName: {
         width: "75%",
         borderColor: "#8DC6F2",
+        //backgroundColor: 'red',
+    },
+    yearPicker: {
+        width: "100%",
+        borderColor: "#8DC6F2",
+        //backgroundColor: 'red',
     },
     newButton: {
         position: "absolute",
@@ -63,10 +80,10 @@ export default function BookAdminPage() {
     async function getBooks() {
         try {
             const response = await axios.get(
-                "https://library-mini.xyz/api/v1/book"
+                "https://library-mini.xyz/api/v1/book?"
             );
-            console.log(response.data.data);
-            setRecords(response.data.data);
+            console.log(response.data.books);
+            setRecords(response.data.books);
         } catch (error) {
             console.error(error);
         }
@@ -120,10 +137,6 @@ export default function BookAdminPage() {
     };
 
     const addOrEdit = (book, resetForm) => {
-        // const checkBook = axios.get(`https://library-mini.xyz/api/v1/book/3`)
-        // .then((result) => console.log())
-        // .catch((err) => console.log(err))
-        // if(checkBook.data.data == [])
         if (book.book_id == 0) {
             console.log(book);
             axios
@@ -187,41 +200,54 @@ export default function BookAdminPage() {
         setOpenPopup(true);
     };
 
-    return (
-        <div style={{ width: "70%", flexDirection: "column", marginLeft: 200 }}>
-            <Box
-                display="flex"
-                flexDirection="column"
-                className={useStyles.tableBox}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        padding: 10,
-                    }}
-                >
-                    <Controls.FilterItem
-                        title={"Tổng số đơn"}
-                        amount={44}
-                        imgSource={"/image/svg/filterTSD.svg"}
-                    />
-                    <Controls.FilterItem
-                        title={"Đang mượn"}
-                        amount={44}
-                        imgSource={"/image/svg/filterDangMuon.svg"}
-                    />
-                    <Controls.FilterItem
-                        title={"Đã trả"}
-                        amount={44}
-                        imgSource={"/image/svg/filterDaTra.svg"}
-                    />
-                </div>
+    const options = ["Tiểu thuyết", "Truyện tranh", "Ngôn tình", "Kinh tế", "Khoa học"]
 
-                <Toolbar>
+    return (
+        <div style={{ 
+            width: "85%",
+            display: 'flex' , 
+            flexDirection: "row", 
+            marginLeft: 100,
+            position: "fixed"
+            }}>
+            <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        width: "23%",
+                        padding: 15,
+                        justifyContent: 'space-between',
+                        height: 500,
+                        // position: 'absolute',
+                        // top: 80
+
+                    }} >
+                    <Controls.Select
+                        label="Category"
+                        name="type_id"
+                        size="small"
+                        //value={values.type_id}
+                        //onChange={handleInputChange}
+                        //error={errors.email}
+                        options= {options}
+                    />
+
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker disableToolbar variant="inline" inputVariant="outlined"
+                        label="năm xuất bản"
+                        views={['year']}
+                        //format="yyyy/mm/dd"
+                        name="year"
+                        //value={value}
+                        //onChange={date =>onChange(convertToDefEventPara(name,date))}
+                        size="small"
+                        className={classes.yearPicker}
+
+                    />
+                    </MuiPickersUtilsProvider>
+
                     <Controls.Input
-                        label="Search Books"
+                        label="Theo tên sách"
+                        size="small"
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (
@@ -232,6 +258,87 @@ export default function BookAdminPage() {
                         }}
                         onChange={handleSearch}
                     />
+
+                    <Controls.Input
+                        label="Theo tên sách"
+                        size="small"
+                        className={classes.searchInput}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search />
+                                </InputAdornment>
+                            ),
+                        }}
+                        onChange={handleSearch}
+                    />
+
+                    <Controls.Input
+                        label="Theo tên sách"
+                        size="small"
+                        className={classes.searchInput}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search />
+                                </InputAdornment>
+                            ),
+                        }}
+                        onChange={handleSearch}
+                    />
+                    <Controls.Input
+                        label="Theo tên sách"
+                        size="small"
+                        className={classes.searchInput}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search />
+                                </InputAdornment>
+                            ),
+                        }}
+                        onChange={handleSearch}
+                    />
+
+                    <Controls.Input
+                        label="Theo tên tác giả"
+                        size="small"
+                        className={classes.searchInput}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search />
+                                </InputAdornment>
+                            ),
+                        }}
+                        onChange={handleSearch}
+                    />
+                    
+                    </div>
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    paddingTop: 10
+                }}
+            >
+                
+
+                <Toolbar>
+                    
+                    <Controls.Input
+                        label="Theo tên sách"
+                        className={classes.searchInputByName}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Search />
+                                </InputAdornment>
+                            ),
+                        }}
+                        onChange={handleSearch}
+                    />
+
                     <Controls.Button
                         text="Add New"
                         variant="outlined"
@@ -243,9 +350,15 @@ export default function BookAdminPage() {
                         }}
                     />
                 </Toolbar>
+                <div style={{
+                    height: 450,
+                    overflow: 'scroll'
+                }} >
+
+                
                 <TblContainer>
                     <TblHead />
-                    <TableBody style={{ width: "100%" }}>
+                    <TableBody style={{ width: "100%" , height: "100%"}}>
                         {recordsAfterPagingAndSorting().map((item, index) => (
                             <TableRow key={item.id} style={{ height: "45%" }}>
                                 <TableCell
@@ -317,7 +430,8 @@ export default function BookAdminPage() {
                     </TableBody>
                 </TblContainer>
                 <TblPagination />
-            </Box>
+                </div>
+            </div>
             <Controls.Dialogg
                 title="Xóa Sách"
                 content="Bạn có thực sự muốn xóa thông tin cuốn sách này?"
