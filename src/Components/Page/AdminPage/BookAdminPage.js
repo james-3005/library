@@ -18,6 +18,7 @@ import {
     Box,
     TableHead,
     TextField,
+    Button
 } from "@material-ui/core";
 import useTable from "./components/useTable";
 import Controls from "./components/controls/Controls";
@@ -32,6 +33,9 @@ import styles from "./BookAdminPage.module.scss";
 import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
 import axios from "axios";
+import Dialog from '../MainPage/Dialog';
+
+
 const useStyles = makeStyles((theme) => ({
     tableBox: {
         paddingLeft: 200,
@@ -42,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
         //backgroundColor: 'red',
     },
     searchInputByName: {
-        width: "75%",
+        width: "65%",
         borderColor: "#8DC6F2",
         //backgroundColor: 'red',
     },
@@ -62,8 +66,9 @@ const headCells = [
     { id: "book_id", label: "ID" },
     { id: "name_book", label: "Book Name" },
     { id: "type_id", label: "Category" },
+    { id: "country_id", label: "Country" },
     { id: "author", label: "Author", disableSorting: true },
-    { id: "date", label: "publishing date" },
+    { id: "pulication_date", label: "Pulication Date" },
     { id: "action", label: "actions", disableSorting: true },
 ];
 
@@ -80,7 +85,18 @@ export default function BookAdminPage() {
     const [openPopup, setOpenPopup] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [deletedId, setDeletedId] = useState(0);
+    const [open, setOpen] = React.useState(false);
+
     const { turnOnLoader, turnOffLoader } = useLoader();
+
+    const [author, setAuthor] = React.useState("");
+    const [year, setYear] = React.useState("");
+    const [country, setCountry] = React.useState("");
+    const [translator, setTranslator] = React.useState("");
+    const [type1, setType1] = React.useState("All");
+    const [type2, setType2] = React.useState("All");
+    const [type3, setType3] = React.useState("All");
+
     async function getBooks() {
         try {
             turnOnLoader();
@@ -222,112 +238,30 @@ export default function BookAdminPage() {
             .finally(() => turnOffLoader());
     }, []);
 
-    const options = [
-        "Tiểu thuyết",
-        "Truyện tranh",
-        "Ngôn tình",
-        "Kinh tế",
-        "Khoa học",
-    ];
+    const handleClose = (value) => {
+        setOpen(false);
+    };
+
+    const Filter = () => {
+        turnOnLoader();
+        let exptype = 1;
+        if (type3 !== "All") exptype = type3;
+        else if (type2 !== "All") exptype = type2;
+        console.log(exptype);
+        axios
+            .get(
+                `http://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
+                    exptype - 1
+                }&country_name=${country === "All" ? "" : country}`
+            )
+            .then((res) => {
+                setRecords(res.data.books);
+            })
+            .finally(() => turnOffLoader());
+    };
 
     return (
         <div className={c(styles.mainContainer, styles.hideScroll)}>
-            {/* <div className={c(styles.childcom, styles.hideScroll)}>
-                <Controls.Select
-                    label="Category"
-                    name="type_id"
-                    size="small"
-                    //value={values.type_id}
-                    //onChange={handleInputChange}
-                    //error={errors.email}
-                    options={options}
-                />
-
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        inputVariant="outlined"
-                        label="năm xuất bản"
-                        views={["year"]}
-                        //format="yyyy/mm/dd"
-                        name="year"
-                        //value={value}
-                        //onChange={date =>onChange(convertToDefEventPara(name,date))}
-                        size="small"
-                        className={classes.yearPicker}
-                    />
-                </MuiPickersUtilsProvider>
-
-                <Controls.Input
-                    label="Theo tên sách"
-                    size="small"
-                    className={classes.searchInput}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>
-                        ),
-                    }}
-                    onChange={handleSearch}
-                />
-
-                <Controls.Input
-                    label="Theo tên sách"
-                    size="small"
-                    className={classes.searchInput}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>
-                        ),
-                    }}
-                    onChange={handleSearch}
-                />
-
-                <Controls.Input
-                    label="Theo tên sách"
-                    size="small"
-                    className={classes.searchInput}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>
-                        ),
-                    }}
-                    onChange={handleSearch}
-                />
-                <Controls.Input
-                    label="Theo tên sách"
-                    size="small"
-                    className={classes.searchInput}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>
-                        ),
-                    }}
-                    onChange={handleSearch}
-                />
-
-                <Controls.Input
-                    label="Theo tên tác giả"
-                    size="small"
-                    className={classes.searchInput}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <Search />
-                            </InputAdornment>
-                        ),
-                    }}
-                    onChange={handleSearch}
-                />
-            </div> */}
             <div
                 style={{
                     display: "flex",
@@ -349,6 +283,23 @@ export default function BookAdminPage() {
                         }}
                         onChange={handleSearch}
                     />
+
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        style={{ height: 30, marginLeft: 25 }}
+                        onClick={() => {setOpen(true)}}
+                    >
+                        <img src="/image/svg/filter.svg" alt="" />
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        style={{ height: 30, marginLeft: 25 }}
+                        onClick={() => {getBooks()}}
+                    >
+                        <img src="/image/svg/filterclear.svg" alt="" />
+                    </Button>
 
                     <Controls.Button
                         text="Add New"
@@ -380,49 +331,53 @@ export default function BookAdminPage() {
                                         <TableCell
                                             algin="left"
                                             size="small"
-                                            style={{
-                                                width: "1%",
-                                            }}
+                                            
                                         >
                                             {index}
                                         </TableCell>
                                         <TableCell
                                             algin="left"
                                             size="small"
-                                            style={{
-                                                width: "1%",
-                                            }}
+                                            
                                         >
                                             {item.book_id}
                                         </TableCell>
                                         <TableCell
                                             size="small"
                                             algin="left"
-                                            style={{ width: "35%" }}
+                                            style={{ width: 300 }}
                                         >
                                             {item.name_book}
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            style={{ width: "10%" }}
+                                            style={{ width: 20 }}
                                         >
                                             {item.type_id}
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            style={{ width: "20%" }}
+                                            style={{ width: 20 }}
+                                        >
+                                            {item.country_id}
+                                        </TableCell>
+                                        
+                                        <TableCell
+                                            size="small"
+                                            algin="left"
+                                            style={{ width: 130 }}
                                         >
                                             {item.author}
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            style={{ width: "20%" }}
+                                            //style={{ width: "20%" }}
                                         >
                                             {item.publication_date}
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            style={{ width: "24%" }}
+                                            //style={{ width: "24%" }}
                                         >
                                             <Controls.ActionButton
                                                 color="primary"
@@ -464,8 +419,30 @@ export default function BookAdminPage() {
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
-                <BookForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
+                <BookForm 
+                recordForEdit={recordForEdit}
+                addOrEdit={addOrEdit} 
+                 />
             </Popup>
+            <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    author={author}
+                    setAuthor={setAuthor}
+                    year={year}
+                    setYear={setYear}
+                    type1={type1}
+                    setType1={setType1}
+                    type2={type2}
+                    setType2={setType2}
+                    type3={type3}
+                    setType3={setType3}
+                    translator={translator}
+                    setTranslator={setTranslator}
+                    country={country}
+                    setCountry={setCountry}
+                    Filter={Filter}
+                />
         </div>
     );
 }
