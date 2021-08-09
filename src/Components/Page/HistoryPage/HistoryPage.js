@@ -24,6 +24,7 @@ import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
 import { api } from "../../../env";
 import { useTranslation } from "react-i18next";
+import { useNoti } from "../../../Context/NotificationProvider";
 
 const useStyles = makeStyles((theme) => ({
     searchInput: {
@@ -84,6 +85,7 @@ export default function HistoryPage() {
     const [active, setActive] = useState(0);
     const axios = require("axios");
     const token = window.localStorage.getItem("user");
+    const { addNoti } = useNoti();
     async function getBorrows() {
         turnOnLoader();
         try {
@@ -125,10 +127,12 @@ export default function HistoryPage() {
                 }
             )
             .then((res) => {
-                console.log(res.data);
+                addNoti("Borrowing success", "success");
                 getBorrows();
             })
-            .catch((err) => console.log(err.response.data))
+            .catch((err) => {
+                addNoti("Borrowing fail, book is being borrowed", "fail");
+            })
             .finally(() => turnOffLoader());
 
         resetForm();
@@ -148,7 +152,11 @@ export default function HistoryPage() {
                 if (target.value == "") return items;
                 else
                     return items.filter((x) =>
-                    x.book[0]? x.book[0].name_book.toLowerCase().includes(target.value): false
+                        x.book[0]
+                            ? x.book[0].name_book
+                                  .toLowerCase()
+                                  .includes(target.value)
+                            : false
                     );
             },
         });
@@ -293,11 +301,14 @@ export default function HistoryPage() {
             }} > */}
                     <tableUser.TblContainer>
                         <tableUser.TblHead />
-                        <TableBody>
+                        <TableBody style={{ width: "100%" }}>
                             {tableUser
                                 .recordsAfterPagingAndSorting()
                                 .map((item, index) => (
-                                    <TableRow key={item.book_id}>
+                                    <TableRow
+                                        key={item.book_id}
+                                        style={{ width: "100%" }}
+                                    >
                                         <TableCell algin="left" size="small">
                                             {index}
                                         </TableCell>
@@ -325,7 +336,7 @@ export default function HistoryPage() {
                                         <TableCell
                                             size="small"
                                             style={{
-                                                width: 150,
+                                                width: 250,
                                             }}
                                         >
                                             {moment(item.from_date).format(
@@ -335,7 +346,7 @@ export default function HistoryPage() {
                                         <TableCell
                                             size="small"
                                             style={{
-                                                width: 150,
+                                                width: 250,
                                             }}
                                         >
                                             {moment(item.to_date).format(
@@ -345,7 +356,7 @@ export default function HistoryPage() {
                                         <TableCell
                                             size="small"
                                             style={{
-                                                width: 150,
+                                                width: 250,
                                             }}
                                         >
                                             {moment(

@@ -10,7 +10,6 @@ import { api } from "../../../../env";
 const Fav = () => {
     const [array, setArray] = useState([]);
     useEffect(() => {
-        console.log("adsad");
         axios
             .get(`${api}book/top-borrowing?limit=7`)
             .then((res) => {
