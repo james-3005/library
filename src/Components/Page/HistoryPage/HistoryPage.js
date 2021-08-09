@@ -22,12 +22,9 @@ import moment from "moment";
 import styles from "../AdminPage/BookAdminPage.module.scss";
 import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
-<<<<<<< HEAD
 import { api } from "../../../env";
-=======
 import { useTranslation } from "react-i18next";
 
->>>>>>> Toan
 const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: "80%",
@@ -56,8 +53,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
 const brr = [];
 
 export default function HistoryPage() {
@@ -72,7 +67,7 @@ export default function HistoryPage() {
         { id: "status_id", label: t("Status"), disableSorting: true },
         { id: "action", label: t("Action"), disableSorting: true },
     ];
-    
+
     const { turnOnLoader, turnOffLoader } = useLoader();
     const classes = useStyles();
     const [filterFn, setFilterFn] = useState({
@@ -383,14 +378,16 @@ export default function HistoryPage() {
             </div>
             <Controls.Dialogg
                 title={t("Confirm returned")}
-                content={t("Do you want to confirm that this book is returned?")}
+                content={t(
+                    "Do you want to confirm that this book is returned?"
+                )}
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}
                 deletedId={returnId}
                 actionCf={confirm}
             />
             <Popup
-                title= {t("Borrow Form")}
+                title={t("Borrow Form")}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
                 size="small"

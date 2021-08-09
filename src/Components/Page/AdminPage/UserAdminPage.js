@@ -22,12 +22,9 @@ import { useHistory } from "react-router-dom";
 import { useLoader } from "../../../Context/LoaderProvider";
 import styles from "./styles.module.scss";
 import c from "classnames";
-<<<<<<< HEAD
 import { api } from "../../../env";
-=======
 import { useTranslation } from "react-i18next";
 
->>>>>>> Toan
 const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: "80%",
@@ -53,10 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
 export default function UserAdminPage() {
-
     const { t } = useTranslation();
 
     const userHeadCells = [
