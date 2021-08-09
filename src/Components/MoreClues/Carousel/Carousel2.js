@@ -12,9 +12,9 @@ function Carousel({data}) {
     }
     return (
         <div className={styles.component}>
-            <img src="/image/svg/nextCarousel.svg" alt="" 
+            <img src="/Image/svg/nextCarousel.svg" alt="" 
             className={styles.next} onClick={() => handleScroll(300)}/>
-            <img src="/image/svg/backCarousel.svg" alt="" 
+            <img src="/Image/svg/backCarousel.svg" alt="" 
             className={styles.back} onClick={() => handleScroll(-300)}/>
          
             <div className={styles.carousel} ref={carouselRef}>

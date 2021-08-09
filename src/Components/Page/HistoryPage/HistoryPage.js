@@ -31,21 +31,23 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 15,
     },
     containerUser: {
+        display: 'flex',
         //alignItems: 'center',
         flexDirection: "column",
         height: window.height,
         flex: 1,
         overflowY: "scroll",
-        paddingTop: 50,
+        //paddingTop: 40,
         position: "fixed",
         zIndex: 5,
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        marginTop: 40,
-        width: "75%",
-        paddingLeft: 200,
+        marginTop: 80,
+        width: "100%",
+       //backgroundColor: 'green',
+        alignItems: 'center'
     },
     newButton: {
         position: "absolute",
@@ -224,6 +226,8 @@ export default function HistoryPage() {
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.hideScroll)}>
+                <div className={styles.font} style={{width: "75%"}} >
+                <h2>{t("Manage borrowing book")}</h2>
                 <div
                     style={{
                         display: "flex",
@@ -375,6 +379,7 @@ export default function HistoryPage() {
 
                 <tableUser.TblPagination />
                 {/* </div> */}
+            </div>
             </div>
             <Controls.Dialogg
                 title={t("Confirm returned")}

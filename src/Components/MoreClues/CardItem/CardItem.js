@@ -36,7 +36,7 @@ function ShowCard({ data }) {
     return (
         <div className={styles.slidebox}>
             <img
-                src={book_image ? book_image : "image/svg/book.svg"}
+                src={book_image ? book_image : "/Image/svg/book.svg"}
                 alt=""
                 className={styles.imagecard}
             />
@@ -45,8 +45,8 @@ function ShowCard({ data }) {
             <img
                 src={
                     available
-                        ? "image/svg/available.svg"
-                        : "image/svg/notavailable.svg"
+                        ? "/Image/svg/available.svg"
+                        : "/Image/svg/notavailable.svg"
                 }
                 alt=""
                 className={styles.available}

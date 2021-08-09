@@ -19,9 +19,9 @@ function Notification({text}) {
                 animate={{y: 0}}
                 exit={{y: -200}}
                 transition={{duration: 1}}>
-                <img src="/image/svg/noti/fail.svg" alt="" className={styles.icon}/>
-                <img src="/image/svg/noti/fail2.svg" alt="" className={styles.icon2}/>
-                <img src="/image/svg/x_white.svg" alt="" 
+                <img src="/Image/svg/noti/fail.svg" alt="" className={styles.icon}/>
+                <img src="/Image/svg/noti/fail2.svg" alt="" className={styles.icon2}/>
+                <img src="/Image/svg/x_white.svg" alt="" 
                     className={styles.turnOff}
                     onClick={() => setShow(false)}
                     />

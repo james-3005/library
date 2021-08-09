@@ -14,7 +14,7 @@ function FilterBar({activeSearch, setActiveSearch, activeFilter, setActiveFilter
     return (
         <div className={styles.searchComponent}>
                 <button className={styles.btn} onClick={handleToggle}>
-                    <img src={!activeFilter?"image/svg/filter.svg":"image/svg/filterclear.svg"}
+                    <img src={!activeFilter?"/Image/svg/filter.svg":"/Image/svg/filterclear.svg"}
                         alt="" 
                         className={styles.icon}/>
                 </button>

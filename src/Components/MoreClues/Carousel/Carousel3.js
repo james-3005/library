@@ -13,13 +13,13 @@ function Carousel({ data }) {
     return (
         <div className={styles.component}>
             <img
-                src="/image/svg/nextCarousel.svg"
+                src="/Image/svg/nextCarousel.svg"
                 alt=""
                 className={styles.next}
                 onClick={() => handleScroll(300)}
             />
             <img
-                src="/image/svg/backCarousel.svg"
+                src="/Image/svg/backCarousel.svg"
                 alt=""
                 className={styles.back}
                 onClick={() => handleScroll(-300)}

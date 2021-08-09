@@ -18,11 +18,18 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+
+.font{
+    @include font-bar;
+}
 .mainContainer {
     width: 1300px;
     display: flex;
-    margin-left: 100px;
+    align-items: center;
     position: fixed;
+    //background-color: aqua;
+    justify-content: center;
+    @include font-bar;
 }
 .childcom {
     display: flex;

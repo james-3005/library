@@ -19,13 +19,13 @@ function Carousel({ data }) {
             animate={{ opacity: 1, y: 0 }}
         >
             <img
-                src="/image/svg/nextCarousel.svg"
+                src="/Image/svg/nextCarousel.svg"
                 alt=""
                 className={styles.next}
                 onClick={() => handleScroll(300)}
             />
             <img
-                src="/image/svg/backCarousel.svg"
+                src="/Image/svg/backCarousel.svg"
                 alt=""
                 className={styles.back}
                 onClick={() => handleScroll(-300)}

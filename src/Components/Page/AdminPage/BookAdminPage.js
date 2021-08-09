@@ -39,7 +39,7 @@ import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     tableBox: {
-        paddingLeft: 200,
+        //paddingLeft: 200,
     },
     searchInput: {
         width: "100%",
@@ -157,32 +157,35 @@ export default function BookAdminPage() {
     };
     const history = useHistory();
     const addOrEdit = (book, resetForm) => {
+        console.log(book);
+        var formdata = new FormData();
+        formdata.append("name_book", book.name_book);
+        formdata.append("type_id", book.type_id);
+        formdata.append("author", book.author);
+        formdata.append("translator", book.translator);
+        formdata.append("publisher", book.publisher);
+        formdata.append("publication_date", moment(book.publication_date).format(
+            "YYYY-MM-DD"
+        ),);
+        formdata.append("price", book.price);
+        formdata.append("isbn", "1234567891");
+        formdata.append("country_id", book.country_id);
+        formdata.append("review", book.review);
+        formdata.append("book_image", book.book_image, book.book_image.name);
+
+        var requestOptions = {
+            method: "POST",
+            body: formdata,
+            redirect: "follow",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
         if (book.book_id == 0) {
+
             turnOnLoader();
-            axios
-                .post(
-                    `${api}book`,
-                    {
-                        type_id: book.type_id,
-                        name_book: book.name_book,
-                        author: book.author,
-                        translator: book.translator,
-                        publisher: "none",
-                        publication_date: moment(book.publication_date).format(
-                            "YYYY-MM-DD"
-                        ),
-                        price: book.price,
-                        isbn: "234567892",
-                        review: book.review,
-                        book_image: book.book_image,
-                        country_id: book.country_id,
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
+            fetch(`${api}book`, requestOptions)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log(err.response.data))
                 .finally(() => turnOffLoader());
@@ -273,6 +276,7 @@ export default function BookAdminPage() {
                 }}
                 className={styles.hideScroll}
             >
+                <h2 style={{marginTop: 5, marginBottom: 15}}>{t("Manage book")}</h2>
                 <Toolbar>
                     <Controls.Input
                         label={t("Search for book name")}
@@ -319,6 +323,7 @@ export default function BookAdminPage() {
                         }}
                     />
                 </Toolbar>
+                
                 <div
                     style={{
                         height: 450,

@@ -36,6 +36,7 @@ const initialFValues = {
     price: "0",
     translator: "",
     review: "",
+    publisher: ""
 };
 
 export default function BookForm(props) {
@@ -69,7 +70,8 @@ export default function BookForm(props) {
             setListType1(res.data);
         });
         axios.get(`${api}country`).then((res) => {
-            setListCountry(res.data.countries);
+            console.log(res.data);
+            setListCountry(res.data);
         });
     }, []);
     useEffect(() => {
@@ -136,7 +138,8 @@ export default function BookForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (validate()) {
+        
+       
             var exptype = 1;
             if (type3 !== "All") exptype = type3;
             else if (type2 !== "All") exptype = type2;
@@ -147,7 +150,7 @@ export default function BookForm(props) {
             });
 
             addOrEdit(values, resetForm);
-        }
+        
     };
 
     useEffect(() => {

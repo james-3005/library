@@ -6,7 +6,7 @@ function CartCom() {
     return (
         <div className={styles.cart}>
             <div style={{cursor: 'pointer'}} onClick={() => history.push('/paymentPage')}>
-                <img src="image/svg/cart.svg" />
+                <img src="/Image/svg/cart.svg" />
             </div>
             <div class={styles.total}>
                 <p>$1.12</p>

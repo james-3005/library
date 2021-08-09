@@ -14,7 +14,7 @@ function InputFIlter({type, placeholder, active}) {
                    value={val}
                    onChange={(e) => setVal(e.target.value)}
             />
-            <img src="image/svg/x.svg" alt=""
+            <img src="/Image/svg/x.svg" alt=""
                 className={styles.icon}
                 onClick={() => setVal("")}
             />

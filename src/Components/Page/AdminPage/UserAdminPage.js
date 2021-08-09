@@ -31,18 +31,16 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 15,
     },
     containerUser: {
+        display: 'flex',
         flexDirection: "column",
         overflowY: "scroll",
-        paddingTop: 50,
+        paddingTop: 10,
+        marginTop: 100,
         position: "fixed",
         zIndex: 5,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        marginTop: 40,
-        width: "65%",
-        paddingLeft: 230,
+        width: "100%",
+        //backgroundColor: 'green',
+        alignItems: "center"
     },
     newButton: {
         position: "absolute",
@@ -155,6 +153,8 @@ export default function UserAdminPage() {
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.containerUser)}>
+                <div style={{width: "70%"}}>
+                <h2 style={{marginBottom: 15}} >{t("Manage Users")}</h2>
                 <Toolbar>
                     <Controls.Input
                         label={t("Search User")}
@@ -236,14 +236,15 @@ export default function UserAdminPage() {
 
                 <tableUser.TblPagination />
             </div>
-            <Popup
+            </div>
+            {/* <Popup
                 title={t("User Form")}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
                 size="small"
             >
                 <UserForm addOrEdit={addOrEdit} />
-            </Popup>
+            </Popup> */}
         </Background6>
     );
 }

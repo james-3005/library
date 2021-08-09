@@ -44,19 +44,17 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
     appMain: {
+        display: 'flex',
         alignItems: "center",
         flexDirection: "column",
         width: window.width,
         height: window.height,
         flex: 1,
         overflowY: "scroll",
-        paddingTop: 80,
-        position: "absolute",
+        paddingTop: 90,
         zIndex: 5,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
+        width: "100%",
+        //backgroundColor: 'green'
     },
 });
 

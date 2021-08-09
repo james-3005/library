@@ -34,7 +34,7 @@ function NavBar({ isAdmin, setIsAdmin }) {
                     onClick={() => history.push("/loginPage")}
                 >
                     <p>
-                        <img src="image/svg/login.svg" />
+                        <img src="/Image/svg/login.svg" />
                         {t("login")}
                     </p>
                 </div>
