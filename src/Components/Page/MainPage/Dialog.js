@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { api } from "../../../env";
 function Popup(props) {
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -61,31 +62,27 @@ function Popup(props) {
         onClose(selectedValue);
     };
     useEffect(() => {
-        axios.get("http://library-mini.xyz/api/v1/type?level=1").then((res) => {
+        axios.get(`${api}type?level=1`).then((res) => {
             console.log(res.data);
             setListType1(res.data);
         });
-        axios.get("http://library-mini.xyz/api/v1/country").then((res) => {
+        axios.get(`${api}country`).then((res) => {
             setListCountry(res.data);
         });
     }, []);
     useEffect(() => {
         setListType3([]);
         setType3("All");
-        axios
-            .get(`http://library-mini.xyz/api/v1/type?parent_id=${type1}`)
-            .then((res) => {
-                setListType2(res.data);
-                setType2("All");
-            });
+        axios.get(`${api}type?parent_id=${type1}`).then((res) => {
+            setListType2(res.data);
+            setType2("All");
+        });
     }, [type1]);
     useEffect(() => {
         setType3("All");
-        axios
-            .get(`http://library-mini.xyz/api/v1/type?parent_id=${type2}`)
-            .then((res) => {
-                setListType3(res.data);
-            });
+        axios.get(`${api}type?parent_id=${type2}`).then((res) => {
+            setListType3(res.data);
+        });
     }, [type2]);
     return (
         <Dialog onClose={handleClose} open={open}>

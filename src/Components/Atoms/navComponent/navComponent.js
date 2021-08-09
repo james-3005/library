@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./navComponent.module.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { api } from "../../../env";
 function NavComponent({ isAdmin, setIsAdmin }) {
     useEffect(() => {
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"
@@ -16,7 +17,7 @@ function NavComponent({ isAdmin, setIsAdmin }) {
                 setIsAdmin(true);
             })
             .catch((err) => {
-                console.log(err.response.data);
+                console.log(err);
             });
     }, []);
     return (

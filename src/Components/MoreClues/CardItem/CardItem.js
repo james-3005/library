@@ -4,6 +4,7 @@ import styles from "./CardItem.module.scss";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { api } from "../../../env";
 function ShowCard({ data }) {
     const {
         image,
@@ -26,9 +27,7 @@ function ShowCard({ data }) {
     const [available, setAvailable] = useState(true);
     useState(() => {
         axios
-            .get(
-                `http://library-mini.xyz/api/v1/borrowing-book/check/${book_id}`
-            )
+            .get(`${api}borrowing-book/check/${book_id}`)
             .then((res) => {
                 setAvailable(!res.data.borrowing);
             })

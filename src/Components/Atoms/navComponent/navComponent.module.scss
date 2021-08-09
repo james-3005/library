@@ -1,52 +1,55 @@
 @import "../../init";
 
 .nav {
-  position: relative;
-  width: 250px;
-  display: flex;
-  list-style-type: none;
-  justify-content: space-between;
-  align-items: center;
-  li {
-    @include font-mont;
-    a {
-      margin: 5px;
-      position: relative;
-      @include font-mont;
-      text-decoration: none;
-      color: black;
-      cursor: pointer;
-    }
-    a:hover {
-      color: rgba(43, 39, 35, 0.59);
-    }
-    .dropDown_content {
-      position: absolute;
-      display: none;
-      z-index: 1;
-      min-width: 100px;
-      background-color: white;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      li {
+    position: relative;
+    width: 250px;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    li {
         @include font-mont;
-        list-style: none;
-        
-      }
+        height: 30px;
+        a {
+            margin: 5px;
+            position: relative;
+            @include font-mont;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+        a:hover {
+            // color: white;
+        }
+        .dropDown_content {
+            position: absolute;
+            display: none;
+            z-index: 1;
+            min-width: 100px;
+            background-color: white;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            li {
+                @include font-mont;
+                list-style: none;
+            }
+        }
     }
-  }
 
-  .dropDown:hover {
-    .dropDown_content {
-      display: block;
-      li:hover {
-        background-color: map-get($colors, "white" )
-      }
+    .dropDown:hover {
+        .dropDown_content {
+            display: block;
+            li:hover {
+                Link {
+                    color: white;
+                }
+                background-color: map-get($colors, "white");
+            }
+        }
     }
-  }
 }
 .link {
-  width: 100%;
-  // @include b;
-  height: 100%;
-  display: block;
+    width: 100%;
+    // @include b;
+    height: 100%;
+    display: block;
 }

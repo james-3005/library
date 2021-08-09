@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
 import { useLoader } from "./LoaderProvider";
-
+import { api } from "../env";
 const FilterBookContext = React.createContext();
 
 export function useFilterBook() {
@@ -17,20 +17,21 @@ export function FilterBookProvider({ children }) {
     useEffect(() => {
         turnOnLoader();
         axios
-            .get("http://library-mini.xyz/api/v1/book/get-latest-books?limit=5")
+            .get(`${api}book/get-latest-books?limit=6`)
             .then((res) => {
                 // console.log(res.data);
                 setNewBook(res.data.books);
             })
             .catch((err) => console.log(err.response.data));
         axios
-            .get("http://library-mini.xyz/api/v1/book/top-borrowing")
+            .get(`${api}book/top-borrowing?limit=6`)
             .then((res) => {
-                setFavBook(res.data.books);
+                let books = res.data.books.map((item) => item.book);
+                setFavBook(books);
             })
             .catch((err) => console.log(err.response.data));
         axios
-            .get("http://library-mini.xyz/api/v1/book")
+            .get(`${api}book`)
             .then((res) => {
                 console.log(res.data.books);
                 setAllBook(res.data.books);

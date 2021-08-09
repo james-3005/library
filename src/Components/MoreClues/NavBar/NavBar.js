@@ -7,14 +7,17 @@ import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../Translate/i18n";
 import { useAuth } from "../../../Context/AuthProvider";
+import { useNoti } from "../../../Context/NotificationProvider";
 function NavBar({ isAdmin, setIsAdmin }) {
     const history = useHistory();
     const { t } = useTranslation();
     const { currentUser, setCurrentUser } = useAuth();
+    const { addNoti } = useNoti();
     const handleLogout = () => {
         setCurrentUser("");
         window.localStorage.setItem("user", "");
         history.push("/");
+        addNoti(t("logout"), "success");
         setIsAdmin(false);
     };
     return (

@@ -18,7 +18,7 @@ import {
     Box,
     TableHead,
     TextField,
-    Button
+    Button,
 } from "@material-ui/core";
 import useTable from "./components/useTable";
 import Controls from "./components/controls/Controls";
@@ -33,8 +33,8 @@ import styles from "./BookAdminPage.module.scss";
 import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
 import axios from "axios";
-import Dialog from '../MainPage/Dialog';
-
+import Dialog from "../MainPage/Dialog";
+import { api } from "../../../env";
 
 const useStyles = makeStyles((theme) => ({
     tableBox: {
@@ -100,9 +100,7 @@ export default function BookAdminPage() {
     async function getBooks() {
         try {
             turnOnLoader();
-            const response = await axios.get(
-                "https://library-mini.xyz/api/v1/book?"
-            );
+            const response = await axios.get(`${api}book?`);
             turnOffLoader();
             setRecords(response.data.books);
         } catch (error) {
@@ -141,7 +139,7 @@ export default function BookAdminPage() {
 
     const deleteBook = (id) => {
         axios
-            .delete(`https://library-mini.xyz/api/v1/book/${id}`, {
+            .delete(`${api}book/${id}`, {
                 data: {
                     book_id: id,
                 },
@@ -160,7 +158,7 @@ export default function BookAdminPage() {
             turnOnLoader();
             axios
                 .post(
-                    "https://library-mini.xyz/api/v1/book",
+                    `${api}book`,
                     {
                         type_id: "1",
                         name_book: book.name_book,
@@ -188,7 +186,7 @@ export default function BookAdminPage() {
             turnOnLoader();
             axios
                 .post(
-                    `https://library-mini.xyz/api/v1/book/${book.book_id}`,
+                    `${api}book/${book.book_id}`,
                     {
                         name_book: "dsa",
                         type_id: "1",
@@ -224,7 +222,7 @@ export default function BookAdminPage() {
     useEffect(() => {
         turnOnLoader();
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"
@@ -250,7 +248,7 @@ export default function BookAdminPage() {
         console.log(exptype);
         axios
             .get(
-                `http://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
+                `${api}book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
                     exptype - 1
                 }&country_name=${country === "All" ? "" : country}`
             )
@@ -288,7 +286,9 @@ export default function BookAdminPage() {
                         variant="outlined"
                         color="primary"
                         style={{ height: 30, marginLeft: 25 }}
-                        onClick={() => {setOpen(true)}}
+                        onClick={() => {
+                            setOpen(true);
+                        }}
                     >
                         <img src="/image/svg/filter.svg" alt="" />
                     </Button>
@@ -296,7 +296,9 @@ export default function BookAdminPage() {
                         variant="outlined"
                         color="primary"
                         style={{ height: 30, marginLeft: 25 }}
-                        onClick={() => {getBooks()}}
+                        onClick={() => {
+                            getBooks();
+                        }}
                     >
                         <img src="/image/svg/filterclear.svg" alt="" />
                     </Button>
@@ -328,18 +330,10 @@ export default function BookAdminPage() {
                                         key={item.id}
                                         style={{ height: "45%" }}
                                     >
-                                        <TableCell
-                                            algin="left"
-                                            size="small"
-                                            
-                                        >
+                                        <TableCell algin="left" size="small">
                                             {index}
                                         </TableCell>
-                                        <TableCell
-                                            algin="left"
-                                            size="small"
-                                            
-                                        >
+                                        <TableCell algin="left" size="small">
                                             {item.book_id}
                                         </TableCell>
                                         <TableCell
@@ -361,7 +355,7 @@ export default function BookAdminPage() {
                                         >
                                             {item.country_id}
                                         </TableCell>
-                                        
+
                                         <TableCell
                                             size="small"
                                             algin="left"
@@ -419,30 +413,27 @@ export default function BookAdminPage() {
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
-                <BookForm 
-                recordForEdit={recordForEdit}
-                addOrEdit={addOrEdit} 
-                 />
+                <BookForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
             </Popup>
             <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    author={author}
-                    setAuthor={setAuthor}
-                    year={year}
-                    setYear={setYear}
-                    type1={type1}
-                    setType1={setType1}
-                    type2={type2}
-                    setType2={setType2}
-                    type3={type3}
-                    setType3={setType3}
-                    translator={translator}
-                    setTranslator={setTranslator}
-                    country={country}
-                    setCountry={setCountry}
-                    Filter={Filter}
-                />
+                open={open}
+                onClose={handleClose}
+                author={author}
+                setAuthor={setAuthor}
+                year={year}
+                setYear={setYear}
+                type1={type1}
+                setType1={setType1}
+                type2={type2}
+                setType2={setType2}
+                type3={type3}
+                setType3={setType3}
+                translator={translator}
+                setTranslator={setTranslator}
+                country={country}
+                setCountry={setCountry}
+                Filter={Filter}
+            />
         </div>
     );
 }

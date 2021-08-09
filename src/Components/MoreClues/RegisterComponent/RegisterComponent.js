@@ -8,6 +8,7 @@ import { useLoader } from "../../../Context/LoaderProvider";
 import { useTranslation } from "react-i18next";
 import { useNoti } from "../../../Context/NotificationProvider";
 import axios from "axios";
+import { api } from "../../../env";
 function RegisterComponent() {
     const [signUpScreen, setSignUpScreen] = useState(false);
     const [username, setUsername] = useState("");
@@ -78,7 +79,7 @@ function RegisterComponent() {
 
     useEffect(() => {
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"

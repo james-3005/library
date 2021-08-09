@@ -22,6 +22,7 @@ import moment from "moment";
 import styles from "../AdminPage/BookAdminPage.module.scss";
 import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
+import { api } from "../../../env";
 const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: "80%",
@@ -82,14 +83,11 @@ export default function HistoryPage() {
     async function getBorrows() {
         turnOnLoader();
         try {
-            const response = await axios.get(
-                "http://library-mini.xyz/api/v1/manage/get-borrowing?",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response = await axios.get(`${api}manage/get-borrowing?`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setBorrows(response.data.borrowing);
             setBorrows2(response.data.borrowing);
             turnOffLoader();
@@ -104,7 +102,7 @@ export default function HistoryPage() {
     const addOrEdit = (borrow, resetForm) => {
         axios
             .post(
-                "http://library-mini.xyz/api/v1/manage/borrowing-book",
+                `${api}manage/borrowing-book`,
                 {
                     book_id: parseInt(borrow.book_id, 10),
                     borrower_id: parseInt(borrow.borrower_id, 10),
@@ -155,7 +153,7 @@ export default function HistoryPage() {
             try {
                 turnOnLoader();
                 const response = await axios.get(
-                    "http://library-mini.xyz/api/v1/manage/get-borrowing?status_id=1",
+                    `${api}manage/get-borrowing?status_id=1`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -173,7 +171,7 @@ export default function HistoryPage() {
             try {
                 turnOnLoader();
                 const response = await axios.get(
-                    "http://library-mini.xyz/api/v1/manage/get-borrowing?status_id=2",
+                    `${api}manage/get-borrowing?status_id=2`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -209,14 +207,12 @@ export default function HistoryPage() {
 
     const confirm = (id) => {
         turnOnLoader();
-        axios.get(
-                `https://library-mini.xyz/api/v1/manage/borrowing-book/return-book/${id}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
+        axios
+            .get(`${api}manage/borrowing-book/return-book/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             .then(() => getBorrows())
             .catch((err) => console.log(err))
             .finally(() => turnOffLoader());
@@ -290,10 +286,7 @@ export default function HistoryPage() {
                             .recordsAfterPagingAndSorting()
                             .map((item, index) => (
                                 <TableRow key={item.book_id}>
-                                    <TableCell
-                                        algin="left"
-                                        size="small"
-                                    >
+                                    <TableCell algin="left" size="small">
                                         {index}
                                     </TableCell>
                                     <TableCell

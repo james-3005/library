@@ -7,6 +7,7 @@ import axios from "axios";
 import { useNoti } from "../../../Context/NotificationProvider";
 import { useHistory } from "react-router-dom";
 import { useLoader } from "../../../Context/LoaderProvider";
+import { api } from "../../../env";
 function UserComponent() {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newpassword, setNewPassword] = useState("");
@@ -53,7 +54,7 @@ function UserComponent() {
     };
     useEffect(() => {
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"

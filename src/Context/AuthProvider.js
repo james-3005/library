@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
-
+import { api } from "../env";
 const url = "https://librarymini.ga/api/v1/auth/";
 
 const AuthContext = React.createContext();
@@ -14,18 +14,15 @@ export function AuthProvider({ children }) {
     function signup(email, username, password, phone = "none") {
         async function register() {
             try {
-                let res = await axios.post(
-                    "http://library-mini.xyz/api/v1/auth/register",
-                    {
-                        name: username,
-                        email: email,
-                        password: password,
-                        password_confirmation: password,
-                        phone: phone,
-                        address: "none",
-                        dob: "2001-02-19",
-                    }
-                );
+                let res = await axios.post(`${api}auth/register`, {
+                    name: username,
+                    email: email,
+                    password: password,
+                    password_confirmation: password,
+                    phone: phone,
+                    address: "none",
+                    dob: "2001-02-19",
+                });
                 return "ok";
             } catch (err) {
                 throw err;
@@ -37,13 +34,10 @@ export function AuthProvider({ children }) {
     function login(email, password) {
         async function login2() {
             try {
-                let res = await axios.post(
-                    "http://library-mini.xyz/api/v1/auth/login",
-                    {
-                        email: email,
-                        password: password,
-                    }
-                );
+                let res = await axios.post(`${api}auth/login`, {
+                    email: email,
+                    password: password,
+                });
                 return res.data.original;
             } catch (err) {
                 throw err.response.data;
@@ -56,7 +50,7 @@ export function AuthProvider({ children }) {
         async function resetpass() {
             try {
                 let res = await axios.post(
-                    "http://library-mini.xyz/api/v1/auth/change-password",
+                    `${api}auth/change-password`,
                     {
                         old_password: password,
                         new_password: newpassword,
@@ -76,7 +70,7 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         const user = window.localStorage.getItem("user");
         axios
-            .get("http://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: { Authorization: `Bearer ${user}` },
             })
             .then((res) => {

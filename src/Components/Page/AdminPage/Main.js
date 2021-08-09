@@ -13,7 +13,7 @@ import Background6 from "../../Template/Background3/Background3";
 import BookAdminPage from "./BookAdminPage";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
+import { api } from "../../../env";
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -65,7 +65,7 @@ function Main() {
     const history = useHistory();
     useEffect(() => {
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"

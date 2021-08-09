@@ -22,7 +22,7 @@ import { useHistory } from "react-router-dom";
 import { useLoader } from "../../../Context/LoaderProvider";
 import styles from "./styles.module.scss";
 import c from "classnames";
-
+import { api } from "../../../env";
 const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: "80%",
@@ -75,14 +75,11 @@ export default function UserAdminPage() {
     async function getUsers() {
         try {
             turnOnLoader();
-            const response = await axios.get(
-                "http://library-mini.xyz/api/v1/manage/get-user",
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response = await axios.get(`${api}manage/get-user`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setUsers(response.data);
             turnOffLoader();
         } catch (error) {
@@ -100,7 +97,7 @@ export default function UserAdminPage() {
         turnOnLoader();
         axios
             .post(
-                "https://library-mini.xyz/api/v1/auth/register",
+                `${api}auth/register`,
                 {
                     id: user.id,
                     name: user.name,
@@ -138,7 +135,7 @@ export default function UserAdminPage() {
     useEffect(() => {
         turnOnLoader();
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"

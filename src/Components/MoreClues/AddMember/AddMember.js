@@ -7,6 +7,7 @@ import { useAuth } from "../../../Context/AuthProvider";
 import { useLoader } from "../../../Context/LoaderProvider";
 import { useTranslation } from "react-i18next";
 import { useNoti } from "../../../Context/NotificationProvider";
+import { api } from "../../../env";
 import axios from "axios";
 function AddMember() {
     const [username, setUsername] = useState("");
@@ -55,7 +56,7 @@ function AddMember() {
 
     useEffect(() => {
         axios
-            .get("https://library-mini.xyz/api/v1/auth/user-profile", {
+            .get(`${api}auth/user-profile`, {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem(
                         "user"

@@ -7,7 +7,7 @@ import {
     AiOutlineQuestionCircle,
     AiOutlineRocket,
 } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentItem from "./components/CommentItem";
 import AddCommentPopup from "./components/AddCommentPopup";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
@@ -20,7 +20,8 @@ import { useTranslation } from "react-i18next";
 import { useCurrentBook } from "../../../Context/CurrentBookProvider";
 import { Link, useHistory } from "react-router-dom";
 import moment from "moment";
-
+import axios from "axios";
+import { api } from "../../../env";
 const BookDetailsScreen = () => {
     const { currentBook } = useCurrentBook();
     const {
@@ -34,10 +35,18 @@ const BookDetailsScreen = () => {
         publication_date,
         book_id,
         translator,
+        country_id,
     } = currentBook;
 
     const { t } = useTranslation();
     const history = useHistory();
+    const [country, setCountry] = useState("");
+    useEffect(() => {
+        axios.get(`${api}country?country_id=${country_id}`).then((res) => {
+            setCountry(res.data[0].country_name);
+            console.log(res.data);
+        });
+    });
     return (
         <div className={styles.container}>
             <motion.div
@@ -97,6 +106,10 @@ const BookDetailsScreen = () => {
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("translator")}:</p>
                             <p>{translator}</p>
+                        </span>
+                        <span className={styles.textRow}>
+                            <p className={styles.t1}>{t("country")}:</p>
+                            <p>{country}</p>
                         </span>
                     </div>
                     <div className={styles.introduction}>
