@@ -177,7 +177,10 @@ export default function BookAdminPage() {
         formdata.append("isbn", "1234567891");
         formdata.append("country_id", book.country_id);
         formdata.append("review", book.review);
-        formdata.append("book_image", book.book_image, book.book_image.name);
+        if(book.book_image instanceof File) {
+            formdata.append("book_image", book.book_image, book.book_image.name);
+        }
+        
 
         var requestOptions = {
             method: "POST",
@@ -194,6 +197,7 @@ export default function BookAdminPage() {
                 .then((response) => response.text())
                 .then((result) => {
                     addNoti("Add book success", "success");
+                    getBooks();
                 })
                 .catch((error) => {
                     console.log("error", error);
@@ -203,33 +207,19 @@ export default function BookAdminPage() {
                     turnOffLoader();
                 });
         }
-        // else {
-        //     turnOnLoader();
-        //     axios
-        //         .post(
-        //             `${api}book/${book.book_id}`,
-        //             {
-        //                 name_book: "dsa",
-        //                 type_id: "1",
-        //                 author: "das",
-        //                 translator: "none",
-        //                 publisher: "2020-02-20",
-        //                 publication_date: "2020-02-20",
-        //                 price: "12.2",
-        //                 isbn: "1234567892",
-        //                 review: "sac ve",
-        //                 book_image: "null",
-        //             },
-        //             {
-        //                 headers: {
-        //                     Authorization: `Bearer ${token}`,
-        //                 },
-        //             }
-        //         )
-        //         .then((res) => console.log(res.data))
-        //         .catch((err) => console.log(err.response.data))
-        //         .finally(() => turnOffLoader());
-        // }
+        else {
+            turnOnLoader();
+            fetch(`http://library-mini.xyz/api/v1/book/${book.book_id}`, requestOptions)
+                .then((res) => {
+                    addNoti("Edit book success", "success");
+                    getBooks();
+                })
+                .catch((err) => {
+                    addNoti("Edit book fail, check infomation", "fail");
+                    console.log(err.response.data)
+                })
+                .finally(() => turnOffLoader());
+        }
         resetForm();
         setRecordForEdit(null);
         setOpenPopup(false);
@@ -344,6 +334,7 @@ export default function BookAdminPage() {
                     style={{
                         height: 450,
                         overflow: "scroll",
+                        width: 1100
                     }}
                     className={styles.hideScroll}
                 >
@@ -356,10 +347,10 @@ export default function BookAdminPage() {
                                         key={item.id}
                                         style={{ height: "45%" }}
                                     >
-                                        <TableCell algin="left" size="small">
+                                        <TableCell algin="left" size="small" style={{ width: 20 }}>
                                             {index}
                                         </TableCell>
-                                        <TableCell algin="left" size="small">
+                                        <TableCell algin="left" size="small" style={{ width: 20 }}>
                                             {item.book_id}
                                         </TableCell>
                                         <TableCell
@@ -391,13 +382,13 @@ export default function BookAdminPage() {
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            //style={{ width: "20%" }}
+                                            style={{ width: 140 }}
                                         >
                                             {item.publication_date}
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            //style={{ width: 50 }}
+                                            style={{ width: 70 }}
                                         >
                                             <Controls.ActionButton
                                                 color="primary"

@@ -32,7 +32,7 @@ const initialFValues = {
     country_id: 0,
     author: "",
     publication_date: new Date(),
-    book_image: "",
+    book_image: null,
     price: "0",
     translator: "",
     review: "",
@@ -54,7 +54,8 @@ export default function BookForm(props) {
     const { addOrEdit, recordForEdit } = props;
 
     const { t } = useTranslation();
-    const [image, setImage] = useState();
+    
+    const [image, setImage] = useState();   
     const [listCountry, setListCountry] = useState([]);
     const [listType1, setListType1] = useState([]);
     const [listType2, setListType2] = useState([]);
@@ -126,16 +127,6 @@ export default function BookForm(props) {
         resetForm,
     } = useForm(initialFValues, true, validate);
 
-    const getUrlImage = (file) => {
-        var reader = new FileReader();
-        var url = reader.readAsDataURL(file);
-
-        reader.onloadend = function (e) {
-            setImage(reader.result);
-        };
-        return reader;
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -153,10 +144,16 @@ export default function BookForm(props) {
 
     useEffect(() => {
         if (recordForEdit != null)
+        setImage(recordForEdit.book_image)
             setValues({
                 ...recordForEdit,
             });
     }, [recordForEdit]);
+
+    // useEffect(() => {
+    //     if (recordForEdit != null)
+    //         setImage(recordForEdit.book_image)
+    // }, [recordForEdit]);
 
     return (
         <Form onSubmit={handleSubmit} style={{ width: "100%" }}>

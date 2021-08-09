@@ -153,7 +153,7 @@ export default function UserAdminPage() {
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.containerUser)}>
-                <div style={{ width: "70%" }}>
+                <div style={{ width: 1000 }}>
                     <h2 style={{ marginBottom: 15 }}>{t("Manage Users")}</h2>
                     <Toolbar>
                         <Controls.Input

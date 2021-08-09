@@ -8,3 +8,7 @@
     scrollbar-width: none; /* Firefox */
     @include font-bar;
 }
+
+tr td{
+ height: 35px !important;
+}

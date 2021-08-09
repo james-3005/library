@@ -148,7 +148,7 @@ export default function HistoryPage() {
                 if (target.value == "") return items;
                 else
                     return items.filter((x) =>
-                        x.book[0].name_book.toLowerCase().includes(target.value)
+                    x.book[0]? x.book[0].name_book.toLowerCase().includes(target.value): false
                     );
             },
         });
@@ -231,7 +231,7 @@ export default function HistoryPage() {
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.hideScroll)}>
-                <div className={styles.font} style={{ width: "75%" }}>
+                <div className={styles.font} style={{ width: 900 }}>
                     <h2>{t("Manage borrowing book")}</h2>
                     <div
                         style={{
