@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {makeStyles } from '@material-ui/core';
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
     dialogWrapper: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function AlertDialog(props) {
+    const { t } = useTranslation();
     const { title, content, openDialog, setOpenDialog, actionCf, deletedId } = props;
     const classes = useStyles();
   return (
@@ -40,14 +42,14 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => {setOpenDialog(false)}} color="primary">
-            Đóng
+            {t("Cancel")}
           </Button>
           <Button onClick={() => {
               setOpenDialog(false)
               actionCf(deletedId)
         
         }} color="primary" autoFocus>
-            Đồng ý
+            {t("Agree")}
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Table, TableHead, TableRow, TableCell, makeStyles, TablePagination, TableSortLabel } from '@material-ui/core'
+import { Table, TableHead, TableRow, TableCell, makeStyles, TablePagination, TableSortLabel } from '@material-ui/core';
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -24,8 +25,9 @@ const useStyles = makeStyles(theme => ({
 export default function useTable(records, headCells,filterFn) {
 
     const classes = useStyles();
+    const { t } = useTranslation();
 
-    const pages = [5, 10, 25,"all"]
+    const pages = [5, 10, 25,t("all")]
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(pages[page])
     const [order, setOrder] = useState()
@@ -72,7 +74,7 @@ export default function useTable(records, headCells,filterFn) {
     }
 
     const handleChangeRowsPerPage = event => {
-        if (event.target.value == "all") {
+        if (event.target.value == t("all")) {
             setRowsPerPage(records.length)
         } else {
             setRowsPerPage(parseInt(event.target.value, 10))

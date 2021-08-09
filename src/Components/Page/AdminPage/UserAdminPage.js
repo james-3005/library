@@ -22,7 +22,12 @@ import { useHistory } from "react-router-dom";
 import { useLoader } from "../../../Context/LoaderProvider";
 import styles from "./styles.module.scss";
 import c from "classnames";
+<<<<<<< HEAD
 import { api } from "../../../env";
+=======
+import { useTranslation } from "react-i18next";
+
+>>>>>>> Toan
 const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: "80%",
@@ -48,15 +53,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const userHeadCells = [
-    { id: "stt", label: "Stt", disableSorting: true },
-    { id: "id", label: "ID" },
-    { id: "name", label: "User Name" },
-    { id: "address", label: "Address", disableSorting: true },
-    { id: "email", label: "Email" },
-];
+
 
 export default function UserAdminPage() {
+
+    const { t } = useTranslation();
+
+    const userHeadCells = [
+        { id: "stt", label: "Stt", disableSorting: true },
+        { id: "id", label: "ID" },
+        { id: "name", label: t("User Name") },
+        { id: "address", label: t("Address"), disableSorting: true },
+        { id: "email", label: "Email" },
+    ];
+
     const history = useHistory();
     const { turnOnLoader, turnOffLoader } = useLoader();
     const classes = useStyles();
@@ -153,7 +163,7 @@ export default function UserAdminPage() {
             <div className={c(classes.containerUser, styles.containerUser)}>
                 <Toolbar>
                     <Controls.Input
-                        label="Search User"
+                        label={t("Search User")}
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (
@@ -166,7 +176,7 @@ export default function UserAdminPage() {
                     />
 
                     <Controls.Button
-                        text="Add New"
+                        text={t("Add New")}
                         variant="outlined"
                         startIcon={<AddIcon />}
                         className={classes.newButton}
@@ -233,7 +243,7 @@ export default function UserAdminPage() {
                 <tableUser.TblPagination />
             </div>
             <Popup
-                title="User Form"
+                title={t("User Form")}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
                 size="small"
