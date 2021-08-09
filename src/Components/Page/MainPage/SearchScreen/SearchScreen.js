@@ -10,12 +10,15 @@ import { Button, Grid } from "@material-ui/core";
 import Dialog from "../Dialog";
 import { useLoader } from "../../../../Context/LoaderProvider";
 import { useFilterBook } from "../../../../Context/FilterBookProvider";
+import { api } from "../../../../env";
 function SearchScreen() {
     const [valueSearch, setValueSearch] = useState("");
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
     const { turnOnLoader, turnOffLoader } = useLoader();
-    const { allBook, allBookCurrent, setAllBookCurrent } = useFilterBook();
+    // const { allBook, allBookCurrent, setAllBookCurrent } = useFilterBook();
+    const [allBook, setAllBook] = useState([]);
+    const [allBookCurrent, setAllBookCurrent] = useState([]);
     const searchRef = useRef();
     const handleClickOpen = () => {
         setOpen(true);
@@ -54,6 +57,20 @@ function SearchScreen() {
             searchRef.current.scrollIntoView();
             window.localStorage.setItem("path", "");
         }
+    }, []);
+    useEffect(() => {
+        turnOnLoader();
+        axios
+            .get(`${api}book`)
+            .then((res) => {
+                console.log(res.data.books);
+                setAllBook(res.data.books);
+                setAllBookCurrent(res.data.books);
+            })
+            .catch((err) => {
+                console.log(err.response.data);
+            })
+            .finally(() => turnOffLoader());
     }, []);
     return (
         <div id="search" ref={searchRef}>
@@ -96,9 +113,11 @@ function SearchScreen() {
                             data={
                                 allBookCurrent
                                     ? allBookCurrent.filter((item) =>
-                                          item["name_book"].includes(
-                                              valueSearch
-                                          )
+                                          item["name_book"]
+                                              .toLowerCase()
+                                              .includes(
+                                                  valueSearch.toLowerCase()
+                                              )
                                       )
                                     : []
                             }

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 15,
     },
     containerUser: {
-        display: 'flex',
+        display: "flex",
         flexDirection: "column",
         overflowY: "scroll",
         paddingTop: 10,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 5,
         width: "100%",
         //backgroundColor: 'green',
-        alignItems: "center"
+        alignItems: "center",
     },
     newButton: {
         position: "absolute",
@@ -83,11 +83,11 @@ export default function UserAdminPage() {
                 },
             });
             setUsers(response.data);
-            turnOffLoader();
+            // turnOffLoader();
         } catch (error) {
             console.error(error);
             history.push("/login");
-            turnOffLoader();
+            // turnOffLoader();
         }
     }
 
@@ -148,94 +148,94 @@ export default function UserAdminPage() {
             .catch((err) => {
                 history.push("/loginPage");
             })
-            .finally(turnOffLoader());
+            .finally(() => turnOffLoader());
     }, []);
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.containerUser)}>
-                <div style={{width: "70%"}}>
-                <h2 style={{marginBottom: 15}} >{t("Manage Users")}</h2>
-                <Toolbar>
-                    <Controls.Input
-                        label={t("Search User")}
-                        className={classes.searchInput}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Search />
-                                </InputAdornment>
-                            ),
-                        }}
-                        onChange={handleSearch}
-                    />
+                <div style={{ width: "70%" }}>
+                    <h2 style={{ marginBottom: 15 }}>{t("Manage Users")}</h2>
+                    <Toolbar>
+                        <Controls.Input
+                            label={t("Search User")}
+                            className={classes.searchInput}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Search />
+                                    </InputAdornment>
+                                ),
+                            }}
+                            onChange={handleSearch}
+                        />
 
-                    <Controls.Button
-                        text={t("Add New")}
-                        variant="outlined"
-                        startIcon={<AddIcon />}
-                        className={classes.newButton}
-                        onClick={() => {
-                            history.push("/addMemberPage");
-                        }}
-                    />
-                </Toolbar>
+                        <Controls.Button
+                            text={t("Add New")}
+                            variant="outlined"
+                            startIcon={<AddIcon />}
+                            className={classes.newButton}
+                            onClick={() => {
+                                history.push("/addMemberPage");
+                            }}
+                        />
+                    </Toolbar>
 
-                <tableUser.TblContainer>
-                    <tableUser.TblHead />
-                    <TableBody>
-                        {tableUser
-                            .recordsAfterPagingAndSorting()
-                            .map((item, index) => (
-                                <TableRow key={item.id}>
-                                    <TableCell
-                                        algin="left"
-                                        size="small"
-                                        style={{
-                                            width: 30,
-                                        }}
-                                    >
-                                        {index}
-                                    </TableCell>
-                                    <TableCell
-                                        algin="left"
-                                        size="small"
-                                        style={{
-                                            width: 30,
-                                        }}
-                                    >
-                                        {item.id}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 200,
-                                        }}
-                                    >
-                                        {item.name}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 350,
-                                        }}
-                                    >
-                                        {item.address}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 250,
-                                        }}
-                                    >
-                                        {item.email}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </tableUser.TblContainer>
+                    <tableUser.TblContainer>
+                        <tableUser.TblHead />
+                        <TableBody>
+                            {tableUser
+                                .recordsAfterPagingAndSorting()
+                                .map((item, index) => (
+                                    <TableRow key={item.id}>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{
+                                                width: 30,
+                                            }}
+                                        >
+                                            {index}
+                                        </TableCell>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{
+                                                width: 30,
+                                            }}
+                                        >
+                                            {item.id}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 200,
+                                            }}
+                                        >
+                                            {item.name}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 350,
+                                            }}
+                                        >
+                                            {item.address}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 250,
+                                            }}
+                                        >
+                                            {item.email}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </tableUser.TblContainer>
 
-                <tableUser.TblPagination />
-            </div>
+                    <tableUser.TblPagination />
+                </div>
             </div>
             {/* <Popup
                 title={t("User Form")}

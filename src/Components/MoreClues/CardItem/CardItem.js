@@ -6,17 +6,6 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { api } from "../../../env";
 function ShowCard({ data }) {
-    const {
-        image,
-        price,
-        author,
-        name_book,
-        book_image,
-        book_id,
-        country_id,
-        translator,
-        type_id,
-    } = data;
     const { setCurrentBook } = useCurrentBook();
     const history = useHistory();
     const { t } = useTranslation();
@@ -24,27 +13,23 @@ function ShowCard({ data }) {
         setCurrentBook(data);
         history.push("/reviewPage");
     };
-    const [available, setAvailable] = useState(true);
-    useState(() => {
-        axios
-            .get(`${api}borrowing-book/check/${book_id}`)
-            .then((res) => {
-                setAvailable(!res.data.borrowing);
-            })
-            .catch((err) => console.log(err.response.data));
-    }, [book_id]);
+
     return (
         <div className={styles.slidebox}>
             <img
-                src={book_image ? book_image : "/Image/svg/book.svg"}
+                src={
+                    data && data["book_image"]
+                        ? data["book_image"]
+                        : "/Image/svg/book.svg"
+                }
                 alt=""
                 className={styles.imagecard}
             />
-            <p className={styles.author}>{name_book}</p>
-            <p className={styles.type}>{author}</p>{" "}
+            <p className={styles.author}>{data ? data["name_book"] : ""}</p>
+            <p className={styles.type}>{data ? data["author"] : ""}</p>{" "}
             <img
                 src={
-                    available
+                    data && data["borrowing"] == false
                         ? "/Image/svg/available.svg"
                         : "/Image/svg/notavailable.svg"
                 }

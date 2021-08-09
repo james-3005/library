@@ -4,16 +4,20 @@ import Background3 from "../../../Template/Background3/Background3";
 import Carousel2 from "../../../MoreClues/Carousel/Carousel2";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { useFilterBook } from "../../../../Context/FilterBookProvider";
-// install Swiper modules
 
+// install Swiper modules
+import { api } from "../../../../env";
 const New = () => {
     const [array, setArray] = useState([]);
-    const { newBook } = useFilterBook();
-
     useEffect(() => {
-        setArray(newBook);
-    }, [newBook]);
+        axios
+            .get(`${api}book/get-latest-books?limit=6`)
+            .then((res) => {
+                setArray(res.data.books);
+            })
+            .catch((err) => console.log(err.response.data));
+    }, []);
+
     const { t } = useTranslation();
     return (
         <Background3>

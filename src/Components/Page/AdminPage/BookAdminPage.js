@@ -22,7 +22,7 @@ import {
 } from "@material-ui/core";
 import useTable from "./components/useTable";
 import Controls from "./components/controls/Controls";
-import { Search, SlowMotionVideoOutlined } from "@material-ui/icons";
+import { Bookmark, Search, SlowMotionVideoOutlined } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Popup from "./components/Popup";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
@@ -36,7 +36,8 @@ import axios from "axios";
 import Dialog from "../MainPage/Dialog";
 import { api } from "../../../env";
 import { useTranslation } from "react-i18next";
-
+import { useFilterBook } from "../../../Context/FilterBookProvider";
+import { useNoti } from "../../../Context/NotificationProvider";
 const useStyles = makeStyles((theme) => ({
     tableBox: {
         //paddingLeft: 200,
@@ -91,7 +92,7 @@ export default function BookAdminPage() {
     const [open, setOpen] = React.useState(false);
 
     const { turnOnLoader, turnOffLoader } = useLoader();
-
+    // const {allBook, allBookCurrent}= useFilterBook
     const [author, setAuthor] = React.useState("");
     const [year, setYear] = React.useState("");
     const [country, setCountry] = React.useState("");
@@ -99,7 +100,8 @@ export default function BookAdminPage() {
     const [type1, setType1] = React.useState("All");
     const [type2, setType2] = React.useState("All");
     const [type3, setType3] = React.useState("All");
-
+    const [valueSearch, setValueSearch] = useState("");
+    const { addNoti } = useNoti();
     async function getBooks() {
         try {
             turnOnLoader();
@@ -121,19 +123,20 @@ export default function BookAdminPage() {
         TblHead,
         TblPagination,
         recordsAfterPagingAndSorting,
-    } = useTable(records, headCells, filterFn);
+    } = useTable(
+        records
+            ? records.filter((item) =>
+                  item["name_book"]
+                      .toLowerCase()
+                      .includes(valueSearch.toLowerCase())
+              )
+            : [],
+        headCells,
+        filterFn
+    );
 
     const handleSearch = (e) => {
-        let target = e.target;
-        setFilterFn({
-            fn: (items) => {
-                if (target.value == "") return items;
-                else
-                    return items.filter((x) =>
-                        x.name.toLowerCase().includes(target.value)
-                    );
-            },
-        });
+        setValueSearch(e.target.value);
     };
     const openDeleteDialog = (id) => {
         setDeletedId(id);
@@ -152,8 +155,10 @@ export default function BookAdminPage() {
             })
             .then((result) => {
                 console.log(result);
+                addNoti("Delete book success", "success");
                 getBooks();
-            });
+            })
+            .catch((err) => addNoti("Delete book fail", "fail"));
     };
     const history = useHistory();
     const addOrEdit = (book, resetForm) => {
@@ -164,9 +169,10 @@ export default function BookAdminPage() {
         formdata.append("author", book.author);
         formdata.append("translator", book.translator);
         formdata.append("publisher", book.publisher);
-        formdata.append("publication_date", moment(book.publication_date).format(
-            "YYYY-MM-DD"
-        ),);
+        formdata.append(
+            "publication_date",
+            moment(book.publication_date).format("YYYY-MM-DD")
+        );
         formdata.append("price", book.price);
         formdata.append("isbn", "1234567891");
         formdata.append("country_id", book.country_id);
@@ -183,40 +189,47 @@ export default function BookAdminPage() {
         };
 
         if (book.book_id == 0) {
-
             turnOnLoader();
-            fetch(`${api}book`, requestOptions)
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err.response.data))
-                .finally(() => turnOffLoader());
-            console.log(book);
-        } else {
-            turnOnLoader();
-            axios
-                .post(
-                    `${api}book/${book.book_id}`,
-                    {
-                        name_book: "dsa",
-                        type_id: "1",
-                        author: "das",
-                        translator: "none",
-                        publisher: "2020-02-20",
-                        publication_date: "2020-02-20",
-                        price: "12.2",
-                        isbn: "1234567892",
-                        review: "sac ve",
-                        book_image: "null",
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err.response.data))
-                .finally(() => turnOffLoader());
+            fetch("http://library-mini.xyz/api/v1/book", requestOptions)
+                .then((response) => response.text())
+                .then((result) => {
+                    addNoti("Add book success", "success");
+                })
+                .catch((error) => {
+                    console.log("error", error);
+                    addNoti("Add book fail, check infomation", "fail");
+                })
+                .finally(() => {
+                    turnOffLoader();
+                });
         }
+        // else {
+        //     turnOnLoader();
+        //     axios
+        //         .post(
+        //             `${api}book/${book.book_id}`,
+        //             {
+        //                 name_book: "dsa",
+        //                 type_id: "1",
+        //                 author: "das",
+        //                 translator: "none",
+        //                 publisher: "2020-02-20",
+        //                 publication_date: "2020-02-20",
+        //                 price: "12.2",
+        //                 isbn: "1234567892",
+        //                 review: "sac ve",
+        //                 book_image: "null",
+        //             },
+        //             {
+        //                 headers: {
+        //                     Authorization: `Bearer ${token}`,
+        //                 },
+        //             }
+        //         )
+        //         .then((res) => console.log(res.data))
+        //         .catch((err) => console.log(err.response.data))
+        //         .finally(() => turnOffLoader());
+        // }
         resetForm();
         setRecordForEdit(null);
         setOpenPopup(false);
@@ -276,7 +289,9 @@ export default function BookAdminPage() {
                 }}
                 className={styles.hideScroll}
             >
-                <h2 style={{marginTop: 5, marginBottom: 15}}>{t("Manage book")}</h2>
+                <h2 style={{ marginTop: 5, marginBottom: 15 }}>
+                    {t("Manage book")}
+                </h2>
                 <Toolbar>
                     <Controls.Input
                         label={t("Search for book name")}
@@ -288,7 +303,8 @@ export default function BookAdminPage() {
                                 </InputAdornment>
                             ),
                         }}
-                        onChange={handleSearch}
+                        value={valueSearch}
+                        onChange={(e) => handleSearch(e)}
                     />
 
                     <Button
@@ -323,7 +339,7 @@ export default function BookAdminPage() {
                         }}
                     />
                 </Toolbar>
-                
+
                 <div
                     style={{
                         height: 450,

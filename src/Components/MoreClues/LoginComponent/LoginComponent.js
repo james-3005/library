@@ -222,18 +222,6 @@ function LoginScreen({ setIsAdmin }) {
                             text={signUpScreen ? t("signUp") : t("login")}
                             action={signUpScreen ? handleSignUp : handleLogin}
                         />
-                        {/* <p className={styles.descript}>
-                            <span>
-                                {signUpScreen ? t("HaveAcc") : t("NotHaveAcc")}
-                            </span>
-                            <span
-                                className={styles.signUp}
-                                onClick={() => handleSwitch()}
-                            >
-                                {signUpScreen ? t("login") : t("signUp")}
-                            </span>{" "}
-                            {t("now")}.
-                        </p> */}
                     </div>
                 </motion.div>
             ) : (

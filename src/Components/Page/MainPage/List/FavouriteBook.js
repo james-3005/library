@@ -6,14 +6,21 @@ import Background2 from "../../../Template/Background2/Background2";
 import Carousel from "../../../MoreClues/Carousel/Carousel";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { useFilterBook } from "../../../../Context/FilterBookProvider";
-
+import { api } from "../../../../env";
 const Fav = () => {
     const [array, setArray] = useState([]);
-    const { favBook } = useFilterBook();
     useEffect(() => {
-        setArray(favBook);
-    }, [favBook]);
+        console.log("adsad");
+        axios
+            .get(`${api}book/top-borrowing?limit=7`)
+            .then((res) => {
+                let books = res.data.books.map((item) => item.book);
+
+                setArray(books);
+            })
+            .catch((err) => console.log(err.response.data));
+    }, []);
+
     const { t } = useTranslation();
     return (
         <Background2>

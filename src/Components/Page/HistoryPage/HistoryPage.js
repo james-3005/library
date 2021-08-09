@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 15,
     },
     containerUser: {
-        display: 'flex',
+        display: "flex",
         //alignItems: 'center',
         flexDirection: "column",
         height: window.height,
@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
         bottom: 0,
         marginTop: 80,
         width: "100%",
-       //backgroundColor: 'green',
-        alignItems: 'center'
+        //backgroundColor: 'green',
+        alignItems: "center",
     },
     newButton: {
         position: "absolute",
@@ -66,7 +66,6 @@ export default function HistoryPage() {
         { id: "from_date", label: t("From Date") },
         { id: "to_date", label: t("To Date") },
         { id: "promissory_date", label: t("Promissory Date") },
-        { id: "status_id", label: t("Status"), disableSorting: true },
         { id: "action", label: t("Action"), disableSorting: true },
     ];
 
@@ -105,6 +104,7 @@ export default function HistoryPage() {
     useEffect(() => {}, []);
 
     const addOrEdit = (borrow, resetForm) => {
+        turnOnLoader();
         axios
             .post(
                 `${api}manage/borrowing-book`,
@@ -128,13 +128,18 @@ export default function HistoryPage() {
                 console.log(res.data);
                 getBorrows();
             })
-            .catch((err) => console.log(err.response.data));
+            .catch((err) => console.log(err.response.data))
+            .finally(() => turnOffLoader());
 
         resetForm();
         setOpenPopup(false);
     };
 
-    const tableUser = useTable(borrows, userHeadCells, filterFn);
+    const tableUser = useTable(
+        borrows.length != 0 ? borrows : [],
+        userHeadCells,
+        filterFn
+    );
 
     const handleSearch = (e) => {
         let target = e.target;
@@ -226,160 +231,157 @@ export default function HistoryPage() {
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.hideScroll)}>
-                <div className={styles.font} style={{width: "75%"}} >
-                <h2>{t("Manage borrowing book")}</h2>
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        padding: 10,
-                    }}
-                >
-                    <Controls.FilterItem
-                        title={t("Total Order")}
-                        amount={getAmount(0)}
-                        type={1}
-                        active={active == 0}
-                        action={() => setActive(0)}
-                    />
-                    <Controls.FilterItem
-                        title={t("Borrowing")}
-                        amount={getAmount(1)}
-                        type={2}
-                        active={active == 1}
-                        action={() => setActive(1)}
-                    />
-                    <Controls.FilterItem
-                        title={t("Returned")}
-                        amount={getAmount(2)}
-                        type={3}
-                        active={active == 2}
-                        action={() => setActive(2)}
-                    />
-                </div>
+                <div className={styles.font} style={{ width: "75%" }}>
+                    <h2>{t("Manage borrowing book")}</h2>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                            padding: 10,
+                        }}
+                    >
+                        <Controls.FilterItem
+                            title={t("Total Order")}
+                            amount={getAmount(0)}
+                            type={1}
+                            active={active == 0}
+                            action={() => setActive(0)}
+                        />
+                        <Controls.FilterItem
+                            title={t("Borrowing")}
+                            amount={getAmount(1)}
+                            type={2}
+                            active={active == 1}
+                            action={() => setActive(1)}
+                        />
+                        <Controls.FilterItem
+                            title={t("Returned")}
+                            amount={getAmount(2)}
+                            type={3}
+                            active={active == 2}
+                            action={() => setActive(2)}
+                        />
+                    </div>
 
-                <Toolbar>
-                    <Controls.Input
-                        label={t("Search User")}
-                        className={classes.searchInput}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Search />
-                                </InputAdornment>
-                            ),
-                        }}
-                        onChange={handleSearch}
-                    />
-                    <Controls.Button
-                        text={t("Add New")}
-                        variant="outlined"
-                        startIcon={<AddIcon />}
-                        className={classes.newButton}
-                        onClick={() => {
-                            setOpenPopup(true);
-                        }}
-                    />
-                </Toolbar>
-                {/* <div style={{
+                    <Toolbar>
+                        <Controls.Input
+                            label={t("Search User")}
+                            className={classes.searchInput}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Search />
+                                    </InputAdornment>
+                                ),
+                            }}
+                            onChange={handleSearch}
+                        />
+                        <Controls.Button
+                            text={t("Add New")}
+                            variant="outlined"
+                            startIcon={<AddIcon />}
+                            className={classes.newButton}
+                            onClick={() => {
+                                setOpenPopup(true);
+                            }}
+                        />
+                    </Toolbar>
+                    {/* <div style={{
                 height: 450,
                 overflow: 'scroll'
             }} > */}
-                <tableUser.TblContainer>
-                    <tableUser.TblHead />
-                    <TableBody>
-                        {tableUser
-                            .recordsAfterPagingAndSorting()
-                            .map((item, index) => (
-                                <TableRow key={item.book_id}>
-                                    <TableCell algin="left" size="small">
-                                        {index}
-                                    </TableCell>
-                                    <TableCell
-                                        algin="left"
-                                        size="small"
-                                        style={{
-                                            width: 200,
-                                        }}
-                                    >
-                                        {item.user[0].name}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: "30%",
-                                        }}
-                                    >
-                                        {item.book[0].name_book}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 150,
-                                        }}
-                                    >
-                                        {moment(item.from_date).format(
-                                            "YYYY-MM-DD h:mm A"
-                                        )}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 150,
-                                        }}
-                                    >
-                                        {moment(item.to_date).format(
-                                            "YYYY-MM-DD h:mm A"
-                                        )}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 150,
-                                        }}
-                                    >
-                                        {moment(item.promissory_date).format(
-                                            "YYYY-MM-DD h:mm A"
-                                        )}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 30,
-                                        }}
-                                    >
-                                        {item.status_id}
-                                    </TableCell>
-                                    <TableCell
-                                        size="small"
-                                        style={{
-                                            width: 50,
-                                        }}
-                                    >
-                                        {item.status_id == 1 ? (
-                                            <Controls.ActionButton
-                                                color="primary"
-                                                onClick={() => {
-                                                    openReturnDialog(
-                                                        item.borrowing_book_id
-                                                    );
-                                                }}
-                                            >
-                                                <DoneIcon fontSize="small" />
-                                            </Controls.ActionButton>
-                                        ) : (
-                                            <p>{t("Returned")}</p>
-                                        )}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </tableUser.TblContainer>
+                    <tableUser.TblContainer>
+                        <tableUser.TblHead />
+                        <TableBody>
+                            {tableUser
+                                .recordsAfterPagingAndSorting()
+                                .map((item, index) => (
+                                    <TableRow key={item.book_id}>
+                                        <TableCell algin="left" size="small">
+                                            {index}
+                                        </TableCell>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{
+                                                width: 200,
+                                            }}
+                                        >
+                                            {item.user[0]
+                                                ? item.user[0].name
+                                                : ""}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: "30%",
+                                            }}
+                                        >
+                                            {item.book[0]
+                                                ? item.book[0].name_book
+                                                : ""}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 150,
+                                            }}
+                                        >
+                                            {moment(item.from_date).format(
+                                                "YYYY-MM-DD h:mm A"
+                                            )}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 150,
+                                            }}
+                                        >
+                                            {moment(item.to_date).format(
+                                                "YYYY-MM-DD h:mm A"
+                                            )}
+                                        </TableCell>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 150,
+                                            }}
+                                        >
+                                            {moment(
+                                                item.promissory_date
+                                            ).format("YYYY-MM-DD h:mm A")}
+                                        </TableCell>
 
-                <tableUser.TblPagination />
-                {/* </div> */}
-            </div>
+                                        <TableCell
+                                            size="small"
+                                            style={{
+                                                width: 50,
+                                            }}
+                                        >
+                                            {item.status_id == 1 ? (
+                                                <Controls.ActionButton
+                                                    color="primary"
+                                                    onClick={() => {
+                                                        openReturnDialog(
+                                                            item.borrowing_book_id
+                                                        );
+                                                    }}
+                                                >
+                                                    <DoneIcon fontSize="small" />
+                                                </Controls.ActionButton>
+                                            ) : (
+                                                <p>{t("Returned")}</p>
+                                            )}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                        </TableBody>
+                    </tableUser.TblContainer>
+
+                    <tableUser.TblPagination />
+                    {/* </div> */}
+                </div>
             </div>
             <Controls.Dialogg
                 title={t("Confirm returned")}

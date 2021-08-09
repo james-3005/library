@@ -26,7 +26,7 @@ function Carousel({ data }) {
             />
             <div className={styles.carousel} ref={carouselRef}>
                 <div style={{ display: "flex" }}>
-                    {data ? (
+                    {data.length != 0 ? (
                         data.map((item, index) => (
                             <CarouselSilde key={index} data={item} />
                         ))

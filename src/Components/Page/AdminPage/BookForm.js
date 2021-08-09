@@ -16,7 +16,7 @@ import { api } from "../../../env";
 //import * as employeeService from "../../services/employeeService";
 import { useTranslation } from "react-i18next";
 import { VariantLabels } from "framer-motion";
-
+import styles from "./BookAdminPage.module.scss";
 const options = [
     "Tiểu thuyết",
     "Truyện tranh",
@@ -36,7 +36,7 @@ const initialFValues = {
     price: "0",
     translator: "",
     review: "",
-    publisher: ""
+    publisher: "",
 };
 
 export default function BookForm(props) {
@@ -138,19 +138,17 @@ export default function BookForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-       
-            var exptype = 1;
-            if (type3 !== "All") exptype = type3;
-            else if (type2 !== "All") exptype = type2;
-            console.log(exptype);
-            setValues({
+
+        var exptype = 1;
+        if (type3 !== "All") exptype = type3;
+        else if (type2 !== "All") exptype = type2;
+        addOrEdit(
+            {
                 ...values,
                 type_id: exptype,
-            });
-
-            addOrEdit(values, resetForm);
-        
+            },
+            resetForm
+        );
     };
 
     useEffect(() => {
@@ -182,6 +180,7 @@ export default function BookForm(props) {
                                 setImage(reader.result);
                             };
                         }}
+                        className={styles.files}
                         id="file"
                         style={{ display: "none" }}
                     />
@@ -192,7 +191,7 @@ export default function BookForm(props) {
                             marginLeft: 90,
                             width: 155,
                             height: 40,
-                            backgroundColor: "#0a0a94",
+                            backgroundColor: "#333996",
                             justifyContent: "center",
                             alignItems: "center",
                             color: "white",
@@ -200,6 +199,7 @@ export default function BookForm(props) {
                             fontWeight: "bold",
                             borderRadius: 5,
                         }}
+                        className={styles.files}
                     >
                         {t("Upload a image")}
                     </label>
@@ -215,7 +215,6 @@ export default function BookForm(props) {
                         <Select
                             value={type1}
                             onChange={(e) => setType1(e.target.value)}
-                            //style={{ width: "110%" }}
                         >
                             <MenuItem value={"All"}>{t("all")}</MenuItem>
                             {listType1
