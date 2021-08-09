@@ -239,7 +239,7 @@ export default function HistoryPage() {
     return (
         <Background6>
             <div className={c(classes.containerUser, styles.hideScroll)}>
-                <div className={styles.font} style={{ width: 900 }}>
+                <div className={styles.font} style={{ width: 1200 }}>
                     <h2>{t("Manage borrowing book")}</h2>
                     <div
                         style={{
@@ -326,7 +326,7 @@ export default function HistoryPage() {
                                         <TableCell
                                             size="small"
                                             style={{
-                                                width: "30%",
+                                                width: "26%",
                                             }}
                                         >
                                             {item.book[0]
