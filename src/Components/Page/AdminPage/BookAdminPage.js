@@ -196,7 +196,7 @@ export default function BookAdminPage() {
 
         if (book.book_id == 0) {
             turnOnLoader();
-            fetch("http://library-mini.xyz/api/v1/book", requestOptions)
+            fetch(`${api}book`, requestOptions)
                 .then((response) => response.text())
                 .then((result) => {
                     addNoti("Add book success", "success");
@@ -211,10 +211,7 @@ export default function BookAdminPage() {
                 });
         } else {
             turnOnLoader();
-            fetch(
-                `http://library-mini.xyz/api/v1/book/${book.book_id}`,
-                requestOptions
-            )
+            fetch(`${api}book/${book.book_id}`, requestOptions)
                 .then((res) => {
                     addNoti("Edit book success", "success");
                     getBooks();

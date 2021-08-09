@@ -3,7 +3,9 @@ import styles from "./navComponent.module.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { api } from "../../../env";
+import { useTranslation } from "react-i18next";
 function NavComponent({ isAdmin, setIsAdmin }) {
+    const { t } = useTranslation();
     useEffect(() => {
         axios
             .get(`${api}auth/user-profile`, {
@@ -24,7 +26,7 @@ function NavComponent({ isAdmin, setIsAdmin }) {
         <div>
             <ul className={styles.nav}>
                 <li className={styles.dropDown}>
-                    <p style={{ cursor: "pointer" }}>Menu</p>
+                    <p style={{ cursor: "pointer" }}>{t("menu")}</p>
                     <ul className={styles.dropDown_content}>
                         {isAdmin ? (
                             <>
@@ -75,8 +77,8 @@ function NavComponent({ isAdmin, setIsAdmin }) {
                         )}
                     </ul>
                 </li>
-                <li>Contact</li>
-                <li>Help</li>
+                <li>{t("contact")}</li>
+                <li>{t("help")}</li>
             </ul>
         </div>
     );

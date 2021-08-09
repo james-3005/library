@@ -35,7 +35,7 @@ function SearchScreen() {
         if (exptype == "All") exptype = 1;
         axios
             .get(
-                `http://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
+                `${api}book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
                     exptype - 1
                 }&country_id=${country === "All" ? "" : country}`
             )

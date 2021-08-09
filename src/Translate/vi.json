@@ -78,7 +78,7 @@
     "book name": "Tên sách",
     "borrower name": "Tên người mượn",
     "From Date": "Từ ngày",
-    "Promissory Date" : "Ngày hứa trả",
+    "Promissory Date": "Ngày hứa trả",
     "User Name": "Tên người dùng",
     "Book Name": "Tên sách",
     "To Date": "Đến ngày",
@@ -98,7 +98,7 @@
     "Agree": "Đồng ý",
     "Price": "Giá",
     "Translator": "Dịch giả",
-    "Author" : "Tác giả",
+    "Author": "Tác giả",
     "Publishing Date": "Ngày xuất bản",
     "Review": "Giới thiệu",
     "Upload a image": "Tải ảnh lên",
@@ -112,5 +112,7 @@
     "User Form": "Biểu mẫu người dùng",
     "Manage book": "Quản lí sách",
     "Manage Users": "Quản lí người dùng",
-    "Manage borrowing book": "Quản lí mượn sách"
+    "Manage borrowing book": "Quản lí mượn sách",
+    "menu": "Tùy chọn",
+    "help": "Trợ giúp"
 }
