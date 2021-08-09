@@ -13,6 +13,8 @@ import {
 import Controls from "./components/controls/Controls";
 import { useForm, Form } from './components/useForm';
 //import * as employeeService from "../../services/employeeService";
+import { useTranslation } from "react-i18next";
+import { VariantLabels } from 'framer-motion';
 
 
 const options = ["Tiểu thuyết", "Truyện tranh", "Ngôn tình", "Kinh tế", "Khoa học"]
@@ -21,7 +23,7 @@ const initialFValues = {
     book_id: 0,
     name_book: '',
     type_id: 1,
-    country_id: '',
+    country_id: 0,
     author: '',
     publication_date: new Date(),
     book_image: "",
@@ -46,6 +48,8 @@ export default function BookForm(props) {
         addOrEdit, 
         recordForEdit,
      } = props
+
+    const { t } = useTranslation();
     const [image, setImage] = useState(); 
     const [listCountry, setListCountry] = useState([]);
     const [listType1, setListType1] = useState([]);
@@ -63,7 +67,7 @@ export default function BookForm(props) {
             setListType1(res.data);
         });
         axios.get("http://library-mini.xyz/api/v1/country").then((res) => {
-            setListCountry(res.data.countries);
+            setListCountry(res.data);
         });
     }, []);
     useEffect(() => {
@@ -87,8 +91,8 @@ export default function BookForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('Name' in fieldValues)
-            temp.fullName = fieldValues.fullName ? "" : "This field is required."
+        if ('name_book' in fieldValues)
+            temp.name_book = fieldValues.fullName ? "" : "This field is required."
         if ('email' in fieldValues)
             temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
         if ('mobile' in fieldValues)
@@ -112,37 +116,31 @@ export default function BookForm(props) {
         resetForm
     } = useForm(initialFValues, true, validate);
 
-    const getUrlImage = (file) => {
-        var reader = new FileReader();
-        var url = reader.readAsDataURL(file);
-
-        reader.onloadend = function (e) {
-            setImage(reader.result)
-           }
-        return reader;
-    }
 
     const handleSubmit = e => {
         e.preventDefault()
         if (validate()) {
-            let exptype = 1;
+            var exptype = 1;
             if (type3 !== "All") exptype = type3;
             else if (type2 !== "All") exptype = type2;
+            console.log(exptype)
             setValues(
                 {
                     ...values,
-                    country_id: exptype
+                    type_id: exptype
                 }
             )
+            
             addOrEdit(values, resetForm);
         }
     }
 
     useEffect(() => {
         if (recordForEdit != null)
+
             setValues({
                 ...recordForEdit
-            })
+            })  
     }, [recordForEdit])
 
     return (
@@ -186,10 +184,11 @@ export default function BookForm(props) {
                         fontWeight: 'bold',
                         borderRadius: 5,
                     }}>
-                    Upload a image
+                   {t("Upload a image")}
                 </label>
-                <InputLabel>Type DDC</InputLabel>
-                <FormControl
+                <InputLabel>DDC</InputLabel>
+                {/* <div className={styles.select}> */}
+                    <FormControl
                         variant="outlined"
                         className={classes.formControl}
                     >
@@ -199,8 +198,9 @@ export default function BookForm(props) {
                         <Select
                             value={type1}
                             onChange={(e) => setType1(e.target.value)}
+                            //style={{ width: "110%" }}
                         >
-                            {/* <MenuItem value="All">All</MenuItem> */}
+                            <MenuItem value={"All"}>{t("all")}</MenuItem>
                             {listType1
                                 ? listType1.map((item, index) => (
                                       <MenuItem
@@ -213,97 +213,111 @@ export default function BookForm(props) {
                                 : []}
                         </Select>
                     </FormControl>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <InputLabel style={{ backgroundColor: "white" }}>
-                            2
-                        </InputLabel>
-                        <Select
-                            value={type2}
-                            onChange={(e) => setType2(e.target.value)}
+                    {listType2.length != 0 ? (
+                        <FormControl
+                            variant="outlined"
+                            className={classes.formControl}
                         >
-                            <MenuItem value="All">All</MenuItem>
-                            {listType2
-                                ? listType2.map((item, index) => (
-                                      <MenuItem
-                                          value={item.type_id}
-                                          key={index}
-                                      >
-                                          {item.name}
-                                      </MenuItem>
-                                  ))
-                                : []}
-                        </Select>
-                    </FormControl>
-                    <FormControl
-                        variant="outlined"
-                        className={classes.formControl}
-                    >
-                        <InputLabel style={{ backgroundColor: "white" }}>
-                            3
-                        </InputLabel>
-                        <Select
-                            value={type3}
-                            onChange={(e) => setType3(e.target.value)}
-                        >
-                            <MenuItem value="All">All</MenuItem>
-                            {listType3
-                                ? listType3.map((item, index) => (
-                                      <MenuItem
-                                          value={item.type_id}
-                                          key={index}
-                                      >
-                                          {item.name}
-                                      </MenuItem>
-                                  ))
-                                : []}
-                        </Select>
-                    </FormControl>
-                    
+                            <InputLabel style={{ backgroundColor: "white" }}>
+                                2
+                            </InputLabel>
+                            <Select
+                                value={type2}
+                                onChange={(e) => setType2(e.target.value)}
+                                //style={{ width: "110%" }}
+                            >
+                                <MenuItem value="All">{t("all")}</MenuItem>
+                                {listType2
+                                    ? listType2.map((item, index) => (
+                                          <MenuItem
+                                              value={item.type_id}
+                                              key={index}
+                                          >
+                                              {item.name}
+                                          </MenuItem>
+                                      ))
+                                    : []}
+                            </Select>
+                        </FormControl>
+                    ) : (
+                        <div />
+                    )}
+                    <>
+                        {listType3.length != 0 ? (
+                            <FormControl
+                                variant="outlined"
+                                className={classes.formControl}
+                            >
+                                <InputLabel
+                                    style={{ backgroundColor: "white" }}
+                                >
+                                    3
+                                </InputLabel>
+                                <Select
+                                    value={type3}
+                                    onChange={(e) => setType3(e.target.value)}
+                                    //style={{ width: "110%" }}
+                                >
+                                    <MenuItem value="All">{t("all")}</MenuItem>
+                                    {listType3
+                                        ? listType3.map((item, index) => (
+                                              <MenuItem
+                                                  value={item.type_id}
+                                                  key={index}
+                                              >
+                                                  {item.name}
+                                              </MenuItem>
+                                          ))
+                                        : []}
+                                </Select>
+                            </FormControl>
+                        ) : (
+                            <div />
+                        )}
+                    </>
                 </Grid>
                 <Grid item xs={6} >
                 <Controls.Input
                         name="price"
-                        label="Price"
+                        label={t("Price")}
                         value={values.price}
                         onChange={handleInputChange}
                         //error={errors.id}
                     />
                     <Controls.Input
                         name="translator"
-                        label="Translator"
+                        label={t("Translator")}
                         value={values.translator}
                         onChange={handleInputChange}
                         //error={errors.id}
                     />
                 <Controls.Input
                         name="name_book"
-                        label="Name"
+                        label={t("Book Name")}
                         value={values.name_book}
                         onChange={handleInputChange}
                         error={errors.Name}
                     />
                     
                     <Controls.Input
-                        label="Author"
+                        label={t("Author")}
                         name="author"
                         value={values.author}
                         onChange={handleInputChange}
                        // error={errors.mobile}
                     />
 
-                    <FormControl variant="outlined" className={classes.formControl}>
+    <               FormControl variant="outlined" className={classes.formControl}>
                         <InputLabel style={{ backgroundColor: "white" }}>
-                            Country
+                            {t("country")}
                         </InputLabel>
                         <Select
                             name="country_id"
                             value={values.country_id}
                             onChange={handleInputChange}
+                            //style={{ width: "110%" }}
                         >
-                            <MenuItem value="All">All</MenuItem>
+                            <MenuItem value="All">{t("all")}</MenuItem>
                             {listCountry
                                 ? listCountry.map((item, index) => (
                                     <MenuItem value={item.country_id} key={index}>
@@ -314,14 +328,14 @@ export default function BookForm(props) {
                         </Select>
                     </FormControl>
                     <Controls.DatePicker 
-                        label="Publishing Date"
+                        label={t("Publishing Date")}
                         name="publication_date"
                         value={Date.parse(values.publication_date)}
                         onChange={handleInputChange}
                     />
                     <Controls.Input
                         name="review"
-                        label="Review"
+                        label={t("Review")}
                         value={values.review}
                         onChange={handleInputChange}
                         //error={errors.id}
@@ -330,11 +344,11 @@ export default function BookForm(props) {
                     <div style={{marginTop: 20}}>
                         <Controls.Button
                             type="submit"
-                            text="Submit" 
+                            text={t("Submit")} 
                             onClick = {handleSubmit}
                             />
                         <Controls.Button
-                            text="Reset"
+                            text={t("Reset")}
                             color="default"
                             onClick={resetForm} />
                     </div>

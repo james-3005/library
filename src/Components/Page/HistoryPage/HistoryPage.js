@@ -22,6 +22,8 @@ import moment from "moment";
 import styles from "../AdminPage/BookAdminPage.module.scss";
 import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
+import { useTranslation } from "react-i18next";
+
 const useStyles = makeStyles((theme) => ({
     searchInput: {
         width: "80%",
@@ -50,20 +52,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const userHeadCells = [
-    { id: "stt", label: "Stt", disableSorting: true },
-    { id: "name", label: "Name", disableSorting: true },
-    { id: "name_book", label: "Book Name" },
-    { id: "from_date", label: "From Date" },
-    { id: "to_date", label: "To Date" },
-    { id: "promissory_date", label: "Promissory Date" },
-    { id: "status_id", label: "Status", disableSorting: true },
-    { id: "action", label: "Action", disableSorting: true },
-];
+
 
 const brr = [];
 
 export default function HistoryPage() {
+    const { t } = useTranslation();
+    const userHeadCells = [
+        { id: "stt", label: "Stt", disableSorting: true },
+        { id: "name", label: t("User Name"), disableSorting: true },
+        { id: "name_book", label: t("Book Name") },
+        { id: "from_date", label: t("From Date") },
+        { id: "to_date", label: t("To Date") },
+        { id: "promissory_date", label: t("Promissory Date") },
+        { id: "status_id", label: t("Status"), disableSorting: true },
+        { id: "action", label: t("Action"), disableSorting: true },
+    ];
+    
     const { turnOnLoader, turnOffLoader } = useLoader();
     const classes = useStyles();
     const [filterFn, setFilterFn] = useState({
@@ -234,21 +239,21 @@ export default function HistoryPage() {
                     }}
                 >
                     <Controls.FilterItem
-                        title={"Tổng số đơn"}
+                        title={t("Total Order")}
                         amount={getAmount(0)}
                         type={1}
                         active={active == 0}
                         action={() => setActive(0)}
                     />
                     <Controls.FilterItem
-                        title={"Đang mượn"}
+                        title={t("Borrowing")}
                         amount={getAmount(1)}
                         type={2}
                         active={active == 1}
                         action={() => setActive(1)}
                     />
                     <Controls.FilterItem
-                        title={"Đã trả"}
+                        title={t("Returned")}
                         amount={getAmount(2)}
                         type={3}
                         active={active == 2}
@@ -258,7 +263,7 @@ export default function HistoryPage() {
 
                 <Toolbar>
                     <Controls.Input
-                        label="Search User"
+                        label={t("Search User")}
                         className={classes.searchInput}
                         InputProps={{
                             startAdornment: (
@@ -270,7 +275,7 @@ export default function HistoryPage() {
                         onChange={handleSearch}
                     />
                     <Controls.Button
-                        text="Add New"
+                        text={t("Add New")}
                         variant="outlined"
                         startIcon={<AddIcon />}
                         className={classes.newButton}
@@ -369,7 +374,7 @@ export default function HistoryPage() {
                                                 <DoneIcon fontSize="small" />
                                             </Controls.ActionButton>
                                         ) : (
-                                            <p>đã trả</p>
+                                            <p>{t("Returned")}</p>
                                         )}
                                     </TableCell>
                                 </TableRow>
@@ -381,15 +386,15 @@ export default function HistoryPage() {
                 {/* </div> */}
             </div>
             <Controls.Dialogg
-                title="Xác nhận trả sách"
-                content="Bạn muốn xác nhận cuốn sách này đã được trả?"
+                title={t("Confirm returned")}
+                content={t("Do you want to confirm that this book is returned?")}
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}
                 deletedId={returnId}
                 actionCf={confirm}
             />
             <Popup
-                title="Borrow Form"
+                title= {t("Borrow Form")}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
                 size="small"

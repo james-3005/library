@@ -16,7 +16,7 @@ function NavComponent({ isAdmin, setIsAdmin }) {
                 setIsAdmin(true);
             })
             .catch((err) => {
-                console.log(err.response.data);
+                console.log(err);
             });
     }, []);
     return (

@@ -34,6 +34,7 @@ import c from "classnames";
 import { useLoader } from "../../../Context/LoaderProvider";
 import axios from "axios";
 import Dialog from '../MainPage/Dialog';
+import { useTranslation } from "react-i18next";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -61,18 +62,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const headCells = [
-    { id: "stt", label: "stt", disableSorting: true },
-    { id: "book_id", label: "ID" },
-    { id: "name_book", label: "Book Name" },
-    { id: "type_id", label: "Category" },
-    { id: "country_id", label: "Country" },
-    { id: "author", label: "Author", disableSorting: true },
-    { id: "pulication_date", label: "Pulication Date" },
-    { id: "action", label: "actions", disableSorting: true },
-];
+
 
 export default function BookAdminPage() {
+    const { t } = useTranslation();
+
+    const headCells = [
+        { id: "stt", label: "stt", disableSorting: true },
+        { id: "book_id", label: "ID" },
+        { id: "name_book", label: t("Book Name") },
+        { id: "type_id", label: t("Category") },
+        { id: "country_id", label: t("Country") },
+        { id: "author", label: t("Author"), disableSorting: true },
+        { id: "pulication_date", label: t("Pulication Date") },
+        { id: "action", label: t("Action"), disableSorting: true },
+    ];
+
     const token = window.localStorage.getItem("user");
     const classes = useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null);
@@ -156,13 +161,14 @@ export default function BookAdminPage() {
     };
     const history = useHistory();
     const addOrEdit = (book, resetForm) => {
+        
         if (book.book_id == 0) {
             turnOnLoader();
             axios
                 .post(
                     "https://library-mini.xyz/api/v1/book",
                     {
-                        type_id: "1",
+                        type_id: book.type_id,
                         name_book: book.name_book,
                         author: book.author,
                         translator: book.translator,
@@ -173,7 +179,8 @@ export default function BookAdminPage() {
                         price: book.price,
                         isbn: "234567892",
                         review: book.review,
-                        book_image: "null",
+                        book_image: book.book_image,
+                        country_id: book.country_id
                     },
                     {
                         headers: {
@@ -184,6 +191,7 @@ export default function BookAdminPage() {
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log(err.response.data))
                 .finally(() => turnOffLoader());
+                console.log(book)
         } else {
             turnOnLoader();
             axios
@@ -247,12 +255,12 @@ export default function BookAdminPage() {
         let exptype = 1;
         if (type3 !== "All") exptype = type3;
         else if (type2 !== "All") exptype = type2;
-        console.log(exptype);
+        if (exptype == "All") exptype = 1;
         axios
             .get(
                 `http://library-mini.xyz/api/v1/book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
                     exptype - 1
-                }&country_name=${country === "All" ? "" : country}`
+                }&country_id=${country === "All" ? "" : country}`
             )
             .then((res) => {
                 setRecords(res.data.books);
@@ -272,7 +280,7 @@ export default function BookAdminPage() {
             >
                 <Toolbar>
                     <Controls.Input
-                        label="Theo tên sách"
+                        label={t("Search for book name")}
                         className={classes.searchInputByName}
                         InputProps={{
                             startAdornment: (
@@ -302,7 +310,7 @@ export default function BookAdminPage() {
                     </Button>
 
                     <Controls.Button
-                        text="Add New"
+                        text={t("Add New")}
                         variant="outlined"
                         startIcon={<AddIcon />}
                         className={classes.newButton}
@@ -377,7 +385,7 @@ export default function BookAdminPage() {
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            //style={{ width: "24%" }}
+                                            //style={{ width: 50 }}
                                         >
                                             <Controls.ActionButton
                                                 color="primary"
@@ -407,15 +415,15 @@ export default function BookAdminPage() {
                 </div>
             </div>
             <Controls.Dialogg
-                title="Xóa Sách"
-                content="Bạn có thực sự muốn xóa thông tin cuốn sách này?"
+                title={t("Delete book")}
+                content={t("Do you want to delete this book?")}
                 openDialog={openDialog}
                 setOpenDialog={setOpenDialog}
                 deletedId={deletedId}
                 actionCf={deleteBook}
             />
             <Popup
-                title="Book Form"
+                title={t("Book Form")}
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
             >
