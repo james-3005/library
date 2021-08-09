@@ -7,7 +7,7 @@ function Background1({ children }) {
             <img
                 className={styles.footer_animal}
                 alt=""
-                src="image/svg/footer6.svg"
+                src="/Image/svg/footer6.svg"
             />
             <img
                 className={styles.cloud}

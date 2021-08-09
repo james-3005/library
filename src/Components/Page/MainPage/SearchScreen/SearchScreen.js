@@ -78,7 +78,7 @@ function SearchScreen() {
                 <div className={styles.searchBar}>
                     <Grid container spacing={1} alignItems="flex-end">
                         <Grid item>
-                            <img src="image/svg/search.svg" alt="" />
+                            <img src="/Image/svg/search.svg" alt="" />
                         </Grid>
                         <Grid item>
                             <TextField
@@ -96,7 +96,7 @@ function SearchScreen() {
                         style={{ height: 30 }}
                         onClick={handleClickOpen}
                     >
-                        <img src="image/svg/filter.svg" alt="" />
+                        <img src="/Image/svg/filter.svg" alt="" />
                     </Button>
                     <Button
                         variant="outlined"
@@ -104,7 +104,7 @@ function SearchScreen() {
                         style={{ height: 30, marginLeft: 20 }}
                         onClick={() => setAllBookCurrent(allBook)}
                     >
-                        <img src="image/svg/filterclear.svg" alt="" />
+                        <img src="/Image/svg/filterclear.svg" alt="" />
                     </Button>
                 </div>
                 <div className={styles.component}>

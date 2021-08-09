@@ -177,10 +177,13 @@ export default function BookAdminPage() {
         formdata.append("isbn", "1234567891");
         formdata.append("country_id", book.country_id);
         formdata.append("review", book.review);
-        if(book.book_image instanceof File) {
-            formdata.append("book_image", book.book_image, book.book_image.name);
+        if (book.book_image instanceof File) {
+            formdata.append(
+                "book_image",
+                book.book_image,
+                book.book_image.name
+            );
         }
-        
 
         var requestOptions = {
             method: "POST",
@@ -206,17 +209,19 @@ export default function BookAdminPage() {
                 .finally(() => {
                     turnOffLoader();
                 });
-        }
-        else {
+        } else {
             turnOnLoader();
-            fetch(`http://library-mini.xyz/api/v1/book/${book.book_id}`, requestOptions)
+            fetch(
+                `http://library-mini.xyz/api/v1/book/${book.book_id}`,
+                requestOptions
+            )
                 .then((res) => {
                     addNoti("Edit book success", "success");
                     getBooks();
                 })
                 .catch((err) => {
                     addNoti("Edit book fail, check infomation", "fail");
-                    console.log(err.response.data)
+                    console.log(err.response.data);
                 })
                 .finally(() => turnOffLoader());
         }
@@ -305,7 +310,7 @@ export default function BookAdminPage() {
                             setOpen(true);
                         }}
                     >
-                        <img src="/image/svg/filter.svg" alt="" />
+                        <img src="/Image/svg/filter.svg" alt="" />
                     </Button>
                     <Button
                         variant="outlined"
@@ -315,7 +320,7 @@ export default function BookAdminPage() {
                             getBooks();
                         }}
                     >
-                        <img src="/image/svg/filterclear.svg" alt="" />
+                        <img src="/Image/svg/filterclear.svg" alt="" />
                     </Button>
 
                     <Controls.Button
@@ -334,7 +339,7 @@ export default function BookAdminPage() {
                     style={{
                         height: 450,
                         overflow: "scroll",
-                        width: 1100
+                        width: 1100,
                     }}
                     className={styles.hideScroll}
                 >
@@ -347,10 +352,18 @@ export default function BookAdminPage() {
                                         key={item.id}
                                         style={{ height: "45%" }}
                                     >
-                                        <TableCell algin="left" size="small" style={{ width: 20 }}>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{ width: 20 }}
+                                        >
                                             {index}
                                         </TableCell>
-                                        <TableCell algin="left" size="small" style={{ width: 20 }}>
+                                        <TableCell
+                                            algin="left"
+                                            size="small"
+                                            style={{ width: 20 }}
+                                        >
                                             {item.book_id}
                                         </TableCell>
                                         <TableCell

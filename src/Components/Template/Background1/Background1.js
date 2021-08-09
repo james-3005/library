@@ -8,12 +8,12 @@ function Background1({ children }) {
             <img
                 className={styles.footer}
                 alt=""
-                src="/image/svg/footer1.svg"
+                src="/Image/svg/footer1.svg"
             />
             <img
                 className={styles.footer_animal}
                 alt=""
-                src="/image/svg/footer1-animal.svg"
+                src="/Image/svg/footer1-animal.svg"
             />
             {children}
         </div>
