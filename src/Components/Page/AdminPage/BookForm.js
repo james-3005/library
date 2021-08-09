@@ -54,8 +54,8 @@ export default function BookForm(props) {
     const { addOrEdit, recordForEdit } = props;
 
     const { t } = useTranslation();
-    
-    const [image, setImage] = useState();   
+
+    const [image, setImage] = useState();
     const [listCountry, setListCountry] = useState([]);
     const [listType1, setListType1] = useState([]);
     const [listType2, setListType2] = useState([]);
@@ -126,7 +126,10 @@ export default function BookForm(props) {
         handleInputChange,
         resetForm,
     } = useForm(initialFValues, true, validate);
-
+    // console.log(initialFValues);
+    useEffect(() => {
+        console.log("value ", values);
+    }, [values]);
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -143,11 +146,12 @@ export default function BookForm(props) {
     };
 
     useEffect(() => {
-        if (recordForEdit != null)
-        setImage(recordForEdit.book_image)
+        if (recordForEdit != null) {
+            setImage(recordForEdit.book_image);
             setValues({
                 ...recordForEdit,
             });
+        }
     }, [recordForEdit]);
 
     // useEffect(() => {

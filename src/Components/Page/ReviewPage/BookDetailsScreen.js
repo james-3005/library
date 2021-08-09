@@ -37,7 +37,7 @@ const BookDetailsScreen = () => {
         translator,
         country_id,
     } = currentBook;
-
+    const [type, setType] = useState("");
     const { t } = useTranslation();
     const history = useHistory();
     const [country, setCountry] = useState("");
@@ -46,7 +46,21 @@ const BookDetailsScreen = () => {
             setCountry(res.data[0].country_name);
             console.log(res.data);
         });
-    });
+    }, []);
+    useEffect(() => {
+        var config = {
+            method: "get",
+            url: `https://library-mini.xyz/api/v1/type?type_id=${type_id}`,
+        };
+
+        axios(config)
+            .then(function (response) {
+                setType(response.data[0].name);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, [type_id]);
     return (
         <div className={styles.container}>
             <motion.div
@@ -87,7 +101,7 @@ const BookDetailsScreen = () => {
                         </span>
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("type")}:</p>
-                            <p>{type_id}</p>
+                            <p>{type}</p>
                         </span>
                         <span className={styles.textRow}>
                             <p className={styles.t1}>{t("year")}:</p>

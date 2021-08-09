@@ -96,6 +96,9 @@
     @include font-rob;
     margin-left: 15px;
     align-items: center;
+    & p {
+        padding: 0 5px;
+    }
     &:last-child {
         border-bottom: 1px solid black;
     }

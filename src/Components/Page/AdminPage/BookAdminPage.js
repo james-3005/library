@@ -161,11 +161,12 @@ export default function BookAdminPage() {
             .catch((err) => addNoti("Delete book fail", "fail"));
     };
     const history = useHistory();
+
     const addOrEdit = (book, resetForm) => {
         console.log(book);
         var formdata = new FormData();
         formdata.append("name_book", book.name_book);
-        formdata.append("type_id", book.type_id);
+        if (book.type_id != 1) formdata.append("type_id", book.type_id);
         formdata.append("author", book.author);
         formdata.append("translator", book.translator);
         formdata.append("publisher", book.publisher);
@@ -193,12 +194,12 @@ export default function BookAdminPage() {
                 Authorization: `Bearer ${token}`,
             },
         };
-
         if (book.book_id == 0) {
             turnOnLoader();
             fetch(`${api}book`, requestOptions)
                 .then((response) => response.text())
                 .then((result) => {
+                    console.log(result);
                     addNoti("Add book success", "success");
                     getBooks();
                 })
@@ -213,6 +214,7 @@ export default function BookAdminPage() {
             turnOnLoader();
             fetch(`${api}book/${book.book_id}`, requestOptions)
                 .then((res) => {
+                    console.log("edit");
                     addNoti("Edit book success", "success");
                     getBooks();
                 })
