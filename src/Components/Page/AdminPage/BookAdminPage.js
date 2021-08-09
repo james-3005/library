@@ -336,7 +336,7 @@ export default function BookAdminPage() {
 
                 <div
                     style={{
-                        height: 450,
+                        height: 400,
                         overflow: "scroll",
                         width: 1100,
                     }}

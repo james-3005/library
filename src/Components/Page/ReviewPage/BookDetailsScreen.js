@@ -50,7 +50,7 @@ const BookDetailsScreen = () => {
     useEffect(() => {
         var config = {
             method: "get",
-            url: `https://library-mini.xyz/api/v1/type?type_id=${type_id}`,
+            url: `${api}type?type_id=${type_id}`,
         };
 
         axios(config)
