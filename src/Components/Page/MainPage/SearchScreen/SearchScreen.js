@@ -32,11 +32,12 @@ function SearchScreen() {
         let exptype = type1;
         if (type3 !== "All") exptype = type3;
         else if (type2 !== "All") exptype = type2;
-        if (exptype == "All") exptype = 1;
+        // if (exptype == "All") exptype = 1;
+
         axios
             .get(
                 `${api}book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
-                    exptype == 1 ? "" : exptype - 1
+                    exptype == "All" ? "" : exptype - 1
                 }&country_id=${country === "All" ? "" : country}`
             )
             .then((res) => {
