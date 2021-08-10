@@ -76,5 +76,6 @@
     "publishyear": "Publish year",
     "trans": "Translator",
     "menu": "Menu",
-    "help": "Help"
+    "help": "Help",
+    "Category": "Type id"
 }

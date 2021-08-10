@@ -163,7 +163,6 @@ export default function BookAdminPage() {
     const history = useHistory();
 
     const addOrEdit = (book, resetForm) => {
-        console.log(book);
         var formdata = new FormData();
         formdata.append("name_book", book.name_book);
         if (book.type_id != 1) formdata.append("type_id", book.type_id);
@@ -199,7 +198,6 @@ export default function BookAdminPage() {
             fetch(`${api}book`, requestOptions)
                 .then((response) => response.text())
                 .then((result) => {
-                    console.log(result);
                     addNoti("Add book success", "success");
                     getBooks();
                 })
@@ -264,7 +262,7 @@ export default function BookAdminPage() {
         axios
             .get(
                 `${api}book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
-                    exptype - 1
+                    exptype == 1 ? "" : exptype - 1
                 }&country_id=${country === "All" ? "" : country}`
             )
             .then((res) => {
@@ -374,7 +372,7 @@ export default function BookAdminPage() {
                                         </TableCell>
                                         <TableCell
                                             size="small"
-                                            style={{ width: 20 }}
+                                            style={{ width: 40 }}
                                         >
                                             {item.type_id}
                                         </TableCell>

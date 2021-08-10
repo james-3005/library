@@ -36,7 +36,7 @@ function SearchScreen() {
         axios
             .get(
                 `${api}book?author=${author}&publishing_year=${year}&translator=${translator}&code_ddc=${
-                    exptype - 1
+                    exptype == 1 ? "" : exptype - 1
                 }&country_id=${country === "All" ? "" : country}`
             )
             .then((res) => {

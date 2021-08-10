@@ -98,7 +98,7 @@ function Popup(props) {
                 <TextField
                     label={t("publishyear")}
                     type="number"
-                    className={styles.input}
+                    className={styles.input2}
                     variant="outlined"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
